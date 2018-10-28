@@ -1,41 +1,111 @@
-Sprint 1 Backlog
+Sprint 2 Backlog
 Oct 24 to Oct 28
+--------------------------------------------------------------------------------
+Sprint 1 Completion Report
 
+Tasks accomplished:
+David: 9
+Dann: 6a, 6b, 8
+Susan: 3, 3a
+Philip: 1, 2
+
+Tasks carried over to this sprint:
+4, 18
+--------------------------------------------------------------------------------
+Changes and updates:
+
+-Task 16 is discontinued until further notice. Task 16 would depend on the
+ database being built
+
+-Task 7 is removed due to the small magnitude of the task
+--------------------------------------------------------------------------------
 User Stories from Product Backlog that we will address in this sprint:
-a) ...
-b) ...
-c) ...
+
+1) As a TEQ employee, Mike James, I want to make only authorized agency accounts
+   able to access all of the uploaded data so that we can maintain the privacy 
+   of the organizations
+
+2) As a volunteer for agency XYZ, Sam Spongy, I want to be able to upload any of
+   the 8 different types of iCare excel files so that the agency that I 
+   represent can contribute to the CCS program
+
+3) As a volunteer for agency XYZ, Sam Spongy, I expect that when I upload my
+   data, all entries are automatically formatted to comply with the system’s
+   format so that I do not have to manually change any entries
+
+6) As a long-term TEQ employee, Louis Chan, I want to be able to create custom
+   queries by selecting from a list of variables from a drop-down bar so that I
+   can customize the data I want to see
+--------------------------------------------------------------------------------
+Specific Tasks to be accompished (tasks with letters are independent of 
+another task):
+
+User Story 1:
+Task 5a   [2 pts]: Make the base code for the Console Class
+                   -Dependent on task 3a
+
+Task 5b   [2 pts]: Make the base code for the TEQ Console Class
+
+Task 4   [2 pts]: Connect the authorized agency account to the database
+                  -Dependent on task 1 and 3a
+
+User Story 2:
+Task 10 [13 pts]: Implement a function to store the parsed data into the
+                  database
+                  -Dependent on task 3 and 8
+
+Task 10a [2 pts]: Make the base code for the Agency Console Class
+
+Task 10b [5 pts]: Within the class “MissingValueChecker”, implement a 
+                  functionality to check if a value is missing
+
+Task 10c [5 pts]: Within the class “MissingValueChecker”, implement a 
+                  functionality to let the user insert data for missing value 
+                  or exit the function
+                   
+
+User Story 3:
+Task 11  [8 pts]: Implement a function which matches the parsed data to correct
+                  fields of the main database
+                  -Dependent on task 9
 
 
-
-Specific Tasks to be accompished
-Task xx. ...
-Task xx. ...
-
-
-Members availability are as follows:
-David
-Dann
-Philip
-Riaz
-Susan
+User Story 4:                  
+Task 14  [8 pts]: Have the shell prompt the user that a field is 
+                  missing/duplicated (if there are any) and list those 
+                  respective fields
+                  -Dependent on task 13
 
 
+User Story 6:
+Task 18  [3 pts]: Begin by outputting which fields can be viewed, then give the
+                  user the option of selecting which field(s) they wish to view
+                  -Dependent on task 3
+
+Task 19  [3 pts]: Parse the database for the field that the user selected and 
+                  collect that data from the specific field in the database
+                  -Dependent on task 18
+--------------------------------------------------------------------------------
+Members' estimated availability are as follows:
+David:  0 on Wednesday, 0 on Thursday, 0 on Friday, 1 on Saturday, 1 on Sunday
+Dann:   3 on Wednesday, 1 on Thursday, 1 on Friday, 3 on Saturday, 4 on Sunday
+Philip: 2 on Wednesday, 1 on Thursday, 0 on Friday, 0 on Saturday, 2 on Sunday
+Riaz:   0 on Wednesday, 0 on Thursday, 0 on Friday, 0 on Saturday, 2 on Sunday
+Susan:  0 on Wednesday, 1 on Thursday, 0 on Friday, 4 on Saturday, 4 on Sunday
+--------------------------------------------------------------------------------
 Tasks are assigned as follows:
 
-
-
 Member: David
-Tasks:
+Tasks: 11
 
 Member: Dann
-Tasks:
+Tasks: 5a, 5b, 10a, 10b, 10c
 
 Member: Philip
-Tasks:
+Tasks: 18, 19
 
 Member: Riaz
-Tasks:
+Tasks: 14
 
 Member: Susan
-Tasks:
+Tasks: 4, 10
