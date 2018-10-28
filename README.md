@@ -11,6 +11,8 @@
 
 ## Setup
 
+**python 3** is the minimum requirement in order to run and install everything properly.
+
 **Pip installations required**:
 - pip install pandas
 - 
