@@ -1,0 +1,12 @@
+What was I working on?
+- Task 18b
+
+What am I working on now?
+- Task 18a
+- Task 18c
+
+Am I blocked by anything?
+-Database is getting refactored
+
+What are the main takeaways for me after this meeting?
+- Need to change up task 18 and its sub tasks
