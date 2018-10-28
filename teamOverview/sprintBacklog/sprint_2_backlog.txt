@@ -1,0 +1,41 @@
+Sprint 1 Backlog
+Oct 24 to Oct 28
+
+User Stories from Product Backlog that we will address in this sprint:
+a) ...
+b) ...
+c) ...
+
+
+
+Specific Tasks to be accompished
+Task xx. ...
+Task xx. ...
+
+
+Members availability are as follows:
+David
+Dann
+Philip
+Riaz
+Susan
+
+
+Tasks are assigned as follows:
+
+
+
+Member: David
+Tasks:
+
+Member: Dann
+Tasks:
+
+Member: Philip
+Tasks:
+
+Member: Riaz
+Tasks:
+
+Member: Susan
+Tasks:
