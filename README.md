@@ -16,3 +16,6 @@
 **Pip installations required**:
 - pip install pandas
 - 
+**Dependencies**:
+- [sqlite3](https://www.sqlite.org/download.html)
+- tkinter (Should be pre-installed)
