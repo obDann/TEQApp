@@ -1,4 +1,11 @@
 from UserConsole import *
+import sys
+'''
+Import commands
+'''
+sys.path.insert(0, "../commands")
+from FileSystemFetcher import *
+
 
 class AgencyConsole(UserConsole):
     '''
@@ -68,7 +75,67 @@ class AgencyConsole(UserConsole):
         Uploads the data to the database and returns an OutputQueue in
         regards to the activity
         '''
-        print("I am in 'upload data', but I am not implemented yet!")
+        self._terminal_upload()
+
+    def _terminal_upload(self):
+        '''
+        (TEQConsole, str) -> OutputQueue [this is tentative]
+
+        Uploads the data from an excel file to the database, and returns
+        an OutputQueue in regards to the activity
+        '''
+        flag = False
+
+        # make a templates list
+        templates = ["Client Profile", "Needs Assessment & Referrals",
+                     "Community Connections", "Information and Orientation",
+                     "Employment Related Services",
+                     "Language Training - Client Enrol",
+                     "Language Training - Course Setup",
+                     "Language Training - Client Exit",
+                     "Quit"]
+        # do an infinite while loop until the user selects a valid option
+        not_valid = True
+        while not_valid:
+            # check if the first input is an invalid one
+            if (flag):
+                print("Please input an appropriate number")
+            # then set the flag to true
+            flag = True
+            # go through the templates' list
+            index = 0
+            print("What template would you like to upload?")
+            for index in range(0, len(templates)):
+                print(str(index + 1) + " - " + templates[index])
+            # get the user's input
+            user_input = input()
+
+            # check if the user's input is numeric
+            if (user_input.isnumeric()):
+                # if it is, then we have to change it to a number
+                user_input = int(user_input)
+                # then check if it is in range
+                not_valid = not user_input in range(1, len(templates) + 1)
+                # if it is valid, we can decrement the index by 1
+                if (not not_valid):
+                    user_input -= 1
+
+        # check if the template is not 'Quit'
+        if (user_input != len(templates) - 1):
+
+            print("Select the file corresponding to '" + templates[user_input]
+                  + "'")
+            # so we can now call our file system fetcher
+            our_fsf = FileSystemFetcher()
+            excel_rep = our_fsf.execute()
+
+            msg = "Still waiting for other commands to be implemented\n"
+            msg += "In the mean time, here's a representation of your "
+            msg += "excel file (of a random sheet):"
+            print(msg)
+            keys = list(excel_rep)
+            print(excel_rep[keys[0]].head())
+
 
 if __name__ == '__main__':
     a = AgencyConsole()
