@@ -1,0 +1,67 @@
+# Personas
+
+## Sam Spongy - Starting Volunteer at agency XYZ
+
+* Female, first year university student, 17 years old
+* Studies Psychology at the University of Fireloo
+* Agreed to take part in the TEQ program since she has a white-spaced-filled
+  resume
+* Only knows how to use Windows operating system
+* Knows how to use basic Microsoft Office applications like Word, Excel and 
+  Powerpoint
+* Has an iPhone and only has social media apps installed
+* Hesitant learner' she preferably wants supervision from other agency members
+  before she independently does a task herself
+  
+  
+## Enisa Arthfael - UTSC Project Staff as a temporary admin
+
+* Female, 21 year old student studying Computer Science
+* Currently on co-op, administrates the application made by CSCC01 students to 
+  fit with TEQ's needs
+* Proficient at SQL, Java and Python
+* Linux is her favourite operating system
+* Uses an Android phone
+* Has a Java IDE on her phone
+* Understands documentation for programs really well
+* Passionate about technology and is willing to learn new things
+
+
+## James Wowman - TEQ low level tech employee
+
+* Male, 47 years old
+* Just started at TEQ as he is passionate about giving back to the community
+* Only completed high school
+* Used to work in construction 5 years ago
+* Knows how to use word and really basic Excel entry (does not understand what 
+  excel functions do)
+* Uses an iPhone, only using it for calls; sees applications as complex
+* Stubborn with technology, uses it only when he has to
+
+
+## Louis Chan - TEQ medium level tech employee
+
+* Male, 35 years old
+* Full time employee at TEQ, often communicates with external organizations to
+  support TEQ's intiatives
+* Has a Bachelor of Arts in Labour Studies
+* Been with TEQ for the past 13 years
+* Took a few beginner level computer science courses in university (knows
+  variable manipulation, some tracing, somewhat familiar with SQL)
+* Uses an android phone, knows how to install apps and has his favourite apps
+  installed
+* Likes technology, but doesn't have time to go in depth with it
+
+
+## Mike James - TEQ high level tech employee
+
+* Male, 25 years old
+* Has a MSc in Statistics and BSc in Computer Science
+* Volunteered as part of a research project in Scarborough, addressing the
+  concerns within Scarborough
+* Knows how to conduct statistical tests in a jiffy
+* Uses Linux as his main operating system
+* Uses an android phone, has multiple apps installed
+* Expert in SQL and R, proficient in Hadoop, Tableau, Python, C, C++, and HTML
+* Only uses company-standard technologies
+* Creates his own libraries for R in his spare time

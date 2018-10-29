@@ -18,6 +18,8 @@ Changes and updates:
  database being built
 
 -Task 7 is removed due to the small magnitude of the task
+
+-Task 4 is changed to work with a GUI (see below)
 --------------------------------------------------------------------------------
 User Stories from Product Backlog that we will address in this sprint:
 
@@ -46,8 +48,8 @@ Task 5a   [2 pts]: Make the base code for the Console Class
 
 Task 5b   [2 pts]: Make the base code for the TEQ Console Class
 
-Task 4   [2 pts]: Connect the authorized agency account to the database
-                  -Dependent on task 1 and 3a
+Task 4    [4 pts]: Create a GUI for the login and creating user accounts
+
 
 User Story 2:
 Task 10 [13 pts]: Implement a function to store the parsed data into the
@@ -109,3 +111,7 @@ Tasks: 14
 
 Member: Susan
 Tasks: 4, 10
+--------------------------------------------------------------------------------
+Excess Tasks:
+
+Task 4a  [2 pts]: Connect the GUI and the database for user accounts
