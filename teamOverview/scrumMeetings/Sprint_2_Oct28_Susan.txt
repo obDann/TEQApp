@@ -1,0 +1,12 @@
+What was I working on?
+- Revised all files related to the user database and client info database to work in sqlite (it was originally mysql)
+- Worked on implementing a simple GUI with interactions with buttons
+
+What am I working on now?
+- Connecting the GUI to the user accounts database
+
+Am I blocked on anything?
+- Cannot finish the client info database as there are still some questions the clients need to get back to me on regarding the unique ID value missing in the iCare template LT Course Setup
+
+What are the main takeaways for me after this meeting?
+- Need to combine what we worked on so far and our future tasks to the GUI
