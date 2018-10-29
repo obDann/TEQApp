@@ -95,3 +95,8 @@ Tasks: 6, 7, 13
 
 Member: Susan
 Tasks: 3, 3a, 4
+--------------------------------------------------------------------------------
+Excess tasks:
+
+Task 6a   [1 pts]: Implement the Abstract Command class
+Task 6b   [2 pts]: Implement the OutputQueue class
