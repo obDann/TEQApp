@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from Console import *
+from console import *
 
 class UserConsole(Console):
 

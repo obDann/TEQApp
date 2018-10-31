@@ -1,10 +1,10 @@
-from UserConsole import *
+from user_console import *
 import sys
 '''
 Import commands
 '''
 sys.path.insert(0, "../commands")
-from FileSystemFetcher import *
+from file_system_fetcher import *
 
 
 class AgencyConsole(UserConsole):
@@ -115,7 +115,7 @@ class AgencyConsole(UserConsole):
                 # if it is, then we have to change it to a number
                 user_input = int(user_input)
                 # then check if it is in range
-                not_valid = not user_input in range(1, len(templates) + 1)
+                not_valid = user_input not in range(1, len(templates) + 1)
                 # if it is valid, we can decrement the index by 1
                 if (not not_valid):
                     user_input -= 1

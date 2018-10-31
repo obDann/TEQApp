@@ -3,12 +3,9 @@ import unittest
 
 import pandas as pd
 import numpy as np
-
-
-
 '''Import OutputQueue'''
 sys.path.insert(0, "../output")
-from OutputQueue import *
+from output_queue import *
 
 
 class TestOutputQueue(unittest.TestCase):
@@ -49,7 +46,7 @@ class TestOutputQueue(unittest.TestCase):
         test_str = "test string"
         # make a test dataframe
         some_df = pd.DataFrame(np.random.randint(low=0, high=10, size=(5, 5)),
-                           columns=['a', 'b', 'c', 'd', 'e'])
+                               columns=['a', 'b', 'c', 'd', 'e'])
         # make another string
         another_str = "another string"
 
@@ -63,12 +60,11 @@ class TestOutputQueue(unittest.TestCase):
         expected = 3
         self.assertEqual(expected, result)
 
-
     def test_enqueue_three_objs_order(self):
         test_str = "test string"
         # make a test dataframe
         some_df = pd.DataFrame(np.random.randint(low=0, high=10, size=(5, 5)),
-                           columns=['a', 'b', 'c', 'd', 'e'])
+                               columns=['a', 'b', 'c', 'd', 'e'])
         # make another string
         another_str = "another string"
 

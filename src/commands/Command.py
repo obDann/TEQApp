@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 '''Import OutputQueue'''
 import sys
 sys.path.insert(0, "../output")
-from OutputQueue import *
+from output_queue import *
 
 
 class Command(ABC):
@@ -45,9 +45,3 @@ class Command(ABC):
         Returns an OutputQueue
         '''
         return self._opq
-
-
-class testCommand(Command):
-
-    def __init__(self):
-        Command.__init__(self)

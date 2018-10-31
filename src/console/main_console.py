@@ -4,14 +4,14 @@ import sys
 Import accounts
 '''
 sys.path.insert(0, "../accounts")
-from accounts import account
-from agencyAccount import agencyAccount
-from TEQAccount import TEQ_Account
+from accounts import Account
+from agency_account import AgencyAccount
+from teq_account import TEQAccount
 
-from Console import Console
-from AgencyConsole import AgencyConsole
-from UserConsole import UserConsole
-from TEQConsole import TEQConsole
+from console import Console
+from agency_console import AgencyConsole
+from user_console import UserConsole
+from teq_console import TEQConsole
 
 class MainConsole(Console):
     '''

@@ -1,5 +1,5 @@
 import pandas as pd
-from Command import *
+from command import Command
 from tkinter import Tk
 from tkinter.filedialog import askopenfilename
 

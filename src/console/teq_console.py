@@ -1,4 +1,4 @@
-from UserConsole import *
+from user_console import *
 
 class TEQConsole(UserConsole):
     '''
