@@ -54,21 +54,21 @@ class MainConsole(Console):
 
         # As for now, we don't have any conventions and this makes life much
         # worse
-        if (type(self._account) is agencyAccount):
+        if (type(self._account) is AgencyAccount):
             # make an agency console
             our_console = AgencyConsole()
             our_console.run_console()
-        elif (type(self._account) is TEQ_Account):
+        elif (type(self._account) is TEQAccount):
             our_console = TEQConsole()
             our_console.run_console()
 
 if __name__ == '__main__':
     # BAD CONVENTIONS!
-    my_acc = agencyAccount('name', 'idnum')
+    my_acc = AgencyAccount('name', 'idnum')
     my_console = MainConsole()
     my_console.inject_account(my_acc)
     my_console.run_console()
 
-    my_acc = TEQ_Account('name', 'idnum', 'level')
+    my_acc = TEQAccount('name', 'idnum', 'level')
     my_console.inject_account(my_acc)
     my_console.run_console()
