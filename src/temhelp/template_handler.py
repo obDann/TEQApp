@@ -27,3 +27,11 @@ class TemplateHandler(ABC):
 
         Returns a list of headers of this template
         '''
+
+    @abstractmethod
+    def get_mandatory_headers(self):
+        '''
+        (TemplateHandler) -> [List of str]
+
+        Returns a list of mandatory headers in this template
+        '''
