@@ -106,6 +106,22 @@ def update_agency_status(username, status):
     query = "Update Agency_User SET Status = ? WHERE Username = ?"
     fields = (status, username)
     execute_query(query, fields)
+    
+def get_tables_names():
+        '''
+        A function which gets all the table names of a database.
+        Returns a list of table names.
+        '''
+        table_names = list()
+        conn = sqlite3.connect('test.db')
+        cur = conn.cursor()     
+        cur.execute("SELECT name FROM sqlite_master WHERE type='table';")
+        result = cur.fetchall()
+        for table in result:
+                print(table[0])
+                table_names.append(table)
+        conn.close()
+        return table_names
 
 if __name__ == "__main__":
     insert_user("xyz", "sam", "sam123", "Agency")
