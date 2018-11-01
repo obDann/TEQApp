@@ -1,19 +1,21 @@
-# https://pypi.org/project/xlrd/ <-- reference page for xlrd, not pandas
-# type 'pip install pandas' in the command line to install the pandas module
-import pandas
+import pandas as pd
 import os
 
-def parse(excel):
+# type 'pip install pandas' in the command line to install the pandas module
+
+def parse(ex_data):
     '''
-    Takes an excel file as its parameters (can also take an open file object)
-    and parses the file. Outputs a tuple where the first value is a list of
-    the column headers and the second value is another list with each index
-    corresponding to the column header of the first list. Inside this list
-    is another set of lists where the column values are held.
-    (file) -> ([list of column headers], [list of lists containing values])
+    (DataFrame) -> ([list of column headers],[list of lists containing values])
+
+    Takes a DataFrame as its parameter and parses the file.
+    Outputs a tuple where the first value is a list of the column headers and
+    the second value is another list with each index corresponding to the
+    column header of the first list. Inside this list is another set of lists
+    where the column values are held.
     '''
-    ex_data = pandas.read_excel(excel)
-    
+    # pd.read_excel(ex_data) parses an excel file to get a DataFrame
+    # ex_data = pd.DataFrame(test) changes type of dictionary to DataFrame
+
     # gets the column headers and puts them into a list
     columns = ex_data.columns.values.tolist()
 
@@ -21,14 +23,7 @@ def parse(excel):
     for header in range(0, len(columns)):
         # gets a list of the values under the column header
         values.append(ex_data[columns[header]].tolist())
-    
-    # ex_data.describe() gives summary statistics for numerical columns only    
-    
+
+    # ex_data.describe() gives summary statistics for numerical columns only
+
     return (columns, values)
-
-
-if __name__ == "__main__":
-    # location of excel file in same directory
-    __location__ = os.path.realpath(os.path.join(os.getcwd(), "test.xlsx"))
-    parsed = parse(__location__)
-    print(parsed)
