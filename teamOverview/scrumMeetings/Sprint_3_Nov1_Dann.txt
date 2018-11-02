@@ -1,0 +1,19 @@
+What was I working on?
+-Completed implementation of the TemplateHandler class (abstraction)
+-Completed implementation of the UploadCommand class (abstraction)
+-Refactored a majority of our code for PEP8 standards
+
+What am I working on now?
+-Writing the base code for the DuplicateRowRemover class
+-Handling the majority of the TemplateHandlers
+
+Am I blocked by anything?
+-Will investigate further into Susan's database design; it will eventually help
+ with uploading and reporting
+-Refactor to fit the GUI and the terminal versions of our consoles; more
+ probable to remove my terminal implementation for our main console
+
+What are the main takeaways for me after this meeting?
+-No meeting was taken place, I was personally busy.
+-It is understandable that any member of the team does not make a scrum file;
+ everyone was reporting that they were quite busy.
