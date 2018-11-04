@@ -24,7 +24,7 @@ def insert_community_conn(row_values, service_id, target_id):
     '''
     val = [service_id, target_id]
     index = [(9, 10), (11, 17), (32, 37), (65, 67)]
-    val = insert_general.insert(index, row_values, val)
+    val = database_methods.fetch_values_list(row_values, index, val)
     
     insert_helper.insert_row(val, "Community_Connections")
 

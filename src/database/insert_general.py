@@ -4,6 +4,14 @@ import insert_helper
 import pandas as pd
 
 #Tables that are shown in several iCare files
+def insert_address(row_values, index):
+    address_id = database_methods.get_id("Address") + 1
+    val = [address_id]
+    val = database_methods.fetch_values_list(row_values, index, val)
+    # insert into table
+    insert_helper.insert_row(val, "Address")
+    
+    return address_id
 
 def insert_service(row_values, skill_idx, service_type):
     '''
@@ -37,19 +45,6 @@ def insert_target_group(row_values, start, end):
     
     return target_id
 
-# General method for inserting with a list of indices
-def insert(row_values, index_list, val):
-    i = 0
-    while (i < len(index_list)):
-        start = index_list[i][0]
-        end = index_list[i][1]
-        while (start < end):
-            val.append(row_values[start])
-            start += 1
-        i += 1
-    
-    return val
-
 def insert_3_value(column_values, row_values, table, item_id, start, end):
     '''
     For inserting tables with (id, column_name, value) rows.
@@ -57,7 +52,8 @@ def insert_3_value(column_values, row_values, table, item_id, start, end):
     i = start
     while (i < end):
         val = [item_id]
-        val.append(column_values[i])
-        val.append(row_values[i])
-        insert_helper.insert_row(val, table)
+        if (type(row_values[i]) == str and row_values[i] != "N/A"):
+            val.append(column_values[i])
+            val.append(row_values[i])
+            insert_helper.insert_row(val, table)
         i += 1

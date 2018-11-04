@@ -21,7 +21,7 @@ def insert_service(row_values):
 
 def insert_skills(column_values, row_values, client_id):
     '''
-    Inserts a row in Skills table.
+    Inserts rows in Skills table.
     '''
     insert_general.insert_3_value(column_values, row_values, 
                                   "Skills", client_id, 64, 69)
@@ -34,7 +34,7 @@ def insert_info_ori(row_values, service_id, target_id):
     '''
     index = [(6, 7), (11, 16), (69, 70), (93, 94)]
     val = [service_id, target_id]
-    val = insert_general.insert(row_values, index, val)
+    val = database_methods.fetch_values_list(row_values, index, val)
     
     insert_helper.insert_row(val, "Info_and_Orientation")
 

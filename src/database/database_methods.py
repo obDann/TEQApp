@@ -7,6 +7,8 @@ def connection(database):
     try:
         conn = sqlite3.connect(database)
         cur = conn.cursor()
+        # enable foreign key constraint
+        cur.execute("PRAGMA foreign_keys = ON")
     except sqlite3.Error as e:
         print(format(e))
         
@@ -47,19 +49,7 @@ def get_id(table):
             return val[0]
         else:
             return 0
-    
-def fetch_values(start, end, row_values, lst):
-    '''
-    Returns a list of the values extracted from a row in the excel file.
-    '''
-    i = start
-    ret = lst
-    while (i < end):
-        value = row_values[i]
-        ret.append(value)
-        i += 1
-    
-    return ret
+
 
 def check_client(client_id, database):
     '''
@@ -82,3 +72,30 @@ def check_client(client_id, database):
             return 1
         else:
             return 0
+
+
+def fetch_values(start, end, row_values, lst):
+    '''
+    Returns a list of the values extracted from a row in the excel file.
+    '''
+    i = start
+    ret = lst
+    while (i < end):
+        value = row_values[i]
+        ret.append(value)
+        i += 1
+    
+    return ret
+
+# General method for inserting with a list of indices
+def fetch_values_list(row_values, index_list, val):
+    i = 0
+    while (i < len(index_list)):
+        start = index_list[i][0]
+        end = index_list[i][1]
+        while (start < end):
+            val.append(row_values[start])
+            start += 1
+        i += 1
+    
+    return val

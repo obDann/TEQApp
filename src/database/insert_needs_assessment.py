@@ -13,7 +13,7 @@ def insert_client(row_values, id_value, agency):
     if (not(database_methods.check_client(id_value, 'client_data.db'))):
         # extract the data and insert a row into Client table
         index = [(0, 1), (2, 5), (8, 9)]
-        val = insert_general.insert(row_values, index, [])
+        val = database_methods.fetch_values_list(row_values, index, [])
         val.append(agency)
         # insert into Client table
         query = ("INSERT INTO Client (Processing_Details, Unique_ID_Type, " + 
@@ -29,10 +29,10 @@ def insert_referral(row_values, id_value, agency):
     and a dataframe read_excel object with iloc[row].
     '''
     # check client has been inserted already
-    insert_client(id_value, agency, row_values)
+    insert_client(row_values, id_value, agency)
     index = [(1, 2), (5, 8), (9, 11), (39, 41), (47, 48), (68, 69), (89, 92)]
     val = [id_value]
-    val = insert_general.insert(index, row_values, val)
+    val = database_methods.fetch_values_list(row_values, index, val)
 
     insert_helper.insert_row(val, "Referral")
 

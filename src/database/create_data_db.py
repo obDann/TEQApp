@@ -101,7 +101,7 @@ def create_tables():
                  Value INT NOT NULL,
                  PRIMARY KEY(Client_Unique_ID_Value, Skill),
                  FOREIGN KEY (Client_Unique_ID_Value)
-                 REFERENCES Referral(Client_Unique_ID_Value));""")
+                 REFERENCES Client(Unique_ID_Value));""")
 
     cur.execute("""CREATE TABLE IF NOT EXISTS Target_Group (
                 ID INT PRIMARY KEY NOT NULL,
@@ -137,11 +137,11 @@ def create_tables():
                 End_Date INT NOT NULL,
                 Instructional_Hours_Per_Class REAL NOT NULL,
                 Classes_Per_Week INT NOT NULL,
+                Weeks_Of_Instruction INT NULL,
+                Weeks_Of_Instruction_Per_Year INT NULL,
                 Dominant_Focus text NOT NULL,
                 Directed_Target_Group INT NOT NULL,
                 Materials_Used INT NOT NULL,
-                Weeks_Of_Instruction INT NULL,
-                Weeks_Of_Instruction_Per_Year INT NULL,
                 Citizenship_Prep INT NULL,
                 PBLA_Language_Companion INT NULL,
                 Target_Group_ID INT NULL,
@@ -156,9 +156,9 @@ def create_tables():
                 REFERENCES LT_Course(Course_Code))""")
     
     cur.execute("""CREATE TABLE IF NOT EXISTS Instructor (
-                Name text NOT NULL,
                 Course_Code text NOT NULL,
                 Address_ID INT NOT NULL,
+                Name text NOT NULL,
                 Telephone INT NOT NULL,
                 Telephone_Ext INT,
                 Email_Address text NOT NULL,
@@ -173,7 +173,7 @@ def create_tables():
                 Date_First_Class INT NOT NULL,
                 PRIMARY KEY (Course_Code, Client_Unique_ID_Value),
                 FOREIGN KEY (Course_Code)
-                REFERENCES Course(Course_Code),
+                REFERENCES LT_Course(Course_Code),
                 FOREIGN KEY (Client_Unique_ID_Value)
                 REFERENCES Client(Unique_ID_Value));""")
 
@@ -206,7 +206,7 @@ def create_tables():
                 Essential_Skills_Apitudes_Training INT,
                 Service_Type text NOT NULL);""")
 
-    cur.execute("""CREATE TABLE IF NOT EXISTS Employement_Service (
+    cur.execute("""CREATE TABLE IF NOT EXISTS Employment_Service (
                 Service_ID INT PRIMARY KEY NOT NULL,
                 Registration_Intervention INT NOT NULL,
                 Referral_To text,
@@ -270,6 +270,7 @@ def create_tables():
 
     cur.execute("""CREATE TABLE IF NOT EXISTS Long_Term_Intervention (
                 ID INT PRIMARY KEY NOT NULL,
+                Service_ID INT NOT NULL,
                 Intervention_Received text,
                 Intervention_Status text,
                 Reason_Leaving text,
@@ -281,26 +282,24 @@ def create_tables():
                 Met_Mentor_Regularly_At text,
                 Avg_Hours_Per_Week INT,
                 Profession text,
-                Service_ID INT NOT NULL,
                 FOREIGN KEY (Service_ID)
                 REFERENCES Employment_Related_Service(Service_ID));""")
 
     cur.execute("""CREATE TABLE IF NOT EXISTS Short_Term_Intervention (
                 ID INT PRIMARY KEY NOT NULL,
-                Service_Received text,
-                Date INT,
                 Service_ID INT NOT NULL,
+                Service_Received text NOT NULL,
+                Date INT,
                 FOREIGN KEY (Service_ID)
                 REFERENCES Employment_Related_Service(Service_ID));""")
 
     cur.execute("""CREATE TABLE IF NOT EXISTS Skill_Levels (
-                Type text NOT NULL,
                 Course_Code text NOT NULL,
-                Level INT NOT NULL,
+                Type text NOT NULL,
                 Amount INT NOT NULL,
-                PRIMARY KEY (Type, Course_Code, Level),
+                PRIMARY KEY (Course_Code, Type),
                 FOREIGN KEY (Course_Code)
-                REFERENCES Course(Course_Code));""")
+                REFERENCES LT_Course(Course_Code));""")
 
     cur.execute("""CREATE TABLE IF NOT EXISTS Client_Attends_Service (
                 Service_ID INT NOT NULL,
