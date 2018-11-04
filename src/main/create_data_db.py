@@ -34,10 +34,10 @@ def create_tables():
                 );""")
 
     cur.execute("""CREATE TABLE IF NOT EXISTS Child (
-                Child text NOT NULL,
                 Client_Unique_ID_Value text NOT NULL,
-                Age INT NOT NULL,
-                Type_Of_Care text NOT NULL,
+                Child INT NOT NULL,
+                Age text,
+                Type_Of_Care text,
                 PRIMARY KEY (Child, Client_Unique_ID_Value),
                 FOREIGN KEY (Client_Unique_ID_Value) 
                 REFERENCES Client(Unique_ID_Value));""")
@@ -45,17 +45,17 @@ def create_tables():
     cur.execute("""CREATE TABLE IF NOT EXISTS Referral (
                  Client_Unique_ID_Value text PRIMARY KEY NOT NULL,
                  Update_Record_ID INT,
-                 Service_Postal_Code text NOT NULL,
-                 Assessment_Start_Date INT NOT NULL,
-                 Assessment_End_Date INT NOT NULL,
+                 Service_Postal_Code text NOT NULL,                 
+                 Assessment_Start_Date INT NOT NULL,              
                  Service_Language text NOT NULL,
                  Where_Service_Received text NOT NULL,
                  Referred_By text NOT NULL,
                  Canadian_Citizen_Intention INT NOT NULL,
                  Support_Services_Required INT NOT NULL,
+                 Non_IRCC_Services INT NOT NULL,
                  Support_Services_Received INT NOT NULL,
                  Settlement_Plan_Completed INT NOT NULL,
-                 Non_IRCC_Services INT NOT NULL,
+                 Assessment_End_Date INT NOT NULL,
                  Reason_For_Update text,
                  FOREIGN KEY (Client_Unique_ID_Value)
                  REFERENCES Client(Unique_ID_Value));""")

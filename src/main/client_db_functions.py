@@ -36,7 +36,7 @@ def login(username, password):
     
     if (not(error)):
         name = cur.fetchall()
-        if (name[0][0] is not None):
+        if (len(name) != 0):
             return (name[0][0], name[0][1])
         
     return (None, None)

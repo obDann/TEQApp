@@ -26,13 +26,13 @@ def execute_query(query, fields, database):
         print(e)
         conn.rollback()
     
-    return error
-
+    return error 
+    
 def get_id(table):
     '''
     Gets maximum ID in the table.
     '''
-    (conn, cur) = database_methods.connection('client_data.db')
+    (conn, cur) = connection('client_data.db')
     query = ("select max(ID) from " + table)
     try:
         cur.execute(query)
@@ -43,7 +43,7 @@ def get_id(table):
     
     if (not(error)):
         val = cur.fetchone()
-        if (val[0] is not None):
+        if (val is not None and val[0] is not None):
             return val[0]
         else:
             return 0
@@ -60,3 +60,25 @@ def fetch_values(start, end, row_values, lst):
         i += 1
     
     return ret
+
+def check_client(client_id, database):
+    '''
+    Checks if there is a row for the client with client_id. Returns 1 if yes
+    and 0 otherwise.
+    '''
+    query = "SELECT 1 FROM Client WHERE Unique_ID_Value = " + str(client_id)
+    
+    (conn, cur) = connection(database)
+    try:
+        error = 0
+        cur.execute(query)
+    except sqlite3.Error as e:
+        print(e)
+        error = 1
+    
+    if (not(error)):
+        val = cur.fetchone()
+        if (val is not None and val[0] == 1):
+            return 1
+        else:
+            return 0

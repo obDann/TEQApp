@@ -18,5 +18,3 @@ def create_query(lst, table):
         val = val + ("?, ")
     val = val + ("?);")
     return "INSERT INTO " + table + " values " + val
-    
-    
