@@ -29,3 +29,5 @@ Within the next few sprints, it will be expected of us to be tying the GUI with 
 - ABC (Abstract Base Class, should be pre-installed with Python3)
 - sys
 - os
+- re
+- NumPy (Pre-installed on Python3)
