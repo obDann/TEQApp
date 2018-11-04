@@ -35,3 +35,32 @@ class TemplateHandler(ABC):
 
         Returns a list of mandatory headers in this template
         '''
+
+    @abstractmethod
+    def is_dropdown_value_mandatory(self):
+        '''
+        (TemplateHandler) -> bool
+
+        Determines if the column name injected into the template handler
+        has strict and limited drop down values
+        '''
+
+    @abstractmethod
+    def get_dropdown_values(self):
+        '''
+        (TemplateHandler) -> [list of str]
+
+        Returns the list of mandatory dropdown values for the injected
+        column name.
+
+        If the column name is not 'dropdown value mandatory', this method
+        returns an empty list.
+        '''
+
+class TestClass(TemplateHandler):
+
+    def __init__(self):
+        '''
+        '''
+        None
+
