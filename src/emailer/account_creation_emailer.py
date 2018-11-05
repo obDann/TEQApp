@@ -25,10 +25,12 @@ class AccountCreationEmailer(Emailer):
         Sends an email to the corresponding recipient about their account
         creation
         '''
+        # check if recipient email is in database?, and if so then
+        # self._exec_status = True
+        
         sg = sendgrid.SendGridAPIClient('SG.ME6PqRvVQeqs71zjlyHzCQ.cTKpy39VLj\
         kY52e8SMQTMyMyqfUiqdzHaZGsEPq1VTk')
         from_email = Email("teqapp.noreply@gmail.com")
-        # check if email is in database?
         to_email = Email(recipient)
         subject = "Email Verification"
         # allow user to verify email by clicking a link?
@@ -43,3 +45,4 @@ class AccountCreationEmailer(Emailer):
 
         Returns a boolean to determine whether the email could be sent or not
         '''
+        return self._exec_status

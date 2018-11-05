@@ -20,10 +20,12 @@ class PasswordForgettingEmailer(Emailer):
         Sends an email to the corresponding recipient about their current
         password.
         '''
+        # check if email is in database?, and if so then
+        # self._exec_status = True
+        # otherwise
         sg = sendgrid.SendGridAPIClient('SG.ME6PqRvVQeqs71zjlyHzCQ.cTKpy39VLj\
         kY52e8SMQTMyMyqfUiqdzHaZGsEPq1VTk')
         from_email = Email("teqapp.noreply@gmail.com")
-        # check if email is in database?
         to_email = Email(recipient)
         subject = "Forgot your password"
         # allow user to reset their password? or show in email ??
@@ -37,3 +39,4 @@ class PasswordForgettingEmailer(Emailer):
 
         Returns a boolean to determine whether the email could be sent or not
         '''
+        return self._exec_status
