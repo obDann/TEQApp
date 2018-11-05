@@ -1,14 +1,34 @@
 import pandas as pd
-from Command import *
+from command import *
+from Team10.src.temhelp.template_handler import *
 
 class MissingValChecker():
 
-    def __init__(self):
-        pass
-
-    def get_headers(self, file):
-        ''' (MissingValChecker, DataFrame) -> List
-
-        Given a DataFrame object returns a list of headers
+    def __init__(self, df, TemplateHandler):
+        ''' (MissingValChecker, Dataframe, TemplateHandler) -> None
+        
+        Initializes a MissingValChecker object with it's dataframe to
+        parse and TemplateHandler to reference
         '''
-        return file.columns.values.tolist();
+        self.df = df;
+        self.template = TemplateHandler;
+        
+
+    def parse_column(self):
+        ''' (MissingValChecker) -> List of [Tuple of (String, int)]
+        
+        Given a MissingValChecker object parses its dataframe and returns
+        a tuple of all empty mandatary fields as in the TemplateHandle
+        '''
+        mandatory_headers = self.template.get_mandatary_headers()
+        missing_fields = []
+        for header in mandatory_headers:
+            column = df.get(header)
+            if column is not None:
+                for row in range(len(df.index)):
+                    if (df.get(header)[row].isnull()):
+                        missing_fields.append([header, row])
+            else:
+                missing_fields.appaend([header, -1])
+        
+        return missing_fields
