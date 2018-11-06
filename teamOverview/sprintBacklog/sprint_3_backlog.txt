@@ -114,7 +114,7 @@ Task 33  [8 pts]: Implement the 'DataAggregator' class as described in the
 User Story 10:                  
 Task 34  [1 pts]: Implement a functionality to remove agency users from the
                   database
-                  -Dependent on task 13
+                  -Dependent on task 20
 --------------------------------------------------------------------------------
 Members' estimated availability are as follows:
 David:  1 on Wednesday, 0 on Thursday, 3 on Friday, 3 on Saturday, 3 on Sunday
@@ -140,3 +140,9 @@ Tasks: 22, 29
 Member: Susan
 Tasks: 10, 34
 --------------------------------------------------------------------------------
+Excess Tasks:
+
+User Story 2:
+Task 24a  [3 pts]: Implement the Template Processor
+
+Task 24b  [3 pts]: Implement the Dropdown Processor
