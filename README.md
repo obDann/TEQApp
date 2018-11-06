@@ -21,8 +21,8 @@ Within the next few sprints, it will be expected of us to be tying the GUI with 
 **Python 3** is the minimum requirement in order to run and install everything properly.
 
 **Pip installations required**:
-- pip install pandas
-- pip install sendgrid
+- `pip3 install pandas`
+- `pip3 install sendgrid`
  
 **Dependencies used**:
 - [sqlite3](https://www.sqlite.org/download.html)
