@@ -1,0 +1,17 @@
+What was I working on?
+- Finished DataAggregator
+
+
+What am I working on now?
+- Completing the Client Profile Template Helper
+- Making an GUI for user entry when data cannot be automated
+- Designing the Reporting part of the project 
+
+Am I blocked by anything?
+- I have an incoming term test this week
+
+What are the main takeaways for me after this meeting?
+- Need to edit the video for code review once it has been recorded
+- Clarified on things in my tasks
+- Discussed on how we plan on reporting data for clients
+- Will be doing code review for Riaz's part
