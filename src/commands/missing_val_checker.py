@@ -1,6 +1,6 @@
 import pandas as pd
-from command import *
-from Team10.src.temhelp.template_handler import *
+#from uploading_command import *
+from src import TemplateHeader
 
 class MissingValChecker():
 
@@ -29,6 +29,6 @@ class MissingValChecker():
                     if (df.get(header)[row].isnull()):
                         missing_fields.append([header, row])
             else:
-                missing_fields.appaend([header, -1])
+                missing_fields.append([header, -1])
         
         return missing_fields
