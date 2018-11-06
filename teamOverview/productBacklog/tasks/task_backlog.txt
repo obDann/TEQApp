@@ -1,0 +1,82 @@
+# Task Backlog
+--------------------------------------------------------------------------------
+Why Sprint 1 and 2 tasks are archived, but not placed here:
+
+-A discussion was held on October 31st, majority of the previous tasks were 
+ not found to be viable. Therefore, a majority of the tasks were not carried
+ over.
+
+-Highest possible numbered (recalled) task from previous sprints was 16, 
+ so tasks will start from 17 and onward. One of the remaining tasks from the 
+ previous sprint was task 10.
+
+-Design should be uploaded to the product backlog soon.
+--------------------------------------------------------------------------------
+
+User Story 1:
+Task 17   [3 pts]: Make an 'AccountCreator' class to securely make an account
+                   to the Account Database
+
+Task 18   [3 pts]: Make a 'PasswordChanger' class to securely change the
+                   password through the accounts database
+
+
+User Story 1a:
+Task 19   [1 pts]: Implement the 'Emailer' interface
+
+Task 20   [5 pts]: Implement the 'AccountCreatorEmailer' class
+                   -Dependent on task 17, 19
+
+Task 21   [1 pts]: Implement the 'PasswordForgettingEmailer' class
+                   -Dependent on task 18, 19
+
+
+User Story 2:
+Task 10  [13 pts]: Implement a class to store the parsed (beautiful) data into
+                   the database (the class may be called 'BeautifulUploader')
+
+Task 22   [5 pts]: Implement the MissingValueChecker as described in the design
+                   -Dependent on task 24
+
+Task 23   [2 pts]: Implement the DuplicateRowChecker as described in the design
+
+Task 24   [1 pts]: Implement the TemplateHelper Interface
+
+Task 24a  [3 pts]: Implement the Template Processor
+
+Task 24b  [3 pts]: Implement the Dropdown Processor
+
+Task 25   [1 pts]: Implement the ClientProfileTemplateHelper
+                   -Dependent on task 24, 24a, 24b
+
+Task 26   [1 pts]: Implement the NeedsAndAssessmentTemplateHelper
+                   -Dependent on task 24, 24a, 24b
+
+Task 27   [1 pts]: Implement the CommunityConnectionsTemplateHelper
+                   -Dependent on task 24, 24a, 24b
+                   
+Task 28   [1 pts]: Implement the InformationAndOrientationTemplateHelper
+                   -Dependent on task 24, 24a, 24b
+
+Task 29   [1 pts]: Implement the EmploymentTemplateHelper
+                   -Dependent on task 24, 24a, 24b
+
+Task 30   [1 pts]: Implement the LTClientTemplateHelper
+                   -Dependent on task 24, 24a, 24b
+
+Task 31   [1 pts]: Implement the LTCourseHelper
+                   -Dependent on task 24, 24a, 24b
+
+Task 32   [1 pts]: Implement the LTClientExitTemplateHelper
+                   -Dependent on task 24, 24a, 24b
+
+
+User Story 3:
+Task 33  [8 pts]: Implement the 'DataAggregator' class as described in the 
+                  design
+                  -Dependent on task 24
+
+User Story 10:
+Task 34  [1 pts]: Implement a functionality to remove agency users from the
+                  database
+                  -Dependent on task 20
