@@ -1,34 +1,7 @@
 import sqlite3
-
-def connection():
-    try:
-        conn = sqlite3.connect('users.db')
-        cur = conn.cursor()
-    except sqlite3.Error as e:
-        print(format(e))
-        
-    return (conn, cur)
-
-def check_connection():
-    (conn, cur) = connection()
-    if (conn is not None and cur is not None):
-        return True
-    
-    return False
-
-def execute_query(query, fields):
-    error = 1
-    if (check_connection()):
-        (conn, cur) = connection()
-        try:
-            cur.execute(query, fields)
-            conn.commit()
-            error = 0
-        except sqlite3.Error as e:
-            print(e)
-            conn.rollback()
-    
-    return error
+import sys
+sys.path.insert(0, "../database")
+import database_methods
 
 def insert_user(username, name, password, account_type):
     '''
@@ -38,7 +11,7 @@ def insert_user(username, name, password, account_type):
     query = "INSERT INTO User values (?, ?, ?, ?, strftime('%s','now'));"
     fields = (username, name, password, account_type)
     
-    if (not(execute_query(query, fields))):
+    if (not(database_methods.execute_query(query, fields, 'users.db'))):
         insert_account(username, account_type)
 
 def insert_account(username, account_type):
@@ -46,13 +19,13 @@ def insert_account(username, account_type):
         status = "Active"
         query = "INSERT INTO Agency_User values (?, ?)"
         fields = (username, status)
-        execute_query(query, fields)
+        database_methods.execute_query(query, fields, 'users.db')
         
 def login(username, password):
     '''
     Returns the name of the user and the type if login information is correct.
     '''
-    (conn, cur) = connection()
+    (conn, cur) = database_methods.connection('users.db')
     query = ("SELECT Name, Type from User where Username = ? "
             " AND password = ?")
     fields = (username, password)
@@ -65,7 +38,7 @@ def login(username, password):
     
     if (not(error)):
         name = cur.fetchall()
-        if (name[0][0] is not None):
+        if (len(name) != 0):
             return (name[0][0], name[0][1])
         
     return (None, None)
@@ -77,7 +50,7 @@ def insert_file_info(num, username, filename, service, month, year):
     query = ("INSERT INTO Submission_History "
             + "values (?, ?, ?, ?, ?, ?, strftime('%s','now'))")
     fields = (num, username, filename, service, month, year)
-    execute_query(query, fields)
+    database_methods.execute_query(query, fields, 'users.db')
     
 def insert_request(num, username, desc):
     '''
@@ -87,7 +60,7 @@ def insert_request(num, username, desc):
     query = ("INSERT INTO Request (ID, Username, Description, Status, "
              "Date_Submitted) values (?, ?, ?, ?, strftime('%s','now'))")
     fields = (num, username, desc, status)
-    execute_query(query, fields)
+    database_methods.execute_query(query, fields, 'users.db')
 
 def accepted_request(num, username):
     '''
@@ -97,7 +70,7 @@ def accepted_request(num, username):
     query = ("UPDATE Request SET Admin_Username = ?, Status = ?, "
              "Date_Accepted = strftime('%s','now') WHERE ID = ?")
     fields = (username, status, num)
-    execute_query(query, fields)
+    database_methods.execute_query(query, fields, 'users.db')
 
 def update_agency_status(username, status):
     '''
@@ -105,26 +78,14 @@ def update_agency_status(username, status):
     '''
     query = "Update Agency_User SET Status = ? WHERE Username = ?"
     fields = (status, username)
-    execute_query(query, fields)
+    database_methods.execute_query(query, fields, 'users.db')
     
 def get_tables_names():
-        '''
-        A function which gets all the table names of a database.
-        Returns a list of table names.
-        '''
-        (conn, curr) = connection() 
-        curr.execute("SELECT name FROM sqlite_master WHERE type='table';")
-        result = [row[0] for row in curr.fetchall()]
-        return result
-
-if __name__ == "__main__":
-    insert_user("xyz", "sam", "sam123", "Agency")
-    insert_user("mike22", "Mike", "mike123", "TEQ")
-    insert_user("bobbob", "Bob", "bob123", "Admin")
-    insert_file_info('1', 'xyz', 'file.xlsx', 'Employment', 'April', '2010')
-    # mike requests a deletion
-    insert_request('1', 'mike22', 'Delete field Child1')
-    # bob accepts the request
-    accepted_request('1', 'bobbob')
-    # changed xyzs status to Inactive
-    update_agency_status("xyz", "Inactive")
+    '''
+    A function which gets all the table names of a database.
+    Returns a list of table names.
+    '''
+    (conn, curr) = connection() 
+    curr.execute("SELECT name FROM sqlite_master WHERE type='table';")
+    result = [row[0] for row in curr.fetchall()]
+    return result

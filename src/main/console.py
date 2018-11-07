@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import *
+sys.path.insert(0, "../accounts_database")
 import client_db_functions
 from main_page import *
 from login_page import *
