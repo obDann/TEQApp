@@ -2,12 +2,14 @@ from abc import ABC, abstractmethod
 
 class TemplateHandler(ABC):
 
-    def __init__(self, column_name):
+    def __init__(self, template_name, column_name):
         '''
-        (TemplateHandler, str) -> None
+        (TemplateHandler, str, str) -> None
 
-        Initializes a template handler and injects a column name
+        Initializes a template handler and injects a template name
+        and a column name
         '''
+        self._template_name = template_name
         self._column_name = column_name
 
     @abstractmethod
@@ -56,11 +58,3 @@ class TemplateHandler(ABC):
         If the column name is not 'dropdown value mandatory', this method
         returns an empty list.
         '''
-
-class TestClass(TemplateHandler):
-
-    def __init__(self):
-        '''
-        '''
-        None
-

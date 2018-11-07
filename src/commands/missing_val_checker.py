@@ -12,7 +12,7 @@ class MissingValChecker(UploadingCommand):
         Initializes a MissingValChecker object with it's dataframe to
         parse and TemplateHandler to reference
         '''
-        UploadingCommand.__init__(self, template_name);
+        UploadingCommand.__init__(self, template_name)
         
 
     def execute(self, df):
@@ -24,7 +24,7 @@ class MissingValChecker(UploadingCommand):
         If an entire column is missing, row will be set to -1
         Row is 0 indexed
         '''
-        self._exec_status = 0;
+        self._exec_status = False
         mandatory_headers = self._template_name.get_mandatary_headers()
         missing_fields = []
         
@@ -44,7 +44,7 @@ class MissingValChecker(UploadingCommand):
                 missing_fields.append([header, -1])
         
         # if method reaches here, it executed properly
-        self._exec_status = 1;
+        self._exec_status = True
         
         return missing_fields
     
