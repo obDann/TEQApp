@@ -29,7 +29,9 @@ class PasswordForgettingEmailer(Emailer):
         to_email = Email(recipient)
         subject = "Forgot your password"
         # allow user to reset their password? or show in email ??
-        content = Content("text/plain", "Change your password")
+        content = Content("text/plain", "As you have forgotten your password,\
+        use this temporary password in order to log in so that you may change\
+        your password immediately afterward: \n")
         mail = Mail(from_email, subject, to_email, content)
         response = sg.client.mail.send.post(request_body=mail.get())        
 
