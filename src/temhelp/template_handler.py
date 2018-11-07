@@ -10,10 +10,10 @@ class TemplateHandler(ABC):
         and a column name
 
         RAISES TemplateNotEnteredException if there is no metadata for the
-        column
+        template
 
         RAISES ColumnNotInTemplateException if the specified column name is
-        not in the column
+        not in the template
         '''
         self._template_name = template_name
         self._column_name = column_name
