@@ -60,7 +60,8 @@ class TemplateHandler(ABC):
         (TemplateHandler, str) -> [list of str]
 
         Returns the list of mandatory dropdown values for the injected
-        column name.
+        column name. If the column name exists but is not dropdown mandatory,
+        this method returns an empty list
 
         RAISES ColumnNotInTemplateException if the specified column name is
         not in the template
