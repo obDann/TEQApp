@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
 import re
-from command import Command
 from uploading_command import UploadingCommand
+import datetime
 
 
 class DataAggregator(UploadingCommand):
@@ -24,28 +24,40 @@ class DataAggregator(UploadingCommand):
         Currently only checks for if the data matches the type the column is
         suppose to be.
         '''
-        template = th.get_template(self._template_name)
+        now = datetime.datetime.now()
+        #template = th.get_template(self._template_name)
         # Gets the column names to a list
-        column_name = template.get_mandatory_headers()
+        #header_name = template.get_header()
+        header_name = ['Processing Detail','col2','Postal Code']
+        # Gets the list of regex
+        #regex = template.get_regex()
+        regex = ['','','([A-Z]\d){3}']
+        #str(now.year)+'/'+str(now.month)+"/"+str(now.day) 
+        
         self._exec_status = False
         
-        for column in column_name:
-            if (column == "Postal_Code"):
-                new_col = self.postal_code_checker(df[column])
-                df.update(new_col)
-            else:
-                # Gets the type that the column is suppose to be in
-                # object(string),float or int
-                col_type = df[column].dtype.kind
-                try:
-                    # Make sure all the data are the same type as the column
-                    df[column].get_values().astype(col_type)
-                except ValueError:
-                    # If a string is entered into a set of numeric data
-                    if (type == np.dtype(int) or type == np.dtype(float)):
-                        # The value is set to 0
-                        df[column] = df.replace({column: r'[a-zA-z]*'},
-                                                {column: 0}, regex=True)
+        for header in range(len(header_name)):
+            count = 0
+            column = df.get(header_name[header])
+            if (column is not None):
+                for row in range(len(df.index)):
+                    # getting the regex from the list
+                    p = re.compile(regex[count])
+                    # Checks each row for matching regex
+                    if (not p.Processingmatch(column[row])):
+                        # Automation fix for postal code
+                        if (header_name[header] == "Postal Code"):
+                            new_col = self.postal_code_checker(column)
+                            df.update(new_col)
+                        # Automation fix for processing detail
+                        elif (header_name[header] == "Processing Detail"):
+                            df.replace(df.loc(header, row),str(now.year)+'/'
+                                       +str(now.month)+"/"+str(now.day))
+                        else:
+                            # Open GUI for user to change
+                            print("Open GUI")
+            # Shift the regex list down by 1 each column is done
+            count = count + 1
         self._exec_status = True        
         return df
 
@@ -83,3 +95,9 @@ class DataAggregator(UploadingCommand):
         Returns a boolean to determine if this command was executed properly
         '''
         return self._exec_status
+
+if __name__ == "__main__":
+    test = DataAggregator("test")
+    df = {'Processing Detail': [1,2,3], 'col2' : [9,2,5], 'Postal Code': ['M1M1M1','Y8Y8Y8']}
+    df = pd.Dataframe(df)
+    test.execute(df,'template handler')
