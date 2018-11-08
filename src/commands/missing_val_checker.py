@@ -35,10 +35,10 @@ class MissingValChecker(UploadingCommand):
         for header in mandatory_headers:
             column = df.get(header)
             # if the mandatory column is in the DataFrame
-            if column is not None:
+            if not df.empty and column is not None:
                 # loop through all fields
                 for row in range(len(df.index)):
-                    if (df.get(header)[row].isnull()):
+                    if df.iloc[row:row+1][header].isna().any() or (isinstance(df.iloc[row][header], str) and df.iloc[row][header] == ""):
                         # add any empty fields to missing_fields
                         missing_fields.append((header, row))
             # if the mandatory column is not in the DataFrame
