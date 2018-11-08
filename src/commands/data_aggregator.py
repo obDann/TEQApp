@@ -16,7 +16,7 @@ class DataAggregator(UploadingCommand):
         '''
         UploadingCommand.__init__(self, template_name)
 
-    def execute(self, df):
+    def execute(self, df, th):
         '''
         (Command, DataFrame) -> DataFrame
 
@@ -24,15 +24,15 @@ class DataAggregator(UploadingCommand):
         Currently only checks for if the data matches the type the column is
         suppose to be.
         '''
-
+        template = th.get_template(self._template_name)
         # Gets the column names to a list
-        column_name = df.columns.T.tolist()
-
+        column_name = template.get_mandatory_headers()
+        self._exec_status = False
+        
         for column in column_name:
             if (column == "Postal_Code"):
                 new_col = self.postal_code_checker(df[column])
                 df.update(new_col)
-                print(df)
             else:
                 # Gets the type that the column is suppose to be in
                 # object(string),float or int
@@ -46,6 +46,7 @@ class DataAggregator(UploadingCommand):
                         # The value is set to 0
                         df[column] = df.replace({column: r'[a-zA-z]*'},
                                                 {column: 0}, regex=True)
+        self._exec_status = True        
         return df
 
     def postal_code_checker(self, df):
