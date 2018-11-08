@@ -1,0 +1,14 @@
+What was I working on?
+- Finished emailer interface
+- Began working on the actual emailer classes
+
+What am I working on now?
+- Continue working on emailers
+- Possibly start on password security (hashing and inputting to database, etc)
+
+Am I blocked by anything?
+- I was blocked from some information I was unsure about, but the meeting allowed me to know what to do and cleared up some misunderstandings I had
+
+What are the main takeaways for me after this meeting?
+- We need to be able to test our user stories
+- Emailer classes are more complex that I once thought, so I need to put more work into them

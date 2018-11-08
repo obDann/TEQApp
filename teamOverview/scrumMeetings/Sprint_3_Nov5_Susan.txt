@@ -1,0 +1,15 @@
+What was I working on?
+- creating methods to insert iCare templates into the database
+- finished methods for 6 different iCare templates (Client Profile, Needs & Assessment and Referrals, Community Connections, Information & Orientation, Employment Services, LT Course Setup)
+
+What am I working on now?
+- completing methods for the rest of the iCare templates and combining them together in the BeautifulUploader class
+- cleaning up the code for the files I created
+
+Am I blocked by anything?
+- I will not have too much time this week due to work from other courses
+
+What are the main takeaways for me after this meeting?
+- we need to test our user stories
+- need to review team members code for the code review video (might film that this Thursday)
+

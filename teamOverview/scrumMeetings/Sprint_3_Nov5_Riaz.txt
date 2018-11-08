@@ -1,0 +1,16 @@
+What was I working on?
+Task 22 - MissingValueChecker
+Task 29 - EmployeeTemplateHelper
+
+What am I working on now?
+A better way to import methods in files from different directories
+Integrating MissingValueChecker into the GUI
+Creating a way for users to fix their empty/incorrect fields directly in the GUI
+Adding unit tests for MissingValueChecker
+
+Am I blocked by anything?
+Importing methods in files from different directories did not have an elegant solution
+
+What are the main takeaways for me after this meeting?
+Proper code review needs to be done
+Need to work with Philip to create and complete a task for users to fix fields

@@ -1,0 +1,50 @@
+# Sprint 1 task archive
+
+User Story 1:
+Task 1   [2 pts]: Set up an authorized agency account for agencies
+
+Task 2   [2 pts]: Set up a TEQ account for the user
+
+Task 3   [5 pts]: Set up a database to store the uploaded data
+
+Task 3a  [5 pts]: Set up a database to store accounts
+
+Task 4   [2 pts]: Connect the authorized agency account to the database
+                  -Dependent on task 1 and 3a
+
+
+User Story 2:
+Task 6   [3 pts]: Implement a function that takes in excel files
+
+Task 6a   [1 pts]: Implement the Abstract Command class
+
+Task 6b   [2 pts]: Implement the OutputQueue class
+
+Task 7   [1 pts]: Prompt a message in the end after the upload is complete or a 
+                  message saying not a valid document
+                  -Dependent on task 5, 6
+
+Task 8   [8 pts]: Set up a function which checks for different types of excel
+                  files to determine how to parse the data
+                  -Dependent on task 6
+
+Task 9   [8 pts]: Have a function which parses the DataFrame from the excel file
+                  into different columns
+                  -Dependent on task 3 and 6
+
+                  
+User Story 4:
+Task 13  [2 pts]: Begin by checking what entries the agency is trying to submit
+                  before entering into the database
+                  -Dependent on task 6
+
+
+User Story 5:                  
+Task 16  [3 pts]: Collect data from the database relative to the specific trends
+                  -Dependent on task 3
+
+
+User Story 6:
+Task 18  [2 pts]: Begin by outputting which fields can be viewed, then give the
+                  user the option of selecting which field(s) they wish to view
+                  -Dependent on task 3 and 9

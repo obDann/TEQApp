@@ -1,4 +1,6 @@
 import sqlite3
+import sys
+sys.path.insert(0, "../database")
 import database_methods
 
 def insert_user(username, name, password, account_type):
@@ -87,15 +89,3 @@ def get_tables_names():
     curr.execute("SELECT name FROM sqlite_master WHERE type='table';")
     result = [row[0] for row in curr.fetchall()]
     return result
-
-if __name__ == "__main__":
-    insert_user("xyz", "sam", "sam123", "Agency")
-    insert_user("mike22", "Mike", "mike123", "TEQ")
-    insert_user("bobbob", "Bob", "bob123", "Admin")
-    insert_file_info('1', 'xyz', 'file.xlsx', 'Employment', 'April', '2010')
-    # mike requests a deletion
-    insert_request('1', 'mike22', 'Delete field Child1')
-    # bob accepts the request
-    accepted_request('1', 'bobbob')
-    # changed xyzs status to Inactive
-    update_agency_status("xyz", "Inactive")

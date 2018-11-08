@@ -1,0 +1,49 @@
+# Sprint 2 task archive
+
+User Story 1:
+Task 5a   [2 pts]: Make the base code for the Console Class
+                   -Dependent on task 3a
+
+Task 5b   [2 pts]: Make the base code for the TEQ Console Class
+
+Task 4    [4 pts]: Create a GUI for the login and creating user accounts
+
+Task 4a  [2 pts]: Connect the GUI and the database for user accounts
+
+
+User Story 2:
+Task 10 [13 pts]: Implement a function to store the parsed data into the
+                  database
+                  -Dependent on task 3 and 8
+
+Task 10a [2 pts]: Make the base code for the Agency Console Class
+
+Task 10b [5 pts]: Within the class “MissingValueChecker”, implement a 
+                  functionality to check if a value is missing
+
+Task 10c [5 pts]: Within the class “MissingValueChecker”, implement a 
+                  functionality to let the user insert data for missing value 
+                  or exit the function
+                   
+
+User Story 3:
+Task 11  [8 pts]: Implement a function which matches the parsed data to correct
+                  fields of the main database
+                  -Dependent on task 9
+
+
+User Story 4:                  
+Task 14  [8 pts]: Have the shell prompt the user that a field is 
+                  missing/duplicated (if there are any) and list those 
+                  respective fields
+                  -Dependent on task 13
+
+
+User Story 6:
+Task 18  [3 pts]: Begin by outputting which fields can be viewed, then give the
+                  user the option of selecting which field(s) they wish to view
+                  -Dependent on task 3
+
+Task 19  [3 pts]: Parse the database for the field that the user selected and 
+                  collect that data from the specific field in the database
+                  -Dependent on task 18
