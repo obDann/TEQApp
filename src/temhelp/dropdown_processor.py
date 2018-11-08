@@ -7,7 +7,7 @@ class DropdownProcessor():
     An intermediary to help with dropdown fields for specific data
     '''
 
-    PATH="dropdown.csv"
+    PATH = "dropdown.csv"
 
     def __init__(self):
         '''
@@ -25,7 +25,6 @@ class DropdownProcessor():
         # all other data entries are the dropdown options for that row
         self._intermediary = pd.read_csv('dropdown.csv', index_col=0,
                                          keep_default_na=False)
-
 
     def get_options(self, col_name):
         '''
@@ -48,7 +47,6 @@ class DropdownProcessor():
         options = list(options)
         options = filter(None, options)
         return list(options)
-
 
     def is_dropdown(self, col_name):
         '''

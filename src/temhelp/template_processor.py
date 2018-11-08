@@ -1,6 +1,7 @@
 import pandas as pd
 from data_not_entered_exception import DataNotEnteredException
 
+
 class TemplateProcessor():
     '''
     An intermediary to help with the template helpers and the vast amounts
@@ -25,9 +26,9 @@ class TemplateProcessor():
 
         self._intermediary = pd.read_csv(self.PATH, index_col=0)
 
-    def get_relative_metadata(self, tem_hand):
+    def get_relative_metadata(self, template_name):
         '''
-        (TemplateProcessor, TemplateHandler) -> (dictionary, tuple of str)
+        (TemplateProcessor, str) -> (dictionary, tuple of str)
 
         Given a TemplateHandler, this method returns a dictionary such that
         each key is a string representing the column name, and each value is
@@ -44,9 +45,6 @@ class TemplateProcessor():
         RAISES DataNotEnteredException if there does not exist metadata
         for the TemplateHandler
         '''
-        # get the name of the template handler
-        template_name = tem_hand.__class__.__name__
-
         # check if the template name is not there
         if not (self.is_entered_metadata(template_name)):
             # if it isn't raise an exception
