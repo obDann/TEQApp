@@ -1,5 +1,9 @@
 import sendgrid
 import os
+import sqlite3
+import sys
+sys.path.insert(0, "../database")
+import database_methods
 from sendgrid.helpers.mail import *
 from emailer import Emailer
 
@@ -26,8 +30,7 @@ class AccountCreationEmailer(Emailer):
         creation
         '''
         # check if recipient email is in database?, and if so then
-        # self._exec_status = True
-        
+
         sg = sendgrid.SendGridAPIClient('SG.ME6PqRvVQeqs71zjlyHzCQ.cTKpy39VLj\
         kY52e8SMQTMyMyqfUiqdzHaZGsEPq1VTk')
         from_email = Email("teqapp.noreply@gmail.com")
@@ -45,4 +48,5 @@ class AccountCreationEmailer(Emailer):
 
         Returns a boolean to determine whether the email could be sent or not
         '''
+        # similar to commands
         return self._exec_status
