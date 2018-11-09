@@ -121,13 +121,3 @@ class MissingValCheckerTest(unittest.TestCase):
     
 if __name__ == '__main__':
     unittest.main(exit=False)
-    #df = pd.DataFrame(columns = ["a", "b", "c", "d", "e", "f"],
-    #                     index = [0, 1],
-    #                      data = [[1,1,2,1,1,1],
-    #                              [1,1,1,1,1,1]])
-    #df = pd.DataFrame(columns = ["a", "b", "c", "d", "e", "f"],
-    #                  index = [1, 1])
-    #print(df.get("a").iloc[0])
-    #print(df)
-    #print(df[0:1]["a"].isna().any())
-    #print(df.get("a")[0:1].isna().any())
