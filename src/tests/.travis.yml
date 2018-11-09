@@ -1,0 +1,9 @@
+language: python
+python:
+    - "3.0"
+cache: pip
+install:
+    - pip3 install pandas
+    - pip3 install sendgrid
+script:
+    - python -m unittest missing_val_checker_test
