@@ -1,9 +1,10 @@
 language: python
 python:
-    - "3.0"
+    - "3.7"
 cache: pip
 install:
     - pip3 install pandas
     - pip3 install sendgrid
 script:
+    - cd src/tests
     - python -m unittest missing_val_checker_test
