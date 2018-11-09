@@ -10,7 +10,8 @@ from template_client import TemplateClient
 class MissingValChecker(UploadingCommand):
 
     def __init__(self, template_name):
-        ''' (MissingValChecker, Dataframe, TemplateHandler) -> None
+        '''
+        (MissingValChecker, Dataframe, TemplateHandler) -> None
 
         Initializes a MissingValChecker object with it's dataframe to
         parse and TemplateHandler to reference
@@ -18,7 +19,8 @@ class MissingValChecker(UploadingCommand):
         UploadingCommand.__init__(self, template_name)
 
     def execute(self, df):
-        ''' (MissingValChecker, DataFrame) -> DataFrame
+        '''
+        (MissingValChecker, DataFrame) -> DataFrame
         
         Given a MissingValChecker object parses the DataFrame and allows the
         user to enter values into the empty mandatory fields, then returns
@@ -47,7 +49,8 @@ class MissingValChecker(UploadingCommand):
         return self._exec_status
 
 def parse_columns(df, template):
-    ''' (DataFrame, TemplateHandler) -> List of [Tuple of (String, int)]
+    '''
+    (DataFrame, TemplateHandler) -> List of [Tuple of (String, int)]
 
     Given a DataFrame and TemplateHandler, returns a tuple of all empty
     mandatory fields as in the TemplateHandle
@@ -65,9 +68,8 @@ def parse_columns(df, template):
         if not df.empty and column is not None:
             # loop through all fields
             for row in range(len(df.index)):
-                if (df.iloc[row:row+1][header].isna().any() or
-                    (isinstance(df.iloc[row][header], str) and
-                        df.iloc[row][header] == "")):
+                field = df.iloc[row:row+1][header]
+                if (empty_field(field)):
                     # add any empty fields to missing_fields
                     missing_fields.append((header, row))
         # if the mandatory column is not in the DataFrame
@@ -76,3 +78,12 @@ def parse_columns(df, template):
             missing_fields.append((header, -1))
 
     return missing_fields
+
+def empty_field(df):
+    ''' (DataFrame) -> boolean
+    
+    Given a DataFrame with 1 field, returns True if the DataFrame
+    is empty or the only value is an empty string, otherwise returns
+    False
+    '''
+    return df.isna().any() or (isinstance(df.iat[0], str) and df.iat[0] == "")
