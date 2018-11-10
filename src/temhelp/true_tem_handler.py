@@ -14,7 +14,7 @@ class TrueTemplateHandler(TemplateHandler):
 
     def __init__(self, template_name):
         '''
-        (TrueTemplateHandler, str, str) -> None
+        (TrueTemplateHandler, str) -> None
 
         Initializes a template handler and injects a template name
         and a column name
@@ -147,4 +147,4 @@ class TrueTemplateHandler(TemplateHandler):
 
 
 if __name__ == "__main__":
-    my_th = TrueTemplateHandler("Needs Assessment & Referrals")
+    my_th = TrueTemplateHandler("Community Connections")
