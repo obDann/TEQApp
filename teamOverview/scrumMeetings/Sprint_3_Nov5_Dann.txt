@@ -1,0 +1,26 @@
+What was I working on?
+-Completed the TemplateHandler interface
+-Completed Template Processor
+-Completed Dropdown Processor
+
+What am I working on now?
+-Refactoring GUI, back button was not working, but a solution was found.
+-Completing the rest of the handlers
+-GUI Button Binding; instead of instantiating a command and executing it, we can
+ have a method and then instantiate the command and execute it (only injecting
+ a template name for instance)
+
+Am I blocked by anything?
+-Doing the handlers was tedious in nature; it is tedious to type out. A solution
+ was found, and it was proposed that I take over the rest of the handlers
+
+
+What are the main takeaways for me after this meeting?
+-I will be probably be taking over my tasks for this upcoming sprint, I don't
+ think I can take a new tasks this sprint due to the magnitude of upcoming
+ work
+-Will work more in sprint 5
+-Happy that people took advantage of this meeting to ask questions/clarification
+-Will be available for Philip to talk about design this week
+-Residual: video about code review
+-Residual: unit tests for templates (i.e. 90 column fields)
