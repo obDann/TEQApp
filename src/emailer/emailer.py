@@ -5,13 +5,12 @@ class Emailer(ABC):
     Sends emails accordingly
     '''
 
-    def __init__ (self, email):
+    def __init__ (self):
         '''
         (Emailer) -> None
         
         Intializes with an email address to use to send out other emails
         '''
-        self.email = email
 
     @abstractmethod
     def send(self):

@@ -1,21 +1,18 @@
 import sendgrid
 import os
-import sqlite3
 import sys
-sys.path.insert(0, "../database")
-import database_methods
 from sendgrid.helpers.mail import *
 from emailer import Emailer
 
 class PasswordForgettingEmailer(Emailer):
 
-    def __init__(self, email):
+    def __init__(self):
         '''
         (PasswordForgettingEmailer, str) -> None
         
         Initialize PasswordForgettingEmailer
         '''
-        self.email = email
+        self.email = "teqapp.noreply@gmail.com"
 
     def send(self, recipient):
         '''
@@ -42,14 +39,14 @@ class PasswordForgettingEmailer(Emailer):
         #if (not self._exec_status):
             #return None
 
-        sg = sendgrid.SendGridAPIClient('SG.ME6PqRvVQeqs71zjlyHzCQ.cTKpy39VLj\
-        kY52e8SMQTMyMyqfUiqdzHaZGsEPq1VTk')
-        from_email = Email("teqapp.noreply@gmail.com")
+        sg = sendgrid.SendGridAPIClient('SG.ME6PqRvVQeqs71zjlyHzCQ.cTKpy39VLj'
+                                        + 'kY52e8SMQTMyMyqfUiqdzHaZGsEPq1VTk')
+        from_email = Email(self.email)
         to_email = Email(recipient)
-        subject = "Forgot your password?"
+        subject = "Forgotten Password"
         # allow user to reset their password? or show in email ??
-        content = Content("text/plain", "As you have forgotten your password,\
-        use this temporary password in order to log in so that you may change\
-        your password immediately afterward: \n")
+        content = Content("text/plain", "As you have forgotten your password, "
+        + "use this temporary password in order to log in so that you may "
+        + "change your password immediately afterward: \n")
         mail = Mail(from_email, subject, to_email, content)
-        response = sg.client.mail.send.post(request_body=mail.get())        
+        response = sg.client.mail.send.post(request_body=mail.get())
