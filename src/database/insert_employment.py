@@ -10,6 +10,7 @@ def insert_service(row_values):
     return service_id
 
 def insert_skills(column_values, row_values, client_id):
+    # client skills
     insert_general.insert_3_value(column_values, row_values, 
                                   "Skills", client_id, 30, 36)
     
@@ -49,4 +50,6 @@ def insert_short_term(row_values, service_id):
             val.append(row_values[i+1])
             insert_helper.insert_row(val, "Short_Term_Intervention")
         i += 2
-        
+
+def client_attends_service(service_id, client_id, month, year):
+    insert_general.insert_client_service(service_id, client_id, month, year)
