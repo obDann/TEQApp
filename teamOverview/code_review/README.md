@@ -1,6 +1,6 @@
 # Code Review
 
-Within Team 10, code reviews are typically informal. However, given the requirements in Deliverable 4, documentation of our code review is provided.
+Within Team 10, code reviews are typically informal. However, given the requirements in Deliverable 4, documentation of our code review is provided. The video for the November 8 code review is found [here](https://drive.google.com/file/d/1QWhTOe7yiAyrI3t_L7N8U35C5dqXjaRP/view).
 
 ## Review Strategy
 
@@ -22,8 +22,6 @@ The general strategy is to pick out any code that does "stink" off of scripts th
 Note that the stinks above is not limited to the above as members are able to make professional judgement on other's code. Positive feedback is also encouraged.
 
 ## Code Review Summary (November 8, 2018)
-
-The video of the code review can be found [here](https://drive.google.com/file/d/1QWhTOe7yiAyrI3t_L7N8U35C5dqXjaRP/view)
 
 ### Dann to Philip
 * Noticed that there is at least some injection within the "AggregateValueChecker"; it's great that there is because Philip can make mock objects off of abstract classes.
