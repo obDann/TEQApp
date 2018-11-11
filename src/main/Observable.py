@@ -29,7 +29,6 @@ class Observable(ABC):
         of Observers to be notified
         '''
         self.observers.append(observer)
-        print(self.observers)
 
     def remove_observer(self, observer):
         ''' (Observable, Observer) -> None

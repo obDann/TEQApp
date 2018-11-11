@@ -13,7 +13,10 @@ class CreateUserObserver(Observer):
         '''
 
     def notify(self, obs):
-        '''
+        ''' (CreateUserObserver, Observable) -> None
+        
+        If all values are filled, adds a new user record to the db
+        and displays the main page
         '''
         print("got notified")
         username = obs.button.e1.get()

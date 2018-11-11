@@ -21,13 +21,16 @@ class CreateAccountPage(tk.Frame):
         Label(self, text="Password").grid(row=3)
         Label(self, text="Choose an Account").grid(row=4)
 
+        # create an observable button
         obs_button = ButtonObservable()
-        obs_button.set_button(Button(self, text="Submit", command=lambda: obs_button.raise_event(self)))
-        cuo = CreateUserObserver()
-        obs_button.add_observer(cuo)
+        obs_button.set_button(Button(self, text="Submit",
+                                     command=lambda: obs_button.raise_event(self)))
+        create_usr_obs = CreateUserObserver()
+        obs_button.add_observer(create_usr_obs)
         b2 = obs_button.button
         b2.grid(row=5, column=2, sticky=W, pady=6)
 
+        # set entrys for the observable button
         b2.e1 = Entry(self)
         b2.e1.grid(row=1, column=1)
         b2.e2 = Entry(self)
@@ -43,5 +46,5 @@ class CreateAccountPage(tk.Frame):
         menu.grid(row=4, column=1)
 
         b1 = Button(self, text="Back",
-                            command=lambda: self.cont.display(mp.MainPage))
+                    command=lambda: self.cont.display(mp.MainPage))
         b1.grid(row=5, column=1, sticky=W, pady=6)
