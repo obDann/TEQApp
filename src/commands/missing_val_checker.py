@@ -3,9 +3,6 @@ from uploading_command import UploadingCommand
 import sys
 sys.path.append("../temhelp")
 from template_handler import TemplateHandler
-sys.path.append("../tests")
-from template_client import TemplateClient
-
 
 class MissingValChecker(UploadingCommand):
 
@@ -25,7 +22,7 @@ class MissingValChecker(UploadingCommand):
         user to enter values into the empty mandatory fields, then returns
         the fixed DataFrame
         '''
-        template = tc.get_template(self._template_name)
+        # template = tc.get_template(self._template_name)
         self._exec_status = False
         
         # get a list of empty_fields

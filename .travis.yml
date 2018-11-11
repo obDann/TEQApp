@@ -7,4 +7,5 @@ install:
     - pip3 install sendgrid
 script:
     - cd src/tests
-    - python -m unittest missing_val_checker_test
+    - python3 -m unittest missing_val_checker_test
+    - python3 -m unittest output_queue_test
