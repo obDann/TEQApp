@@ -31,6 +31,9 @@ Note that the stinks above is not limited to the above as members are able to ma
 * This was not discussed in the video, but I noticed that there was an unencapsulated method in his class. Just a small reminder that a single underscore means "private".
 
 ### Philip to Riaz
+* Code is easy to follow and understand, also by Riaz's design, it makes things easier when working with the GUI
+* Since MissingValueChecker and the function (DataAggregator) I was working on are similar, we have to agree and unify our ideas on how the methods should function
+* Only concern about his MissingValueChecker is that, it returns a list of tuples, but it is probably better to return the DataFrame object instead
 
 ### Riaz to Susan
 
