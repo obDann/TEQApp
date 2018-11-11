@@ -11,5 +11,6 @@ if __name__ == "__main__":
     tk_root = Tk()
     tk_root.withdraw()
     my_fsf = FileSystemFetcher(tk_root)
-    x = my_fsf.execute()
+    the_dataframe = my_fsf.execute()
     tk_root.mainloop()
+    print(the_dataframe)

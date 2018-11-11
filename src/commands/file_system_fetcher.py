@@ -63,6 +63,8 @@ class FileSystemFetcher(Command):
         if (len(sheet_names) == 1):
             # if there is, just return the dataframe selected
             the_sheet_name = sheet_names[0]
+            # and we know that our command has successfully executed
+            self._exec_status = True
             return file[the_sheet_name]
         # otherwise, we check if there are more sheets
         elif (len(sheet_names) > 1):
@@ -77,6 +79,8 @@ class FileSystemFetcher(Command):
             # sheet
             SheetSelection(sheet_names, selected_sheet, some_root)
             some_root.mainloop()
+            # we know that our command has successfully executed
+            self._exec_status = True
             # then return the selected sheet
             return file[selected_sheet.get()]
 
