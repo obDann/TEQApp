@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 from data_not_entered_exception import DataNotEnteredException
 
@@ -7,7 +8,8 @@ class TemplateProcessor():
     An intermediary to help with the template helpers and the vast amounts
     of data that is in the templates. Used strictly for metadata.
     '''
-    PATH = "template_headers.csv"
+    TH = "\\template_headers.csv"
+    PATH = os.path.dirname(os.path.realpath(__file__)) + TH
 
     def __init__(self):
         '''
@@ -65,9 +67,13 @@ class TemplateProcessor():
         # not
         is_dropdown = list(self._intermediary.loc[template_name + "Dropdown"])
         # the regexes
-        regexes = list(self._intermediary.loc[template_name + "Regex"])
+        regexes = self._intermediary.loc[template_name + "Regex"]
+        regexes = regexes.fillna("")
+        regexes = list(regexes)
         # the examples
-        examples = list(self._intermediary.loc[template_name + "Example"])
+        examples = self._intermediary.loc[template_name + "Example"]
+        examples = examples.fillna("N/A")
+        examples = list(examples)
 
         # and the mandatory fields
         template_mand = template_name + "Mandatory"

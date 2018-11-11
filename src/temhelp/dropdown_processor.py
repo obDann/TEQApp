@@ -1,4 +1,5 @@
 import pandas as pd
+import os
 from data_not_entered_exception import DataNotEnteredException
 
 
@@ -7,7 +8,7 @@ class DropdownProcessor():
     An intermediary to help with dropdown fields for specific data
     '''
 
-    PATH = "dropdown.csv"
+    PATH = os.path.dirname(os.path.realpath(__file__)) + "\\dropdown.csv"
 
     def __init__(self):
         '''
@@ -23,7 +24,7 @@ class DropdownProcessor():
         # the first column of the csv path is the name of the columns that
         # have dropdown menus
         # all other data entries are the dropdown options for that row
-        self._intermediary = pd.read_csv('dropdown.csv', index_col=0,
+        self._intermediary = pd.read_csv(self.PATH, index_col=0,
                                          keep_default_na=False)
 
     def get_options(self, col_name):
