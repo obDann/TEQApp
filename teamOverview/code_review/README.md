@@ -23,6 +23,8 @@ Note that the stinks above is not limited to the above as members are able to ma
 
 ## Code Review Summary (November 8, 2018)
 
+The video of the code review can be found [here](https://drive.google.com/file/d/1QWhTOe7yiAyrI3t_L7N8U35C5dqXjaRP/view)
+
 ### Dann to Philip
 * Noticed that there is at least some injection within the "AggregateValueChecker"; it's great that there is because Philip can make mock objects off of abstract classes.
 * Found a potential "stink" in his code where he checks a column name like a "postal code". It can be possible that he could expand this list of if statements; the tradeoff is that he may potentially duplicate code.
