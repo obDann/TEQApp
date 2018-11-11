@@ -10,8 +10,7 @@ from template_client import TemplateClient
 class MissingValChecker(UploadingCommand):
 
     def __init__(self, template_name):
-        '''
-        (MissingValChecker, Dataframe, TemplateHandler) -> None
+        ''' (MissingValChecker, Dataframe, TemplateHandler) -> None
 
         Initializes a MissingValChecker object with it's dataframe to
         parse and TemplateHandler to reference
