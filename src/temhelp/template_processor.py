@@ -8,7 +8,7 @@ class TemplateProcessor():
     An intermediary to help with the template helpers and the vast amounts
     of data that is in the templates. Used strictly for metadata.
     '''
-    TH = "\\template_headers.csv"
+    TH = "/template_headers.csv"
     PATH = os.path.dirname(os.path.realpath(__file__)) + TH
 
     def __init__(self):
