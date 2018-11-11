@@ -1,0 +1,39 @@
+# Code Review
+
+Within Team 10, code reviews are typically informal. However, given the requirements in Deliverable 4, documentation of our code review is provided.
+
+## Review Strategy
+
+Within our team agreement (which can be found [here](../deliverable_1)) there exists a section called "Submission". In this section, a buddy/infinite linked list system is in place. Analogously, the system is in place where "A->B" means A reviews B's work:
+
+`Dann -> Philip -> Riaz -> Susan -> David -> Dann`
+
+The general strategy is to pick out any code that does "stink" off of scripts that are typically 100 to 200 lines of code. Examples of such include:
+
+* Duplicate code
+* Long methods
+* Big ("God") classes
+* Long list of switch/if statements
+* Lots of checking for null objects
+* Unencapsulated fields/methods
+* Dead code
+* Hardcoded code
+
+Note that the stinks above is not limited to the above as members are able to make professional judgement on other's code. Positive feedback is also encouraged.
+
+## Code Review Summary (November 8, 2018)
+
+### Dann to Philip
+* Noticed that there is at least some injection within the "AggregateValueChecker"; it's great that there is because Philip can make mock objects off of abstract classes.
+* Found a potential "stink" in his code where he checks a column name like a "postal code". It can be possible that he could expand this list of if statements; the tradeoff is that he may potentially duplicate code.
+    * I recommended Philip to research on the concept of reflection; the idea that you can call methods or instantiate objects with strings (this goes into functional programming territory).
+* I recommended a "hard coded" list of constants at the top of his class for checking column names. If someone were to revisit his code, that person would easily know which column names are "aggregated".
+* This was not discussed in the video, but I noticed that there was an unencapsulated method in his class. Just a small reminder that a single underscore means "private".
+
+### Philip to Riaz
+
+### Riaz to Susan
+
+### Susan to David
+
+### David to Dann
