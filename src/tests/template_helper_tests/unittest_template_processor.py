@@ -33,7 +33,7 @@ class TestTemplateProcessor(unittest.TestCase):
         # 'ls' stands for long strings
         ls_1 = '[BUID:305939,RID:,ORP:4/5,DTS:2018-08-07 10:05:04][1] '
         ls_1 += '(Client) Unable to validate against database. / '
-        ls_1 += '(Client) Impossible de valider dans la base de données.'
+        ls_1 += '(Client) Impossible de valider dans la base de'
         ls_2 = 'FOSS/GCMS Client ID'
         ls_3 = 'Unique Identifier Value'
         ls_4 = 'Client Date of Birth (YYYY-MM-DD)'
