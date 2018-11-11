@@ -41,12 +41,3 @@ class AccountCreationEmailer(Emailer):
         your account has been successfully created")
         mail = Mail(from_email, subject, to_email, content)
         response = sg.client.mail.send.post(request_body=mail.get())
-
-    def sent_properly(self):
-        '''
-        (Emailer) -> boolean
-
-        Returns a boolean to determine whether the email could be sent or not
-        '''
-        # similar to commands
-        return self._exec_status

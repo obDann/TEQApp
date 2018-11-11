@@ -25,22 +25,22 @@ class PasswordForgettingEmailer(Emailer):
         password.
         '''
         # check if email is in database?, and if so then
-        (conn, cur) = database_methods.connection('users.db')
-        query = ("SELECT Name, Type from User where Email = ?")
-        try:
-            cur.execute(query, recipient)
-            error = 0
-        except sqlite3.Error as e:
-            print(format(e))
-            error = 1
+        #(conn, cur) = database_methods.connection('users.db')
+        #query = ("SELECT Name, Type from User where Email = ?")
+        #try:
+            #cur.execute(query, recipient)
+            #error = 0
+        #except sqlite3.Error as e:
+            #print(format(e))
+            #error = 1
 
-        if (not(error)):
-            name = cur.fetchall()
-            if (len(name) != 0):
-                self._exec_status = True
+        #if (not(error)):
+            #name = cur.fetchall()
+            #if (len(name) != 0):
+                #self._exec_status = True
 
-        if (not self._exec_status):
-            return None
+        #if (not self._exec_status):
+            #return None
 
         sg = sendgrid.SendGridAPIClient('SG.ME6PqRvVQeqs71zjlyHzCQ.cTKpy39VLj\
         kY52e8SMQTMyMyqfUiqdzHaZGsEPq1VTk')
@@ -53,11 +53,3 @@ class PasswordForgettingEmailer(Emailer):
         your password immediately afterward: \n")
         mail = Mail(from_email, subject, to_email, content)
         response = sg.client.mail.send.post(request_body=mail.get())        
-
-    def sent_properly(self):
-        '''
-        (Emailer) -> boolean
-
-        Returns a boolean to determine whether the email could be sent or not
-        '''
-        return self._exec_status

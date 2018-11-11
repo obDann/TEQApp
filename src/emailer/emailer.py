@@ -19,12 +19,3 @@ class Emailer(ABC):
         (Emailer) -> None
         
         Sends an email
-        '''
-
-    @abstractmethod
-    def sent_properly(self):
-        '''
-        (Emailer) -> boolean
-
-        Returns a boolean to determine whether the email could be sent or not
-        '''
