@@ -8,7 +8,7 @@ class MockTemplate():
         and a column name
         '''
         #TemplateHandler.__init__(self, template_name, column_name)
-        self_headers = ['a', 'b', 'c', 'd', 'e', 'f']
+        self._headers = ['a', 'b', 'c', 'd', 'e', 'f']
         self._mandatory_headers = ['a', 'e', 'f']
         
     def handle_template(self):

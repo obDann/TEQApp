@@ -1,0 +1,37 @@
+Sprint 2 Report
+Oct 24 to Oct 28
+--------------------------------------------------------------------------------
+Sprint 2 Completion Report
+
+Tasks accomplished:
+David: 
+Dann: 5a, 5b, 10a
+Susan: 4, 4a
+Philip: 
+Riaz: 
+
+--------------------------------------------------------------------------------
+Changes and updates before going into the next sprint:
+
+-A discussion was held on October 31st, majority of the previous tasks were 
+ not found to be viable. Therefore, a majority of the tasks were not carried
+ over.
+
+-Highest possible numbered task from previous sprints was 16, so tasks will
+ start from 17 and onward. One of the remaining tasks from the previous sprint
+ was task 10.
+
+-To adapt, new tasks were made in accordance to design.
+
+-Note that a user story has been added for this sprint. A new version of user
+ stories is needed.
+
+-Design should be uploaded
+--------------------------------------------------------------------------------
+What happened in this sprint:
+
+- Many members had midterms during this week. The provisional and actual
+  burndown chart was expected to be flatter than usual.
+
+- Dann could not start on task 10b or 10c because Sunday was dedicated towards
+  documentation for Deliverable 3.

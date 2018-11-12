@@ -1,0 +1,35 @@
+Sprint 4 Report
+Nov 7 to Nov 11
+--------------------------------------------------------------------------------
+Sprint 4 Completion Report
+
+Tasks accomplished:
+David:  21
+Dann: 25 to 32
+Susan: 10
+Philip: 
+Riaz: 
+
+
+--------------------------------------------------------------------------------
+Changes and updates before going into the next sprint (further more to be 
+discussed):
+
+- There was difficulty in trying to tie the commands into the GUI, an attempt
+  was made with file system fetcher (but does not have real functionality)
+
+- It is expected that we will be overcoming this adversity of tying the
+  commands into the GUI coming the next few sprints
+
+--------------------------------------------------------------------------------
+What happened in this sprint:
+
+- Philip is working on DataAggregator, he's currently working on the GUI
+  portion.
+
+- Believed completion of uploading (thanks to Susan).
+
+- Riaz had time to deal with administrative tasks, so that is why task 22b and
+  22c are on there.
+  
+- Dann finished a "TrueTemplateHelper" class; completing tasks 25 to 32

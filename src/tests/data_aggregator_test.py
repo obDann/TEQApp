@@ -47,6 +47,12 @@ class DataAggregatorTest(unittest.TestCase):
         expected_result = ([('a', 2), ('b', 0), ('c', 0), ('c', 1)])
         result = parse_all_columns(df, self.mock_template)
         self.assertTrue(expected_result, result)
+<<<<<<< HEAD
 
 if __name__ == '__main__':
     unittest.main(exit=False)
+=======
+    
+if __name__ == '__main__':
+    unittest.main(exit=False)
+>>>>>>> ee325ce85d8a90b6b492cd8d0324bba40f604e15

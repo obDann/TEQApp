@@ -115,7 +115,7 @@ class MissingValCheckerTest(unittest.TestCase):
                                   [1, 1, 1, 1, 1]])
         expected_result = [("a", 0), ("f", -1)]
         result = parse_columns(df, self.mock_template)
-        self.assertCountEqual(expected_result, result)    
+        self.assertCountEqual(expected_result, result)
     
 if __name__ == '__main__':
     unittest.main(exit=False)
