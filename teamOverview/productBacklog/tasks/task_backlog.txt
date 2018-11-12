@@ -24,12 +24,22 @@ Task 18   [3 pts]: Make a 'PasswordChanger' class to securely change the
 User Story 1a:
 Task 19   [1 pts]: Implement the 'Emailer' interface
 
-Task 20   [5 pts]: Implement the 'AccountCreatorEmailer' class
-                   -Dependent on task 17, 19
+Task 20   [3 pts]: Implement the 'AccountCreatorEmailer' class
+
+Task 20a  [5 pts]: Integrate this emailer into the program when an account is
+                   being created
+
+Task 20b  [2 pts]: Make sure the user can only enter valid inputs and enter
+                   the email into the database
+                   -Dependent on task 20a
 
 Task 21   [1 pts]: Implement the 'PasswordForgettingEmailer' class
-                   -Dependent on task 18, 19
 
+Task 21a  [2 pts]: Integrate this emailer into the program 
+
+Task 21b  [5 pts]: Make sure the user can use a temporary code in order to log 
+                   into their account and then have them change their password
+                   -Dependent on task 21a
 
 User Story 2:
 Task 10  [13 pts]: Implement a class to store the parsed (beautiful) data into
