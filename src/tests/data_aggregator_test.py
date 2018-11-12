@@ -31,18 +31,21 @@ class DataAggregatorTest(unittest.TestCase):
         df = pd.DataFrame([['ba','asd',"ss"],['abb','ayy','op'],
                            ['you','are','good']], columns=['a', 'b', 'c'])
         expected_result = ([('c', 0), ('c', 1), ('c', 2)])
+        result = parse_all_columns(df, self.mock_template)
         self.assertTrue(expected_result, result)
     
     def test_all_number_df(self):
         df = pd.DataFrame([[1,9,5],[95,3,51],[158,1,5]],
                           columns=['a', 'b', 'c'])
         expected_result = ([('b', 0), ('b', 1), ('b', 2)])
+        result = parse_all_columns(df, self.mock_template)
         self.assertTrue(expected_result, result)
     
     def test_mixed_df(self):
         df = pd.DataFrame([[1,'hi',"litt"],[113,'a','2'],['62',15,'a']],
                           columns=['a', 'b', 'c'])
         expected_result = ([('b', 2), ('c', 0), ('c', 2)])
+        result = parse_all_columns(df, self.mock_template)
         self.assertTrue(expected_result, result)
     
     def test_diff_regex(self):
@@ -50,4 +53,8 @@ class DataAggregatorTest(unittest.TestCase):
                                   columns=['a', 'b', 'c'])
         self.regex = ['^([a-zA-z]?[0-9]){3}$','[a-zA-Z]?[0-9]', '[a-z]']
         expected_result = ([('a', 2), ('b', 0), ('c', 0), ('c', 1)])
+        result = parse_all_columns(df, self.mock_template)
         self.assertTrue(expected_result, result)
+    
+if __name__ == '__main__':
+    unittest.main(exit=False)

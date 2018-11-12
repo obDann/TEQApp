@@ -108,7 +108,7 @@ def parse_all_columns(df, template):
     # List to store the tuples
     misformated = list()
     # Gets the column names to a list
-    header_name = template.get_header()
+    header_name = template.get_headers()
     # Gets the list of regex
     regex = template.get_regex()
     # for looping through regex list
