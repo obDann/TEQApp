@@ -17,10 +17,8 @@ class Observable(ABC):
         
         Notifys all Observers
         '''
-        print("event")
         for obs in self.observers:
             obs.notify(self)
-            print("notified")
 
     def add_observer(self, observer):
         ''' (Observable, Observer) -> None

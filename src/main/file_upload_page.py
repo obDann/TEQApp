@@ -108,19 +108,3 @@ class FileUpload(tk.Frame):
 
     def back(self):
         self.cont.set_page(ap.AgencyPage, self.name)
-
-    def upload(self, template_name):
-        '''
-        (FileUploadPage, str) -> None
-
-        Uploads a file to the database according to a specified template name
-        '''
-        # make a template handler
-
-        # make another root
-        temp_root = Tk()
-        # inject the root into the FileSystemFetcher
-        my_fsf = FileSystemFetcher(temp_root)
-        the_dataframe = my_fsf.execute()
-        temp_root.mainloop()
-        print(the_dataframe)

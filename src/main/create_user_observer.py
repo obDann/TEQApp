@@ -18,7 +18,6 @@ class CreateUserObserver(Observer):
         If all values are filled, adds a new user record to the db
         and displays the main page
         '''
-        print("got notified")
         username = obs.button.e1.get()
         name = obs.button.e2.get()
         pw = obs.button.e3.get()

@@ -21,7 +21,6 @@ class UploadObserver(Observer):
 
         Uploads a file to the database according to a specified template name
         '''
-        print("got notified")
         # make a template handler
 
         # make another root
