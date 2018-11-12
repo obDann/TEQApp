@@ -9,6 +9,7 @@ script:
     - cd src/tests
     - python3 -m unittest missing_val_checker_test
     - python3 -m unittest output_queue_test
+    - python3 -m unittest data_aggregator_test
     - cd template_helper_tests
     - python3 -m unittest unittest_dropdown_processor.py
     - python3 -m unittest unittest_template_processor.py
