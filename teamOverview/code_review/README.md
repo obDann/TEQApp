@@ -43,3 +43,4 @@ Note that the stinks above is not limited to the above as members are able to ma
 * Noticed that in is_dropdown_value_mandatory for the true template handler, there are two dummy variables that are being used in order to take up all indexes of a tuple. Instead only the first index should be returned in order to be more efficient.
 * In the same function, is_dropdown_value_mandatory, I mentioned that there is a conversion of a string into an integer and then into a boolean right after. Python allows 0's and 1's to act as booleans so the second conversion can be removed so I suggested to just keep it as an integer for conditional statements.
 * In handle_template, there is a hardcoded True value returned which is taking memory unnecessarily.
+* Otherwise, the rest of the quality of code is sufficient and no further comments could be made.
