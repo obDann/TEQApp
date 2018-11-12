@@ -36,6 +36,9 @@ Note that the stinks above is not limited to the above as members are able to ma
 * Only concern about his MissingValueChecker is that, it returns a list of tuples, but it is probably better to return the DataFrame object instead
 
 ### Riaz to Susan
+* Code is well seperated into classes and imports are clear making it easy to trace code
+* Biggest concern was that Observer pattern wasn't implemented, this means changes to button functionality not relating to the view requires changing the view page for the button
+	* but I refactored this, this also makes the code easier to follow as button functionality is in its own class and makes adding functionality to buttons easier
 
 ### Susan to David
 
