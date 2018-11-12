@@ -41,6 +41,9 @@ Note that the stinks above is not limited to the above as members are able to ma
 	* but I refactored this, this also makes the code easier to follow as button functionality is in its own class and makes adding functionality to buttons easier
 
 ### Susan to David
+* Code that retrieves information from the database in method send() should be separate from the class PasswordForgettingEmailer
+* The SQL command for checking if an email is in the database does not need to include the Type of the user, having just Name is sufficient
+* In PasswordForgettingEmailer, there does not need to be a method to check whether the email was sent, this can be done externally after validating whether the email exists in the database or not
 
 ### David to Dann
 * Noticed that in is_dropdown_value_mandatory for the true template handler, there are two dummy variables that are being used in order to take up all indexes of a tuple. Instead only the first index should be returned in order to be more efficient.
