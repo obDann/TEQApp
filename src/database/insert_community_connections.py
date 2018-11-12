@@ -36,6 +36,8 @@ def insert_skills(column_values, row_values, client_id):
     Inserts clients skills into the Skills table.
     '''
     if (not(database_methods.check_id(client_id, 'client_data.db', "Skills",
-                                      "Client_Unique_ID_Value"))):
+                                      "Client_Unique_ID_Value")) and
+        database_methods.check_id(client_id, 'client_data.db', "Client",
+                                              "Unique_ID_Value")):
         insert_general.insert_3_value(column_values, row_values, 
                                       "Skills", client_id, 38, 44)

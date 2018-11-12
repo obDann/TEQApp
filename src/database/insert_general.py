@@ -31,7 +31,11 @@ def insert_client_service(service_id, client_id, month, year):
     Inserts a row in the Client_Attends_Service table.
     '''
     val = [service_id, client_id, month, year]
-    insert_helper.insert_row(val, "Client_Attends_Service")
+    if (database_methods.check_id(client_id, 'client_data.db', "Client",
+                                      "Unique_ID_Value") and 
+        database_methods.check_id(service_id, 'client_data.db', "Service",
+                                              "ID")): 
+        insert_helper.insert_row(val, "Client_Attends_Service")
     
 def insert_target_group(row_values, start, end):
     '''

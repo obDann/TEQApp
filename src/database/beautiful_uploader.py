@@ -39,13 +39,13 @@ class BeautifulUploader(BeautifulUploaderAbstract):
         column = df.iloc[1]
         while (i < total_rows):
             # get client id
-            client_id = df.iloc[2][3]            
+            client_id = df.iloc[i][3]
             row = df.iloc[i]
             inserted = insert_needs_assessment.insert_referral(row, client_id, 
                                                              agency)
             if (inserted):
                 insert_needs_assessment.insert_child(row, client_id)
-                insert_trans_int(row, client_id)
+                insert_needs_assessment.insert_trans_int(row, client_id)
                 insert_needs_assessment.insert_find_employment(row, client_id)
                 insert_needs_assessment.insert_improve_skills(column, row,
                                                               client_id)
@@ -65,7 +65,7 @@ class BeautifulUploader(BeautifulUploaderAbstract):
         column = df.iloc[1]
         while (i < total_rows):
             # get client id
-            client_id = df.iloc[2][3]
+            client_id = df.iloc[i][3]
             row = df.iloc[i]
             target_id = insert_community_connections.insert_target(row)
             service_id = insert_community_connections.insert_service(row)
@@ -89,7 +89,7 @@ class BeautifulUploader(BeautifulUploaderAbstract):
         column = df.iloc[1]
         while (i < total_rows):
             # get client id
-            client_id = df.iloc[2][3]            
+            client_id = df.iloc[i][3]            
             row = df.iloc[i]
             target_id = insert_info_ori.insert_target(row)
             service_id = insert_info_ori.insert_service(row)
@@ -111,7 +111,7 @@ class BeautifulUploader(BeautifulUploaderAbstract):
         column = df.iloc[1]
         while (i < total_rows):
             # get client id
-            client_id = df.iloc[2][3]
+            client_id = df.iloc[i][3]
             row = df.iloc[i]
             service_id = insert_employment.insert_service(row)
             insert_employment.insert_employment(row, service_id)
@@ -132,9 +132,9 @@ class BeautifulUploader(BeautifulUploaderAbstract):
         i = 2
         while (i < total_rows):
             # get client id
-            client_id = df.iloc[2][3]
+            client_id = df.iloc[i][3]
             # get course code
-            course_code = df.iloc[2][6]
+            course_code = df.iloc[i][6]
             row = df.iloc[i]
             insert_client_enrol.insert_client_enrol(row, client_id, course_code)
             i += 1
@@ -151,7 +151,7 @@ class BeautifulUploader(BeautifulUploaderAbstract):
         column = df.iloc[1]
         while (i < total_rows):
             # get course code
-            course_code = df.iloc[2][2]
+            course_code = df.iloc[i][2]
             row = df.iloc[i]
             # if course was not already inserted into the database
             if (not(database_methods.check_course(course_code, 
@@ -179,9 +179,9 @@ class BeautifulUploader(BeautifulUploaderAbstract):
         column = df.iloc[1]
         while (i < total_rows):
             # get client id
-            client_id = df.iloc[2][3]
+            client_id = df.iloc[i][3]
             # get course code
-            course_code = df.iloc[2][5]
+            course_code = df.iloc[i][5]
             # check client_id and course_code exists in tables
             key = (course_code, client_id)            
             if (database_methods.check_id(key, 'client_data.db', "Client_Exit",
