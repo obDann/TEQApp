@@ -51,12 +51,13 @@ def get_id(table):
             return 0
 
 
-def check_client(client_id, database):
+def check_id(client_id, database, table, id_name):
     '''
     Checks if there is a row for the client with client_id. Returns 1 if yes
     and 0 otherwise.
     '''
-    query = "SELECT 1 FROM Client WHERE Unique_ID_Value = " + str(client_id)
+    query = ("SELECT 1 FROM " + str(table) + " WHERE " + str(id_name) + " = " 
+             + str(client_id))
     
     (conn, cur) = connection(database)
     try:
@@ -73,6 +74,24 @@ def check_client(client_id, database):
         else:
             return 0
 
+def check_course(course_code, database):
+    query = ("SELECT 1 FROM " + "LT_Course" + " WHERE " +
+             "Course_Code" + " = " + "'" + str(course_code) + "'")
+    
+    (conn, cur) = connection(database)
+    try:
+        error = 0
+        cur.execute(query)
+    except sqlite3.Error as e:
+        print(e)
+        error = 1
+    
+    if (not(error)):
+        val = cur.fetchone()
+        if (val is not None and val[0] == 1):
+            return 1
+        else:
+            return 0    
 
 def fetch_values(start, end, row_values, lst):
     '''

@@ -1,8 +1,4 @@
-import sys
-sys.path.append("../temhelp")
-from template_handler import TemplateHandler
-
-class MockTemplate(TemplateHandler):
+class MockTemplate():
     
     def  __init__(self, template_name, column_name):
         '''
@@ -11,9 +7,9 @@ class MockTemplate(TemplateHandler):
         Initializes a MockTemplate and injects a template name
         and a column name
         '''
-        TemplateHandler.__init__(self, template_name, column_name)
-        TemplateHandler._headers = ['a', 'b', 'c', 'd', 'e', 'f']
-        TemplateHandler._mandatory_headers = ['a', 'e', 'f']
+        #TemplateHandler.__init__(self, template_name, column_name)
+        self_headers = ['a', 'b', 'c', 'd', 'e', 'f']
+        self._mandatory_headers = ['a', 'e', 'f']
         
     def handle_template(self):
         '''
