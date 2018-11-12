@@ -10,7 +10,7 @@ def insert_target(row_values):
         target_id = insert_general.insert_target_group(row_values, 17, 31)
         return target_id
     
-    return 0
+    return None
 
 def insert_service(row_values):
     service_id = insert_general.insert_service(row_values, 63, 
@@ -28,7 +28,7 @@ def insert_skills(column_values, row_values, client_id):
     insert_general.insert_3_value(column_values, row_values, 
                                   "Skills", client_id, 70, 71)
 
-def insert_info_ori(row_values, service_id, target_id):
+def insert_info_and_ori(row_values, service_id, target_id):
     '''
     Inserts a row in the Info_and_Orientation table.
     '''
@@ -38,11 +38,16 @@ def insert_info_ori(row_values, service_id, target_id):
     
     insert_helper.insert_row(val, "Info_and_Orientation")
 
+def client_attends_service(service_id, client_id, month, year):
+    insert_general.insert_client_service(service_id, client_id, month, year)
+
 def insert_service_needs(column_values, row_values, service_id):
     '''
     Inserts rows into the Service_Needs table.
     '''
-    insert_general.insert_3_value(column_values, row_values, "Service_Needs",
-                                  service_id, 31, 63)
-    insert_general.insert_3_value(column_values, row_values, "Service_Needs",
-                                  service_id, 71, 72)
+    if (not(database_methods.check_id(service_id, 'client_data.db', 
+                                      "Service_Needs", "Service_ID"))):    
+        insert_general.insert_3_value(column_values, row_values, 
+                                      "Service_Needs", service_id, 31, 63)
+        insert_general.insert_3_value(column_values, row_values, 
+                                      "Service_Needs", service_id, 71, 72)
