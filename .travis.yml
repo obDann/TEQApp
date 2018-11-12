@@ -1,0 +1,15 @@
+language: python
+python:
+    - "3.6"
+cache: pip
+install:
+    - pip3 install pandas
+    - pip3 install sendgrid
+script:
+    - cd src/tests
+    - python3 -m unittest missing_val_checker_test
+    - python3 -m unittest output_queue_test
+    - cd template_helper_tests
+    - python3 -m unittest unittest_dropdown_processor.py
+    - python3 -m unittest unittest_template_processor.py
+    - python3 -m unittest unittest_true_tem_handler.py
