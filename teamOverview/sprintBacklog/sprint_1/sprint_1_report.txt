@@ -1,0 +1,34 @@
+Sprint 1 Report
+Oct 17 to Oct 21
+--------------------------------------------------------------------------------
+Sprint 1 Completion Report
+
+Tasks accomplished:
+David: 9
+Dann: 6a, 6b, 8
+Susan: 3, 3a
+Philip: 1, 2
+Riaz: 6, 13
+
+Tasks carried over to the next sprint:
+4, 18
+--------------------------------------------------------------------------------
+Changes and updates before going into the next sprint:
+
+-Task 16 is discontinued until further notice. Task 16 would depend on the
+ database being built
+
+-Task 7 is removed due to the small magnitude of the task
+
+-Task 4 is changed to work with a GUI
+--------------------------------------------------------------------------------
+What happened in this sprint:
+
+- Many tasks were burned down this sprint since a library was found (pandas)
+  to help with parsing data from an excel file
+ 
+- A couple tasks were made for the abstract class "Command" and the 
+  "OutputQueue" task; providing at least some design.
+
+- Saturdays are typically days where every group member is free, hence why
+  there is a steep dip from day 3 to day 4.

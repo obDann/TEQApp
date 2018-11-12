@@ -1,0 +1,30 @@
+Sprint 3 Report
+Oct 31 to Nov 4
+--------------------------------------------------------------------------------
+Sprint 3 Completion Report
+
+Tasks accomplished:
+David: 19
+Dann: 24a, 24b
+Susan: 
+Philip: 33
+Riaz: 22
+
+--------------------------------------------------------------------------------
+Changes and updates before going into the next sprint:
+
+-Majority of the tasks were found to be severely underestimated. It was found
+ that there is barely any changes to story points for the upcoming sprint.
+ 
+-Dann has found a 'better' way of dealing with the template handlers, therefore
+ he has taken all tasks of the template handlers
+--------------------------------------------------------------------------------
+What happened in this sprint?
+
+- Members did start their tasks throughout the week, expected to be completed 
+  within the next sprint (as tasks were severely underestimated)
+
+- The "better" way of dealing with the template handlers was to make two
+  additional classes that act as intermediaries for the template (getting
+  all possible metadata from it) hence why there are two excessive tasks this
+  sprint
