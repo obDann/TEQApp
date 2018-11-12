@@ -18,4 +18,3 @@ class Emailer(ABC):
         (Emailer) -> None
         
         Sends an email
-        '''
