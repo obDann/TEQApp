@@ -4,6 +4,7 @@ import main_page as mp
 
 class CreateUserObserver(Observer):
     '''
+    Observer object for button that creates a new user
     '''
     
     def __init__(self):

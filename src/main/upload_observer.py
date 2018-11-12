@@ -7,6 +7,7 @@ import file_system_fetcher as fsf
 
 class UploadObserver(Observer):
     '''
+    Observer object for button that allows users to upload excel files
     '''
     
     def __init__(self):

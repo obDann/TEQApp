@@ -2,6 +2,7 @@ from Observable import Observable
 
 class ButtonObservable(Observable):
     '''
+    Observable object that allows observers to observe a button
     '''
     
     def __init__(self, button=None):
@@ -21,6 +22,8 @@ class ButtonObservable(Observable):
         Observable.raise_event(self)        
 
     def set_button(self, button):
-        ''' (Observable, 
+        ''' (Observable, Button) -> None
+        
+        Sets the button for an observable object
         '''
         self.button = button
