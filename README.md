@@ -27,6 +27,7 @@ Within the next few sprints, it will be expected of us to be tying the GUI with 
 **Pip installations required**:
 - `pip3 install pandas`
 - `pip3 install sendgrid`
+- `pip3 install passlib`
  
 **Dependencies used**:
 - [sqlite3](https://www.sqlite.org/download.html)
