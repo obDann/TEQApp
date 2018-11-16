@@ -2,14 +2,16 @@ import sqlite3
 import sys
 sys.path.insert(0, "../database")
 import database_methods
+import password_hash
 
 def insert_user(username, name, password, account_type):
     '''
     Inserts a new user into the database (table User).
     '''
     # time is stored as UNIX timestap in INT
+    new_password = password_hash.hash_password(password)
     query = "INSERT INTO User values (?, ?, ?, ?, strftime('%s','now'));"
-    fields = (username, name, password, account_type)
+    fields = (username, name, new_password, account_type)
     
     if (not(database_methods.execute_query(query, fields, 'users.db'))):
         insert_account(username, account_type)
@@ -26,19 +28,20 @@ def login(username, password):
     Returns the name of the user and the type if login information is correct.
     '''
     (conn, cur) = database_methods.connection('users.db')
-    query = ("SELECT Name, Type from User where Username = ? "
-            " AND password = ?")
-    fields = (username, password)
+    query = ("SELECT Name, Type, Password from User where Username = ?")
+    fields = (username,)
+
     try:
         cur.execute(query, fields)
         error = 0
     except sqlite3.Error as e:
         print(format(e))
         error = 1
-    
+        
     if (not(error)):
         name = cur.fetchall()
-        if (len(name) != 0):
+        correct_password = password_hash.verify_password(password, name[0][2])
+        if (len(name) != 0 and correct_password):
             return (name[0][0], name[0][1])
         
     return (None, None)

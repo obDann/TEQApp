@@ -1,0 +1,17 @@
+What was I working on?
+- Believed completed implementation on "TrueTemplateHandler"
+
+What am I working on now?
+-Unit tests for template handler
+-Checking back on FileSystemFetcher
+-Investigate button binding
+-Look into DuplicateRowValueChecker (if time permits)
+
+Am I blocked by anything?
+-Upcoming midterm along with two other assignments due this week
+
+What are the main takeaways for me after this meeting?
+-Stay cautious for the reporting portion of the project; will be meeting
+ with the client on Tuesday
+-Proposed "Demo day" on Monday so that we know each other's features.
+-Completed recording for the code review

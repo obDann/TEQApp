@@ -10,7 +10,8 @@ def insert_client(row_values, id_value, agency):
     Client Profile file). If not, insert missing data into Client table.
     '''
     # if client did not submit client profile form
-    if (not(database_methods.check_client(id_value, 'client_data.db'))):
+    if (not(database_methods.check_id(id_value, 'client_data.db', "Client",
+                                      "Unique_ID_Value"))):
         # extract the data and insert a row into Client table
         index = [(0, 1), (2, 5), (8, 9)]
         val = database_methods.fetch_values_list(row_values, index, [])
@@ -26,15 +27,22 @@ def insert_client(row_values, id_value, agency):
 def insert_referral(row_values, id_value, agency):
     '''
     Inserts data into the Referral table. Gets client unique identifier value
-    and a dataframe read_excel object with iloc[row].
+    and a dataframe read_excel object with iloc[row]. Returns 1 if information
+    has been inserted and 0 otherwise.
     '''
     # check client has been inserted already
     insert_client(row_values, id_value, agency)
-    index = [(1, 2), (5, 8), (9, 11), (39, 41), (47, 48), (68, 69), (89, 92)]
-    val = [id_value]
-    val = database_methods.fetch_values_list(row_values, index, val)
+    if (not(database_methods.check_id(id_value, 'client_data.db', "Referral",
+                                      "Client_Unique_ID_Value"))):    
+        index = [(1, 2), (5, 8), (9, 11), (39, 41), (47, 48), (68, 69), 
+                 (89, 92)]
+        val = [id_value]
+        val = database_methods.fetch_values_list(row_values, index, val)
 
-    insert_helper.insert_row(val, "Referral")
+        insert_helper.insert_row(val, "Referral")
+        return 1
+    
+    return 0
 
 def insert_child(row_values, id_value):
     '''
@@ -42,7 +50,7 @@ def insert_child(row_values, id_value):
     '''
     # check child fields are not empty and insert
     i = 1
-    j = 70
+    j = 70   
     while (j < 79):
         if (type(row_values[j]) == str or type(row_values[j+1]) == str):
             val = [id_value, i]

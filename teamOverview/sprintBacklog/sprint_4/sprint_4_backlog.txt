@@ -1,0 +1,133 @@
+Sprint 4 Backlog
+Nov 7 to Nov 11
+--------------------------------------------------------------------------------
+Sprint 3 Completion Report
+
+Tasks accomplished:
+David: 19
+Dann: 24a, 24b
+Susan: 
+Philip: 33
+Riaz: 22
+
+--------------------------------------------------------------------------------
+Changes and updates:
+
+-Majority of the tasks were found to be severely underestimated. It was found
+ that there is barely any changes to story points for this sprint.
+ 
+-Dann has found a 'better' way of dealing with the template handlers, therefore
+ he has taken all tasks of the template handlers
+
+--------------------------------------------------------------------------------
+User Stories from Product Backlog that we will address in this sprint:
+
+1)   As a TEQ employee, Mike James, I want to make only authorized agency
+     accounts able to access all of the uploaded data so that we can maintain 
+     the privacy of the organizations
+
+1a)  As a TEQ employee, Mike James, I want to email agencies their certified
+     account so that they are informed that they have an account to contribute
+     to the TEQ program
+
+2)   As a volunteer for agency XYZ, Sam Spongy, I want to be able to upload any
+     of the 8 different types of iCare excel files so that the agency that I
+     represent can contribute to the CCS program
+
+3)  As a volunteer for agency XYZ, Sam Spongy, I expect that when I upload my
+    data, all entries are automatically formatted to comply with the system’s
+    format so that I do not have to manually change any entries
+
+10) As a TEQ employee, Mike James, I want to be able to remove agencies in the
+    event that they close down so that we don't have any irrelevant data
+
+--------------------------------------------------------------------------------
+Specific Tasks to be accompished:
+
+User Story 1:
+Task 17   [3 pts]: Make an 'AccountCreator' class to securely make an account
+                   to the Account Database
+
+Task 18   [3 pts]: Make a 'PasswordChanger' class to securely change the
+                   password through the accounts database
+
+
+User Story 1a:
+Task 20   [5 pts]: Implement the 'AccountCreatorEmailer' class
+                   -Dependent on task 17, 19
+
+Task 21   [1 pts]: Implement the 'PasswordForgettingEmailer' class
+                   -Dependent on task 18, 19
+
+
+User Story 2:
+Task 10   [3 pts]: Implement a class to store the parsed (beautiful) data into
+                   the database (the class may be called 'BeautifulUploader')
+
+Task 22b  [3 pts]: Make (MissingValueChecker) tests independent and automated
+                   -Dependent on task 22
+
+Task 22c  [5 pts]: Implement methods into GUI
+                   -Dependent on task 22
+
+Task 23   [2 pts]: Implement the DuplicateRowChecker as described in the design
+
+Task 25   [1 pts]: Implement the ClientProfileTemplateHelper
+                   -Dependent on task 24
+
+Task 26   [1 pts]: Implement the NeedsAndAssessmentTemplateHelper
+                   -Dependent on task 24
+
+Task 27   [1 pts]: Implement the CommunityConnectionsTemplateHelper
+                   -Dependent on task 24
+                   
+Task 28   [1 pts]: Implement the InformationAndOrientationTemplateHelper
+                   -Dependent on task 24
+
+Task 29   [1 pts]: Implement the EmploymentTemplateHelper
+                   -Dependent on task 24
+
+Task 30   [1 pts]: Implement the LTClientTemplateHelper
+                   -Dependent on task 24
+
+Task 31   [1 pts]: Implement the LTCourseHelper
+                   -Dependent on task 24
+
+Task 32   [1 pts]: Implement the LTClientExitTemplateHelper
+                   -Dependent on task 24
+
+
+User Story 3:
+Task 33a [8 pts]: Implement a GUI for displaying the table with the values 
+                  that needed to be fix
+                  -Dependent on task 33
+
+User Story 10:                  
+Task 34  [1 pts]: Implement a functionality to remove agency users from the
+                  database
+                  -Dependent on task 20
+--------------------------------------------------------------------------------
+Members' estimated availability are as follows:
+David:  1 on Wednesday, 0 on Thursday, 2 on Friday, 3 on Saturday, 0 on Sunday
+Dann:   3 on Wednesday, 0 on Thursday, 2 on Friday, 0 on Saturday, 0 on Sunday
+Philip: 2 on Wednesday, 1 on Thursday, 0 on Friday, 1 on Saturday, 2 on Sunday
+Riaz:   0 on Wednesday, 0 on Thursday, 3 on Friday, 4 on Saturday, 1 on Sunday
+Susan:  0 on Wednesday, 0 on Thursday, 3 on Friday, 1 on Saturday, 4 on Sunday
+--------------------------------------------------------------------------------
+Tasks are assigned as follows:
+
+Member: David
+Tasks: 17, 18
+
+Member: Dann
+Tasks: 23, 25, 26, 27, 28, 29, 30, 31, 32
+
+Member: Philip
+Tasks: 33a
+
+Member: Riaz
+Tasks: 22b, 22c
+
+Member: Susan
+Tasks: 10, 34
+--------------------------------------------------------------------------------
