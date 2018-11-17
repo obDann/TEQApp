@@ -3,30 +3,38 @@ from command import Command
 import tkinter
 import pandas as pd
 
-class DuplicateRowChecker(UploadingCommand):
+class DuplicateRowChecker(Command):
     '''
     An uploading command that checks for duplicate rows in a dataframe
     '''
 
-    def __init__(self, template_name, root=None):
+    def __init__(self, df):
         '''
-        (DuplicateRowChecker, str, tk) -> None
+        (DuplicateRowChecker, DataFrame) -> None
 
         Initializes a DuplicateRowChecker.
         '''
-        # call uploading command's init method (for a template name)
-        UploadingCommand.__init__(self, template_name)
-        # call command's init method (for an output queue and a execution
-        # status)
         Command.__init__(self)
-        # we will later deal with the root
+        # set our dataframe
+        self._df = df
 
-    def execute(self, df):
+    def execute(self):
         '''
         (DuplicateRowChecker, DataFrame) -> DataFrame
 
         Returns a DataFrame with all duplicate rows removed
         '''
+        # our execution status is now true
+        self._exec_status = True
+
+        # check if the dataframe is empty
+        if (self._df.empty):
+            # if it is, then just return the same dataframe
+            return self._df
+
+        # otherwise, if it isn't then let's return a dataframe with the
+        # duplicate values dropped
+        return self._df.drop_duplicates()
 
     def executed_properly(self):
         '''
