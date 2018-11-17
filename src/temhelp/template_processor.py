@@ -74,10 +74,7 @@ class TemplateProcessor():
         examples = list(examples)
 
         # and the mandatory fields
-        template_mand = template_name + "Mandatory"
-        mandatory_fields = self._intermediary.loc[template_mand]
-        mandatory_fields = mandatory_fields.dropna(axis=0, how="any")
-        mandatory_fields = tuple(mandatory_fields)
+        mandatory_fields = tuple(self.get_mand_headers(template_name))
 
         # we go through the headers
         for index in range(len(headers)):
@@ -102,6 +99,18 @@ class TemplateProcessor():
                                                                how="any")
         headers = list(headers)
         return headers
+
+    def get_mand_headers(self, template_name):
+        '''
+        (str) -> [list of str]
+
+        Returns the list of mandatory headers according to the specified
+        template name
+        '''
+        template_mand = template_name + "Mandatory"
+        mandatory_fields = self._intermediary.loc[template_mand]
+        mandatory_fields = mandatory_fields.dropna(axis=0, how="any")
+        return list(mandatory_fields)
 
     def is_entered_metadata(self, template_name):
         '''
