@@ -1,12 +1,11 @@
 from uploading_command import UploadingCommand
 from command import Command
-import tkinter
 import pandas as pd
 
 
 class DuplicateRowChecker(Command):
     '''
-    An uploading command that checks for duplicate rows in a dataframe
+    A command that checks for duplicate rows in a dataframe
     '''
 
     def __init__(self, df):
@@ -21,7 +20,7 @@ class DuplicateRowChecker(Command):
 
     def execute(self):
         '''
-        (DuplicateRowChecker, DataFrame) -> DataFrame
+        (DuplicateRowChecker) -> DataFrame
 
         Returns a DataFrame with all duplicate rows removed
         '''
