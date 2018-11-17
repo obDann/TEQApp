@@ -42,9 +42,9 @@ class TrueTemplateHandler(TemplateHandler):
         try:
             self._md, self._mand = my_tp.get_relative_metadata(template_name)
             # and we can instantiate the headers
-            self._headers = list(self._md)
+            self._headers = my_tp.get_headers(template_name)
             # convert the tuple into a list for mandatory headers
-            self._mand = list(self._mand)
+            self._mand = my_tp.get_mand_headers(template_name)
             # and let's create a dropdown processor
             self._ddproc = DropdownProcessor()
 

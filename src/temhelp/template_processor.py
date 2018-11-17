@@ -59,9 +59,7 @@ class TemplateProcessor():
 
         # what we want to do is get the row of the template, these are going
         # to be our headers (we want to drop NAs)
-        headers = self._intermediary.loc[template_name].dropna(axis=0,
-                                                               how="any")
-        headers = list(headers)
+        headers = self.get_headers(template_name)
 
         # then what we want is the list of whether or not it is drop down or
         # not
@@ -76,10 +74,7 @@ class TemplateProcessor():
         examples = list(examples)
 
         # and the mandatory fields
-        template_mand = template_name + "Mandatory"
-        mandatory_fields = self._intermediary.loc[template_mand]
-        mandatory_fields = mandatory_fields.dropna(axis=0, how="any")
-        mandatory_fields = tuple(mandatory_fields)
+        mandatory_fields = tuple(self.get_mand_headers(template_name))
 
         # we go through the headers
         for index in range(len(headers)):
@@ -93,6 +88,29 @@ class TemplateProcessor():
 
         # then return the dictionary and the mandatory fields
         return our_dict, mandatory_fields
+
+    def get_headers(self, template_name):
+        '''
+        (str) -> [list of str]
+
+        Returns the headers according to the specified template name
+        '''
+        headers = self._intermediary.loc[template_name].dropna(axis=0,
+                                                               how="any")
+        headers = list(headers)
+        return headers
+
+    def get_mand_headers(self, template_name):
+        '''
+        (str) -> [list of str]
+
+        Returns the list of mandatory headers according to the specified
+        template name
+        '''
+        template_mand = template_name + "Mandatory"
+        mandatory_fields = self._intermediary.loc[template_mand]
+        mandatory_fields = mandatory_fields.dropna(axis=0, how="any")
+        return list(mandatory_fields)
 
     def is_entered_metadata(self, template_name):
         '''
