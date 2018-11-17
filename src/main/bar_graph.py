@@ -27,10 +27,10 @@ class BarGraph():
         x_color must be a single char representing the datas color
         such as "b" for blue or "g" for green.
         '''
-        rects1 = plt.bar(self.index + self.data * self.bar_width, x, self.bar_width,
-                         alpha=self.opacity,
-                         color=x_color,
-                         label=x_label)
+        plt.bar(self.index + self.data * self.bar_width, x, self.bar_width,
+                alpha=self.opacity,
+                color=x_color,
+                label=x_label)
         self.data += 1
 
     def display(self, xticks):
@@ -44,8 +44,8 @@ class BarGraph():
         plt.show()
 
 if __name__ == "__main__":
-    bg = BarGraph("Scores by Person", "Person", "Scores", 4)
-    bg.add_data((90, 55, 40, 65), "Frank", "b")
-    bg.add_data((85, 62, 54, 20), "Guido", "g")
-    bg.display(('A', 'B', 'C', 'D'))
-    bg.display(('A', 'B', 'C', 'D'))
+    while True:
+        bg = BarGraph("Scores by Person", "Person", "Scores", 4)
+        bg.add_data((90, 55, 40, 65), "Frank", "b")
+        bg.add_data((85, 62, 54, 20), "Guido", "g")
+        bg.display(('A', 'B', 'C', 'D'))
