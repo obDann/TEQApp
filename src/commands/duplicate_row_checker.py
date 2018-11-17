@@ -3,6 +3,7 @@ from command import Command
 import tkinter
 import pandas as pd
 
+
 class DuplicateRowChecker(Command):
     '''
     An uploading command that checks for duplicate rows in a dataframe
