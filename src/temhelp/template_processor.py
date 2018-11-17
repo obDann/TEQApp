@@ -59,9 +59,7 @@ class TemplateProcessor():
 
         # what we want to do is get the row of the template, these are going
         # to be our headers (we want to drop NAs)
-        headers = self._intermediary.loc[template_name].dropna(axis=0,
-                                                               how="any")
-        headers = list(headers)
+        headers = self.get_headers(template_name)
 
         # then what we want is the list of whether or not it is drop down or
         # not
@@ -93,6 +91,17 @@ class TemplateProcessor():
 
         # then return the dictionary and the mandatory fields
         return our_dict, mandatory_fields
+
+    def get_headers(self, template_name):
+        '''
+        (str) -> [list of str]
+
+        Returns the headers according to the specified template name
+        '''
+        headers = self._intermediary.loc[template_name].dropna(axis=0,
+                                                               how="any")
+        headers = list(headers)
+        return headers
 
     def is_entered_metadata(self, template_name):
         '''
