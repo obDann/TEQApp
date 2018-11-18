@@ -116,5 +116,34 @@ def check_email(email):
 
     return False
 
-def insert_temp_pass():
-    pass
+def get_username(email):
+    '''
+    (str) -> (str, str)
+    
+    Getting username when given email
+    '''
+    (conn, cur) = database_methods.connection('users.db')
+    query = ("SELECT Username, Name from User where Email = ?")
+    fields = (email,)
+
+    try:
+        cur.execute(query, fields)
+        error = 0
+    except sqlite3.Error as e:
+        print(format(e))
+        error = 1
+
+    if (not(error)):
+        recieved = cur.fetchall()
+        if (len(recieved) != 0):
+            return (recieved[0][0], recieved[0][1])
+
+    return (None, None)
+
+def insert_temp_pass(username, temp_pass):
+    '''
+    Inserts a temporary passcode into the database
+    '''
+    query = "INSERT INTO Temp_Passcode values (?, ?)"
+    fields = (username, temp_pass)
+    database_methods.execute_query(query, fields, 'users.db')

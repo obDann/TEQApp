@@ -4,6 +4,7 @@ import sys
 from sendgrid.helpers.mail import *
 from emailer import Emailer
 import random
+import client_db_functions
 
 
 class PasswordForgettingEmailer(Emailer):
@@ -24,12 +25,16 @@ class PasswordForgettingEmailer(Emailer):
         password.
         '''
         temp_pass = self.create_temp_pass()
+        names = client_db_functions.get_username(recipient)
+        client_db_functions.insert_temp_pass(str(names[0]), temp_pass)
+
         sg = sendgrid.SendGridAPIClient('SG.ME6PqRvVQeqs71zjlyHzCQ.cTKpy39V' +
                                         'LjkY52e8SMQTMyMyqfUiqdzHaZGsEPq1VTk')
         from_email = Email(self.email)
         to_email = Email(recipient)
         subject = "Forgotten Password"
-        content = Content("text/plain", "As you have forgotten your password" +
+        content = Content("text/plain", "Hello " + str(names[1]) + 
+                          ", \n\nAs you have forgotten your password" +
                           ", use this temporary 6 digit passcode in order to" +
                           " log in so that you may change your password " +
                           "immediately afterward: \n" + temp_pass)
@@ -45,5 +50,5 @@ class PasswordForgettingEmailer(Emailer):
         '''
         temp_pass = ''
         for x in range(6):
-            temp_pass += str(random.randint(0,10))
+            temp_pass += str(random.randint(0,9))
         return temp_pass

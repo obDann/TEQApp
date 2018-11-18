@@ -28,9 +28,9 @@ class EmailObserver(Observer):
         email = obs.button.e1.get().lower()
 
         if (email != ""):
-            # grab name and type of acc if login was successful
+            # checking if email exists first`
             found = client_db_functions.check_email(email)
             if (found):
                 emailer = PasswordForgettingEmailer()
-                # emailer.send(emailer)
+                emailer.send(email)
                 obs.page.cont.display(LoginPage)

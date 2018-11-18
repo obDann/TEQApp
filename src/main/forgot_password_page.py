@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from console import *
-import login_page
+import main_page as mp
 from create_account_page import *
 from agency_page import *
 from teq_page import *
@@ -18,7 +18,7 @@ class ForgotPasswordPage(tk.Frame):
         self.cont = controller
         tk.Frame.__init__(self, parent)
 
-        Label(self, text="Email").grid(row=1)
+        Label(self, text="Enter your Email:").grid(row=1)
 
         obs_button = ButtonObservable()
         obs_button.set_button(Button(self, text="Send",
@@ -29,7 +29,7 @@ class ForgotPasswordPage(tk.Frame):
         b2.grid(row=3, column=2, sticky=W, pady=6)
 
         b2.e1 = Entry(self)
-        b2.e1.grid(row=1, column=1)
+        b2.e1.grid(row=2, column=1)
 
         b1 = Button(self, text="Back",
                     command=lambda: self.cont.display(mp.LoginPage))
