@@ -10,6 +10,7 @@ class BarGraph():
         ''' (BarGraph, str, str, str, int) -> None
         
         Initializes a bargraph object
+        Sets the title, axis labels, and number of bars per data
         '''
         fig, ax = plt.subplots()
         self.title = title
@@ -24,6 +25,7 @@ class BarGraph():
     def add_data(self, x, x_label, x_color):
         ''' (BarGraph, tuple of (int), str, str) -> None
         
+        Adds a dataset to the BarGraph
         x_color must be a single char representing the datas color
         such as "b" for blue or "g" for green.
         '''
@@ -34,7 +36,10 @@ class BarGraph():
         self.data += 1
 
     def display(self, xticks):
-        '''
+        ''' (BarGraph, tuple of (str))
+        
+        Displays a BarGraph.
+        xticks should have as many str as there are n_groups
         '''
         plt.xlabel(self.x_label)
         plt.ylabel(self.y_label)

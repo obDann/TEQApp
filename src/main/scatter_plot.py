@@ -10,6 +10,7 @@ class ScatterPlot():
         ''' (ScatterPlot, str, str, str) -> None
         
         Initializes a ScatterPlot object
+        Sets the title and axis labels
         '''
         fig, ax = plt.subplots()
         self.title = title
@@ -17,10 +18,12 @@ class ScatterPlot():
         self.y_label = y_label
 
     def add_data(self, x, y, x_label, x_color, marker):
-        ''' (ScatterPlot, tuple of (int), str, str) -> None
+        ''' (ScatterPlot, tuple of (int), tuple of (int), str, str, str) -> None
         
         x_color must be a single char representing the datas color
         such as "b" for blue or "g" for green.
+        Marker should be 1 char representing the marker for the data set
+        common markers are "x" and "o"
         '''
         plt.scatter(x, y,
                     c=x_color,
@@ -29,6 +32,7 @@ class ScatterPlot():
 
     def display(self):
         '''
+        Displays a ScatterPlot
         '''
         plt.xlabel(self.x_label)
         plt.ylabel(self.y_label)
