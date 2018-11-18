@@ -2,10 +2,12 @@ import pandas as pd
 import numpy as np
 import re
 import sys
+import datetime
 from uploading_command import UploadingCommand
 sys.path.append("../temhelp")
 from template_handler import TemplateHandler
 sys.path.append("../tests")
+from mock_b_template import MockBTemplate
 
 class DataAggregator(UploadingCommand):
 
@@ -29,14 +31,38 @@ class DataAggregator(UploadingCommand):
         Currently only checks for if the data matches the type the column is
         suppose to be.
         '''
-        #template = th.get_template(self._template_name)
+        template = th.get_template(self._template_name)
         self._exec_status = False
-    
+        copy_df = df
         # get a list of fields that are not formatted correctly
         wrong_format_fields = parse_all_columns(df, 'template')
+        # Check for postal code column
+        if (df.get(self._postal_code) is not None):
+            new_postal = self._postal_code_checker(df[self._postal_code])
+            copy_df = copy_df.update(new_postal)
+        # Change Processing detail column to the entry date
+        if (df.get(self._processing_detail) is not None):
+            new_proc = self._processing_details(df[self._processing_detail])
+            df = df.update(new_proc)
         
-        self._exec_status = True        
+        self._exec_status = True     
         return df
+    
+    def _processing_details(self, df):
+        '''
+        (DataFrame) -> DataFrame
+        
+        Takes in the 'Processing Detail' column and replace each element
+        with the current date.
+        '''
+        new_col = list()
+        now = datetime.datetime.now()
+        # Format: YYYY/MM/DD
+        now = str(now.year) +'/' + str(now.month) + '/'  + str(now.day)
+        for item in range (len(df.get_values())):
+            new_col.append(now)
+        
+        return pd.DataFrame(new_col, columns=[self._processing_detail])    
     
     def _postal_code_checker(self, df):
             '''
@@ -60,11 +86,10 @@ class DataAggregator(UploadingCommand):
                     p_codes.append(postal_code)
                 else:
                     # An empty string replaces the false data
-                    p_codes.append("")
-
-            new_df = {'Postal_Code': p_codes}
-            return pd.DataFrame(new_df)
-
+                    p_codes.append('')
+                    
+            return pd.DataFrame(p_codes, columns=[self._postal_code])    
+    
     def executed_properly(self):
         '''
         (Command) -> boolean
@@ -84,7 +109,7 @@ def parse_all_columns(df, template):
     # List to store the tuples
     misformated = list()
     # Gets the column names to a list
-    header_name = template.get_header()
+    header_name = template.get_headers()
     # Gets the list of regex
     regex = template.get_regex()
     # for looping through regex list
@@ -100,8 +125,7 @@ def parse_all_columns(df, template):
                 # Checks each field to the matching regex
                 if (p.match(str(df.iat[row, col_i])) is None):
                     # Get a list of drop down values
-                    #dropdown = template.get_dropdown_values(column)
-                    dropdown = drop_down[col_i]
+                    dropdown = template.get_dropdown_values(column)
                     if (len(dropdown) != 0):
                         # If its not in the drop down list
                         if (column[row] not in dropdown):

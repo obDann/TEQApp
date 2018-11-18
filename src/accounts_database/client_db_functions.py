@@ -2,14 +2,16 @@ import sqlite3
 import sys
 sys.path.insert(0, "../database")
 import database_methods
+import password_hash
 
-def insert_user(username, name, password, account_type):
+def insert_user(username, email, name, password, account_type):
     '''
     Inserts a new user into the database (table User).
     '''
     # time is stored as UNIX timestap in INT
-    query = "INSERT INTO User values (?, ?, ?, ?, strftime('%s','now'));"
-    fields = (username, name, password, account_type)
+    new_password = password_hash.hash_password(password)
+    query = "INSERT INTO User values (?, ?, ?, ?, ?, strftime('%s','now'));"
+    fields = (username, email, name, new_password, account_type)
     
     if (not(database_methods.execute_query(query, fields, 'users.db'))):
         insert_account(username, account_type)
@@ -26,19 +28,20 @@ def login(username, password):
     Returns the name of the user and the type if login information is correct.
     '''
     (conn, cur) = database_methods.connection('users.db')
-    query = ("SELECT Name, Type from User where Username = ? "
-            " AND password = ?")
-    fields = (username, password)
+    query = ("SELECT Name, Type, Password from User where Username = ?")
+    fields = (username,)
+
     try:
         cur.execute(query, fields)
         error = 0
     except sqlite3.Error as e:
         print(format(e))
         error = 1
-    
+        
     if (not(error)):
         name = cur.fetchall()
-        if (len(name) != 0):
+        correct_password = password_hash.verify_password(password, name[0][2])
+        if (len(name) != 0 and correct_password):
             return (name[0][0], name[0][1])
         
     return (None, None)
@@ -89,3 +92,29 @@ def get_tables_names():
     curr.execute("SELECT name FROM sqlite_master WHERE type='table';")
     result = [row[0] for row in curr.fetchall()]
     return result
+
+def check_email(email):
+    '''
+    Checks if an email exists in the database and returns True if it exists,
+    False otherwise.
+    '''
+    (conn, cur) = database_methods.connection('users.db')
+    query = ("SELECT email from User where Email = ?")
+    fields = (email,)
+
+    try:
+        cur.execute(query, fields)
+        error = 0
+    except sqlite3.Error as e:
+        print(format(e))
+        error = 1
+
+    if (not(error)):
+        email = cur.fetchall()
+        if (len(email) != 0):
+            return True
+
+    return False
+
+def insert_temp_pass():
+    pass

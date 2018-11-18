@@ -8,6 +8,7 @@ def create_tables():
     
     cur.execute("""CREATE TABLE IF NOT EXISTS User (
             Username text PRIMARY KEY NOT NULL,
+            Email text NOT NULL UNIQUE,
             Name text NOT NULL,
             Password text NOT NULL,
             Type text NOT NULL,
@@ -38,5 +39,9 @@ def create_tables():
             Date_Accepted INT,
             FOREIGN KEY (Username) references User(Username),
             FOREIGN KEY (Admin_Username) references User(Username));""")
+    
+    cur.execute("""CREATE TABLE IF NOT EXISTS Temp_Passcode (
+            Username text PRIMARY KEY NOT NULL,
+            Temp_Pass text NOT NULL);""")
     
     conn.close()

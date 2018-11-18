@@ -7,6 +7,8 @@ from agency_page import *
 from teq_page import *
 from admin_page import *
 from file_upload_page import *
+from button_observable import *
+from create_user_observer import *
 
 class CreateAccountPage(tk.Frame):
 
@@ -15,37 +17,37 @@ class CreateAccountPage(tk.Frame):
         tk.Frame.__init__(self, parent)
 
         Label(self, text="Username").grid(row=1)
-        Label(self, text="First Name").grid(row=2)
-        Label(self, text="Password").grid(row=3)
-        Label(self, text="Choose an Account").grid(row=4)
+        Label(self, text="Email").grid(row=2)
+        Label(self, text="First Name").grid(row=3)
+        Label(self, text="Password").grid(row=4)
+        Label(self, text="Choose an Account").grid(row=5)
 
-        self.e1 = Entry(self)
-        self.e1.grid(row=1, column=1)
-        self.e2 = Entry(self)
-        self.e2.grid(row=2, column=1)
-        self.e3 = Entry(self, show="*")
-        self.e3.grid(row=3, column=1)
+        # create an observable button
+        obs_button = ButtonObservable()
+        obs_button.set_button(Button(self, text="Submit",
+                                     command=lambda: obs_button.raise_event(self)))
+        create_usr_obs = CreateUserObserver()
+        obs_button.add_observer(create_usr_obs)
+        b2 = obs_button.button
+        b2.grid(row=6, column=2, sticky=W, pady=6)
+
+        # set entrys for the observable button
+        b2.e1 = Entry(self)
+        b2.e1.grid(row=1, column=1)
+        b2.e2 = Entry(self)
+        b2.e2.grid(row=2, column=1)
+        b2.e3 = Entry(self)
+        b2.e3.grid(row=3, column=1)
+        b2.e4 = Entry(self, show="*")
+        b2.e4.grid(row=4, column=1)
 
         # Options menu for selecting which account
-        self.acc = StringVar(self)
+        b2.acc = StringVar(self)
         choice = {"Agency", "TEQ", "Admin"}
-        self.acc.set("Agency")
-        menu = OptionMenu(self, self.acc, *choice)
-        menu.grid(row=4, column=1)
+        b2.acc.set("Agency")
+        menu = OptionMenu(self, b2.acc, *choice)
+        menu.grid(row=5, column=1)
 
         b1 = Button(self, text="Back",
-                            command=lambda: self.cont.display(mp.MainPage))
-        b1.grid(row=5, column=1, sticky=W, pady=6)
-
-        b2 = Button(self, text="Submit", command=self.create_user)
-        b2.grid(row=5, column=2, sticky=W, pady=6)
-
-    def create_user(self):
-        username = self.e1.get()
-        name = self.e2.get()
-        pw = self.e3.get()
-        acc = self.acc.get()
-
-        if (username != "" and name != "" and pw != ""):
-            client_db_functions.insert_user(username, name, pw, acc)
-            self.cont.display(mp.MainPage)
+                    command=lambda: self.cont.display(mp.MainPage))
+        b1.grid(row=6, column=1, sticky=W, pady=6)

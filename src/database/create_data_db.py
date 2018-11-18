@@ -149,11 +149,12 @@ def create_tables():
                 REFERENCES Target_Group(ID));""")
     
     cur.execute("""CREATE TABLE IF NOT EXISTS Course_Schedule (
-                Course_Code text PRIMARY KEY NOT NULL,
+                Course_Code text NOT NULL,
                 Time text NOT NULL,
                 Value INT NOT NULL,
+                PRIMARY KEY (Course_Code, Time),
                 FOREIGN KEY (Course_Code)
-                REFERENCES LT_Course(Course_Code))""")
+                REFERENCES LT_Course(Course_Code));""")
     
     cur.execute("""CREATE TABLE IF NOT EXISTS Instructor (
                 Course_Code text NOT NULL,
@@ -178,25 +179,24 @@ def create_tables():
                 REFERENCES Client(Unique_ID_Value));""")
 
     cur.execute("""CREATE TABLE IF NOT EXISTS Client_Exit (
-                Course_Code text NOT NULL,
                 Client_Unique_ID_Value text NOT NULL,
+                Course_Code text NOT NULL,
                 Training_Status text NOT NULL,
-                Certificate INT NOT NULL,
                 Date_Exited INT,
                 Reason text,
+                Certificate INT NOT NULL,              
                 Certificate_Listening_Level text,
                 Certificate_Speaking_Level text,
-                PRIMARY KEY (Course_Code, Client_Unique_ID_Value),
                 FOREIGN KEY (Course_Code, Client_Unique_ID_Value)
-                REFERENCES 
-                Client_Enrolment(Course_Code, Client_Unique_ID_Value));""")
+                REFERENCES Client_Enrolment(Course_Code, Unique_ID_Value)
+                PRIMARY KEY (Course_Code, Client_Unique_ID_Value));""")
 
     cur.execute("""CREATE TABLE IF NOT EXISTS Client_CLB_Level (
-                Course_Code text NOT NULL,
                 Client_Unique_ID_Value text NOT NULL,
+                Course_Code text NOT NULL,
                 Type text NOT NULL,
                 Level text NOT NULL,
-                PRIMARY KEY (Course_Code, Client_Unique_ID_Value),
+                PRIMARY KEY (Course_Code, Client_Unique_ID_Value, Type),
                 FOREIGN KEY (Course_Code, Client_Unique_ID_Value)
                 REFERENCES 
                 Client_Exit(Course_Code, Client_Unique_ID_Value))""")
@@ -283,7 +283,7 @@ def create_tables():
                 Avg_Hours_Per_Week INT,
                 Profession text,
                 FOREIGN KEY (Service_ID)
-                REFERENCES Employment_Related_Service(Service_ID));""")
+                REFERENCES Employment_Service(Service_ID));""")
 
     cur.execute("""CREATE TABLE IF NOT EXISTS Short_Term_Intervention (
                 ID INT PRIMARY KEY NOT NULL,
@@ -291,7 +291,7 @@ def create_tables():
                 Service_Received text NOT NULL,
                 Date INT,
                 FOREIGN KEY (Service_ID)
-                REFERENCES Employment_Related_Service(Service_ID));""")
+                REFERENCES Employment_Service(Service_ID));""")
 
     cur.execute("""CREATE TABLE IF NOT EXISTS Skill_Levels (
                 Course_Code text NOT NULL,
@@ -310,3 +310,11 @@ def create_tables():
                 FOREIGN KEY (Service_ID) REFERENCES Service(ID)
                 FOREIGN KEY (Client_Unique_ID_Value)
                 REFERENCES Client(Unique_ID_Value));""")
+    
+    cur.execute("""CREATE TABLE IF NOT EXISTS Course_Schedule (
+                Course_Code text NOT NULL,
+                Time text NOT NULL,
+                Value text NOT NULL,
+                PRIMARY KEY (Course_Code, Time),
+                FOREIGN KEY (Course_Code)
+                REFERENCES LT_Course(Course_Code));""")

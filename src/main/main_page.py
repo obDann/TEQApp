@@ -16,9 +16,9 @@ class MainPage(tk.Frame):
         label.pack(side=TOP,fill=X)
 
         b1 = tk.Button(self, text="Login",
-                            command=lambda: controller.display(LoginPage))
+                       command=lambda: controller.display(LoginPage))
         b1.pack(side=TOP,fill=X)
 
         b2 = tk.Button(self, text="Create a New Account",
-                        command=lambda: controller.display(CreateAccountPage))
+                       command=lambda: controller.display(CreateAccountPage))
         b2.pack(side=TOP,fill=X)

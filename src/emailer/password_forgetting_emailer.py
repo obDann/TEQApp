@@ -3,13 +3,15 @@ import os
 import sys
 from sendgrid.helpers.mail import *
 from emailer import Emailer
+import random
+
 
 class PasswordForgettingEmailer(Emailer):
 
     def __init__(self):
         '''
         (PasswordForgettingEmailer, str) -> None
-        
+
         Initialize PasswordForgettingEmailer
         '''
         self.email = "teqapp.noreply@gmail.com"
@@ -17,36 +19,31 @@ class PasswordForgettingEmailer(Emailer):
     def send(self, recipient):
         '''
         (Emailer, str) -> None
-        
+
         Sends an email to the corresponding recipient about their current
         password.
         '''
-        # check if email is in database?, and if so then
-        #(conn, cur) = database_methods.connection('users.db')
-        #query = ("SELECT Name, Type from User where Email = ?")
-        #try:
-            #cur.execute(query, recipient)
-            #error = 0
-        #except sqlite3.Error as e:
-            #print(format(e))
-            #error = 1
-
-        #if (not(error)):
-            #name = cur.fetchall()
-            #if (len(name) != 0):
-                #self._exec_status = True
-
-        #if (not self._exec_status):
-            #return None
-
-        sg = sendgrid.SendGridAPIClient('SG.ME6PqRvVQeqs71zjlyHzCQ.cTKpy39VLj'
-                                        + 'kY52e8SMQTMyMyqfUiqdzHaZGsEPq1VTk')
+        temp_pass = self.create_temp_pass()
+        sg = sendgrid.SendGridAPIClient('SG.ME6PqRvVQeqs71zjlyHzCQ.cTKpy39V' +
+                                        'LjkY52e8SMQTMyMyqfUiqdzHaZGsEPq1VTk')
         from_email = Email(self.email)
         to_email = Email(recipient)
         subject = "Forgotten Password"
-        # allow user to reset their password? or show in email ??
-        content = Content("text/plain", "As you have forgotten your password, "
-        + "use this temporary password in order to log in so that you may "
-        + "change your password immediately afterward: \n")
+        content = Content("text/plain", "As you have forgotten your password" +
+                          ", use this temporary 6 digit passcode in order to" +
+                          " log in so that you may change your password " +
+                          "immediately afterward: \n" + temp_pass)
         mail = Mail(from_email, subject, to_email, content)
         response = sg.client.mail.send.post(request_body=mail.get())
+
+    def create_temp_pass(self):
+        '''
+        (Emailer) -> str
+
+        Crafting a temporary password to be used and storing it into the
+        database.
+        '''
+        temp_pass = ''
+        for x in range(6):
+            temp_pass += str(random.randint(0,10))
+        return temp_pass
