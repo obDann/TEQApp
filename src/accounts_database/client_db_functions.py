@@ -37,7 +37,7 @@ def login(username, password):
     except sqlite3.Error as e:
         print(format(e))
         error = 1
-        
+
     if (not(error)):
         name = cur.fetchall()
         correct_password = password_hash.verify_password(password, name[0][2])
@@ -140,10 +140,53 @@ def get_username(email):
 
     return (None, None)
 
+def check_temp_pass(username, temp_pass):
+    '''
+    (str, str) -> (bool, bool)
+
+    Checks if the user input a correct temporary password and returns whether
+    the account has a temp_pass and if it matches to the input as a tuple
+    '''
+    (conn, cur) = database_methods.connection('users.db')
+    query = ("SELECT Temp_Pass from Temp_Passcode where Username = ?")
+    fields = (username,)
+
+    try:
+        cur.execute(query, fields)
+        error = 0
+    except sqlite3.Error as e:
+        print(format(e))
+        error = 1
+
+    if (not(error)):
+        received = cur.fetchall()
+        if (len(received) != 0):
+            return (True, temp_pass == received[0][0])
+
+    return (False, False)
+
 def insert_temp_pass(username, temp_pass):
     '''
     Inserts a temporary passcode into the database
     '''
-    query = "INSERT INTO Temp_Passcode values (?, ?)"
+    query = ("INSERT OR REPLACE INTO Temp_Passcode (Username, Temp_Pass)" +
+             " values (?, ?)")
     fields = (username, temp_pass)
+    database_methods.execute_query(query, fields, 'users.db')
+
+def remove_temp(username):
+    '''
+    Removes the temporary password after a new one is created
+    '''
+    query = ("DELETE FROM Temp_Passcode WHERE Username = ?")
+    fields = (username,)
+    database_methods.execute_query(query, fields, 'users.db')
+
+def update_pass(username, password):
+    '''
+    Updates the user's password with the new one that was entered
+    '''
+    new_password = password_hash.hash_password(password)
+    query = ("UPDATE User SET Password = ? WHERE Username = ?")
+    fields = (new_password, username)
     database_methods.execute_query(query, fields, 'users.db')

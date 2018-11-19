@@ -1,6 +1,7 @@
 from Observer import Observer
 import client_db_functions
-import login_page
+import main_page as mp
+from login_page import *
 import re
 import sys
 sys.path.insert(0, "../emailer")
@@ -22,15 +23,15 @@ class EmailObserver(Observer):
     def notify(self, obs):
         ''' (EmailObserver, Observable) -> None
         
-        If all values are filled and correct, logs in
-        the appropriate user
+        If the email exists, then the email will be sent to the appropriate
+        email address
         '''
         email = obs.button.e1.get().lower()
 
         if (email != ""):
-            # checking if email exists first`
+            # checking if email exists first
             found = client_db_functions.check_email(email)
             if (found):
                 emailer = PasswordForgettingEmailer()
                 emailer.send(email)
-                obs.page.cont.display(LoginPage)
+                obs.page.cont.display(mp.LoginPage)
