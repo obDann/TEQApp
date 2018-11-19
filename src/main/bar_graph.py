@@ -1,9 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from report_abstract import ReportAbstract
 
-class BarGraph():
+class BarGraph(ReportAbstract):
     '''
-    Graph Object to display a BarGraph
+    Report object to display a BarGraph
     '''
     
     def __init__(self, title, x_label, y_label, n_groups):
@@ -11,11 +12,9 @@ class BarGraph():
         
         Initializes a bargraph object
         Sets the title, axis labels, and number of bars per data
+        These persist after a  display
         '''
-        fig, ax = plt.subplots()
-        self.title = title
-        self.x_label = x_label
-        self.y_label = y_label
+        ReportAbstract.__init__(self, title, x_label, y_label)
         self.n_groups = n_groups
         self.index = np.arange(self.n_groups)
         self.data = 0
@@ -28,6 +27,7 @@ class BarGraph():
         Adds a dataset to the BarGraph
         x_color must be a single char representing the datas color
         such as "b" for blue or "g" for green.
+        After a display, all data must be readded
         '''
         plt.bar(self.index + self.data * self.bar_width, x, self.bar_width,
                 alpha=self.opacity,
@@ -36,17 +36,14 @@ class BarGraph():
         self.data += 1
 
     def display(self, xticks):
-        ''' (BarGraph, tuple of (str))
+        ''' (BarGraph, tuple of (str)) -> None
         
         Displays a BarGraph.
         xticks should have as many str as there are n_groups
+        All added datasets will be reset
         '''
-        plt.xlabel(self.x_label)
-        plt.ylabel(self.y_label)
-        plt.title(self.title)
         plt.xticks(self.index + self.bar_width/2, xticks)
-        plt.legend()
-        plt.show()
+        ReportAbstract.display(self)
 
 if __name__ == "__main__":
     while True:
