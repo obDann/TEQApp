@@ -7,9 +7,10 @@ class FileSystemFetcher(Command):
 
     def __init__(self, tk_root):
         '''
-        (FileSystemFetcher, frame) -> None
+        (FileSystemFetcher, Tk) -> None
 
-        Initialize the FileSystemFetcher
+        Initialize the FileSystemFetcher; asks user for an excel file and
+        what sheet they would like to upload
         '''
         # REPRESENTATION INVARIANT
         # FileSystemFetcher is a command
@@ -80,8 +81,8 @@ class FileSystemFetcher(Command):
         '''
         (FileSystemFetcher) -> DataFrame
 
-        Accesses a file using a User Interface and returns a dictionary of
-        DataFrames that maps to a sheet name
+        Returns a dataframe that is representative of the excel file.
+        Returns None if the user has cancelled halfway through initialization
         '''
         # check if there is one sheet to select from and check if the flag
         # is ready

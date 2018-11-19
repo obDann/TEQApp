@@ -28,79 +28,89 @@ class FileUpload(tk.Frame):
         label.pack(side=TOP,fill=X)
 
         # create observer for upload
-        upload_obs = UploadObserver()
+        upload_obs = UploadObserver(parent, controller)
 
-        template_1 = "Client Profile"
-        obs_button1 = ButtonObservable()
-        obs_button1.set_button(tk.Button(self, text=template_1,
-                                         command = lambda: obs_button1.raise_event(self)))
-        obs_button1.add_observer(upload_obs)
-        b1 = obs_button1.button
-        b1.template = template_1
+        # state the template name
+        tt1 = "Client Profile"
+        # create a button observable
+        obs1 = ButtonObservable()
+        # create a button
+        b1 = tk.Button(self, text=tt1,
+                       command = lambda: obs1.raise_event(self))
+        # set the button for the observable
+        obs1.set_button(b1)
+        # add the observer
+        obs1.add_observer(upload_obs)
+        b1.template = tt1
         b1.pack(side=TOP,fill=X)
 
-        template_2 = "Needs Assessment & Referrals"
-        obs_button2 = ButtonObservable()
-        obs_button2.set_button(tk.Button(self, text=template_2,
-                                         command = lambda: obs_button2.raise_event(self)))
-        obs_button2.add_observer(upload_obs)
-        b2 = obs_button2.button
-        b2.template = template_2
-        b2.pack(side=TOP,fill=X)
 
-        template_3 = "Community Connections"
-        obs_button3 = ButtonObservable()
-        obs_button3.set_button(tk.Button(self, text=template_3,
-                                         command = lambda: obs_button3.raise_event(self)))
-        obs_button3.add_observer(upload_obs)
-        b3 = obs_button3.button
-        b3.template = template_3
-        b3.pack(side=TOP,fill=X)
 
-        template_4 = "Information and Orientation"
-        obs_button4 = ButtonObservable()
-        obs_button4.set_button(tk.Button(self, text=template_4,
-                                         command = lambda: obs_button4.raise_event(self)))
-        obs_button4.add_observer(upload_obs)
-        b4 = obs_button4.button
-        b4.template = template_4
-        b4.pack(side=TOP,fill=X)
+        tt2 = "Needs Assessment & Referrals"
+        obs2 = ButtonObservable()
+        b2 = tk.Button(self, text=tt2,
+                       command = lambda: obs2.raise_event(self))
+        obs2.set_button(b2)
+        obs2.add_observer(upload_obs)
+        b2.template = tt2
+        b2.pack(side=TOP, fill=X)
 
-        template_5 = "Employment Related Services"
-        obs_button5 = ButtonObservable()
-        obs_button5.set_button(tk.Button(self, text=template_5,
-                                         command = lambda: obs_button5.raise_event(self)))
-        obs_button5.add_observer(upload_obs)
-        b5 = obs_button5.button
-        b5.template = template_5
-        b5.pack(side=TOP,fill=X)
 
-        template_6 = "Language Training - Client Enrol"
-        obs_button6 = ButtonObservable()
-        obs_button6.set_button(tk.Button(self, text=template_6,
-                                         command = lambda: obs_button6.raise_event(self)))
-        obs_button6.add_observer(upload_obs)
-        b6 = obs_button6.button
-        b6.template = template_6
-        b6.pack(side=TOP,fill=X)
+        tt3 = "Community Connections"
+        obs3 = ButtonObservable()
+        b3 = tk.Button(self, text=tt3,
+                       command = lambda: obs3.raise_event(self))
+        obs3.set_button(b3)
+        obs3.add_observer(upload_obs)
+        b3.template = tt3
+        b3.pack(side=TOP, fill=X)
 
-        template_7 = "Language Training - Course Setup"
-        obs_button7 = ButtonObservable()
-        obs_button7.set_button(tk.Button(self, text=template_7,
-                                         command = lambda: obs_button7.raise_event(self)))
-        obs_button7.add_observer(upload_obs)
-        b7 = obs_button7.button
-        b7.template = template_7
-        b7.pack(side=TOP,fill=X)
 
-        template_8 = "Language Training - Client Exit"
-        obs_button8 = ButtonObservable()
-        obs_button8.set_button(tk.Button(self, text=template_8,
-                                         command = lambda: obs_button8.raise_event(self)))
-        obs_button8.add_observer(upload_obs)
-        b8 = obs_button8.button
-        b8.template = template_8
-        b8.pack(side=TOP,fill=X)
+        tt4 = "Information and Orientation"
+        obs4 = ButtonObservable()
+        b4 = tk.Button(self, text=tt4,
+                       command = lambda: obs4.raise_event(self))
+        obs4.set_button(b4)
+        obs4.add_observer(upload_obs)
+        b4.template = tt4
+        b4.pack(side=TOP, fill=X)
+
+        tt5 = "Employment Related Services"
+        obs5 = ButtonObservable()
+        b5 = tk.Button(self, text=tt5,
+                       command = lambda: obs5.raise_event(self))
+        obs5.set_button(b5)
+        obs5.add_observer(upload_obs)
+        b5.template = tt5
+        b5.pack(side=TOP, fill=X)
+
+        tt6 = "Language Training - Client Enrol"
+        obs6 = ButtonObservable()
+        b6 = tk.Button(self, text=tt6,
+                       command = lambda: obs6.raise_event(self))
+        obs6.set_button(b6)
+        obs6.add_observer(upload_obs)
+        b6.template = tt6
+        b6.pack(side=TOP, fill=X)
+
+        tt7 = "Language Training - Course Setup"
+        obs7 = ButtonObservable()
+        b7 = tk.Button(self, text=tt7,
+                       command = lambda: obs7.raise_event(self))
+        obs7.set_button(b7)
+        obs7.add_observer(upload_obs)
+        b7.template = tt7
+        b7.pack(side=TOP, fill=X)
+
+        tt8 = "Language Training - Client Exit"
+        obs8 = ButtonObservable()
+        b8 = tk.Button(self, text=tt8,
+                       command = lambda: obs8.raise_event(self))
+        obs8.set_button(b8)
+        obs8.add_observer(upload_obs)
+        b8.template = tt8
+        b8.pack(side=TOP, fill=X)
+
 
         back = Button(self, text="Back",
                             command=self.back)
