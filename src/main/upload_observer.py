@@ -4,6 +4,10 @@ from Observer import Observer
 import sys
 sys.path.append("../commands")
 import file_system_fetcher as fsf
+from screener import *
+sys.path.append("../temhelp")
+from true_tem_handler import *
+
 
 class UploadObserver(Observer):
     '''
@@ -24,24 +28,53 @@ class UploadObserver(Observer):
 
         Uploads a file to the database according to a specified template name
         '''
-        # make a template handler
-        print(obs.button.template)
 
-        ## make another root
-        #temp_root = Tk()
-        ## inject the root into the FileSystemFetcher
-        #my_fsf = fsf.FileSystemFetcher(temp_root)
-        #the_dataframe = my_fsf.execute()
-        #temp_root.mainloop()
+        template_name = obs.button.template
 
-        ## check if the file system fetcher executed properly
-        #if (my_fsf.executed_properly()):
-            ## we are going to be appropriately setting the headers. The
-            ## headers are typically on the third row. The title is in the
-            ## 1st row, so the headers are actually on the 3rd row.
-            #header = the_dataframe.iloc[1]
-            ## cut the rest of the dataframe
-            #the_dataframe = the_dataframe[2:]
-            ## and then rename the headers
-            #the_dataframe = the_dataframe.rename(columns = header)
-            #print(the_dataframe)
+
+        # create a file system fetcher
+        my_fsf = fsf.FileSystemFetcher(self._controller)
+        # get the dataframe
+        df = my_fsf.execute()
+
+        # check if the fsf executed properly
+        if (my_fsf.executed_properly()):
+            self._after_fsf(df, template_name)
+        else:
+            # if the user clicked 'x' in any of the frames in fsf
+            # get the message
+            the_opq = my_fsf.get_output_queue()
+            the_msg = ''
+            while not the_opq.is_empty():
+                the_msg += the_opq.dequeue() + "\n"
+            # make a small pop up
+            mini_pop = tk.Tk()
+            # make a label
+            my_label = tk.Label(mini_pop, text=the_msg)
+            my_label.pack()
+            # make a button
+            my_button = tk.Button(mini_pop, text="OK",
+                                  command=mini_pop.destroy)
+            my_button.pack()
+            self._controller.deiconify()
+
+            mini_pop.mainloop()
+
+
+    def _after_fsf(self, df, template_name):
+        my_tth = TrueTemplateHandler(template_name)
+        my_screener = Screener(df, my_tth)
+        my_screener.execute()
+        if (my_screener.executed_properly()):
+            self._after_screener(df)
+        else:
+            self._checker()
+        print("hello world")
+
+
+    def _after_screener(self, df):
+        print(df)
+
+
+    def _checker(self):
+        print("a linked list of functions")

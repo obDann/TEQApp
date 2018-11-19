@@ -10,7 +10,10 @@ class FileSystemFetcher(Command):
         (FileSystemFetcher, Tk) -> None
 
         Initialize the FileSystemFetcher; asks user for an excel file and
-        what sheet they would like to upload
+        what sheet they would like to upload.
+
+        If a sheet is not selected, then the file system fetcher will have a
+        message and it cannot be able to execute
         '''
         # REPRESENTATION INVARIANT
         # FileSystemFetcher is a command
@@ -34,12 +37,15 @@ class FileSystemFetcher(Command):
         #     self._selected_sheet is a StringVar to determine what is
         #     the sheet name
 
+        # in either cases, this function has a boolean called a user
+        # execution flag
+
 
         # Initialize an output queue and status
         Command.__init__(self)
 
         # withdraw the root
-        tk_root.withdraw()
+        #tk_root.withdraw()
 
         # then initialize the root
         self._root = tk_root
@@ -50,8 +56,10 @@ class FileSystemFetcher(Command):
         # make a "can execute" flag
         self._can_exec_flag = False
 
-        # check if the string is not None
-        if file_path:
+
+        # check if the string is not None or empty
+        try:
+            self._user_exec = True
             # we can assume that there is a successful path selected
             # so we use a dictionary first
             self._file = pd.read_excel(file_path, sheet_name=None)
@@ -75,6 +83,10 @@ class FileSystemFetcher(Command):
                 # then we use a sheet selection object for the user to select
                 # a sheet
                 self._run_selection()
+        except FileNotFoundError:
+            # set the user execution status to false
+            self._user_exec = False
+            self._opq.enqueue("No file was selected.")
 
 
     def execute(self):
@@ -84,21 +96,30 @@ class FileSystemFetcher(Command):
         Returns a dataframe that is representative of the excel file.
         Returns None if the user has cancelled halfway through initialization
         '''
+        # check if the user can execute this
+        if self._user_exec:
         # check if there is one sheet to select from and check if the flag
         # is ready
-        if (self._can_exec_flag and len(self._sheet_names) == 1):
-            # if it can, set the execution status to true
-            self._exec_status = True
-            # then return the specified file
-            return self._file[self._the_sheet_name]
-        # otherwise, check if there is more than 1 sheet
-        elif len(self._sheet_names) > 1:
-            # if there is, wait for the top level
-            self._toplevel.wait_window()
-            # then check if the execution status is okay
-            if (self._can_exec_flag):
-                # if it is okay, then we can return the sheet name
+            if (self._can_exec_flag and len(self._sheet_names) == 1):
+                # if it can, set the execution status to true
+                self._exec_status = True
+                # then return the specified file
                 return self._file[self._the_sheet_name]
+            # otherwise, check if there is more than 1 sheet
+            elif len(self._sheet_names) > 1:
+                # if there is, wait for the top level
+                self._toplevel.wait_window()
+                # then check if the execution status is okay
+                if (self._can_exec_flag):
+                    # the execution is okay
+                    self._exec_status = True
+                    # if it is okay, then we can return the sheet name
+                    return self._file[self._the_sheet_name]
+                # if it is not okay
+                else:
+                    # we want to enqueue a message
+                    the_msg = "No sheet was selected."
+                    self._opq.enqueue(the_msg)
 
 
     def _get_filesystem_object_path(self):
