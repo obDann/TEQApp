@@ -13,8 +13,7 @@ def create_query(lst, table):
     Creates a query to insert values into the database.
     '''
     val = "("
-    #i = 0
     for i in range(0, len(lst) - 1):
         val = val + ("?, ")
     val = val + ("?);")
-    return "INSERT INTO " + table + " values " + val
+    return "INSERT INTO " + table + " values " + val   

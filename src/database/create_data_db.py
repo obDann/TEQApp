@@ -163,6 +163,7 @@ def create_tables():
                 Telephone INT NOT NULL,
                 Telephone_Ext INT,
                 Email_Address text NOT NULL,
+                PRIMARY KEY (Course_Code, Name, Address_ID),
                 FOREIGN KEY (Course_Code)
                 REFERENCES LT_Course(Course_Code),
                 FOREIGN KEY (Address_ID)
@@ -208,8 +209,12 @@ def create_tables():
 
     cur.execute("""CREATE TABLE IF NOT EXISTS Employment_Service (
                 Service_ID INT PRIMARY KEY NOT NULL,
+                Postal_Code text NOT NULL,
                 Registration_Intervention INT NOT NULL,
                 Referral_To text,
+                Language_Of_Service text NOT NULL,
+                Type_Of_Inst text NOT NULL,
+                Referred_By text NOT NULL,
                 Referral_Date INT,
                 Employment_Status text,
                 Education_Status text,
@@ -224,7 +229,11 @@ def create_tables():
     cur.execute("""CREATE TABLE IF NOT EXISTS Info_and_Orientation (
                 Service_ID INT PRIMARY KEY NOT NULL,
                 Target_Group_ID INT,
+                Postal_Code text NOT NULL,
                 Service_Start_Date INT NOT NULL,
+                Language_Of_Service text NOT NULL,
+                Type_Of_Inst text NOT NULL,
+                Referred_By text NOT NULL,
                 Services_Received text NOT NULL,
                 Total_Length text,
                 Total_Length_Hours INT,
@@ -248,7 +257,11 @@ def create_tables():
     cur.execute("""CREATE TABLE IF NOT EXISTS Community_Connections (
                 Service_ID INT NOT NULL,
                 Target_Group_ID INT,
+                Postal_Code text NOT NULL,
+                Language_Of_Service text NOT NULL,
+                Referred_By text NOT NULL,
                 Activity text NOT NULL,
+                Type_of_Inst text NOT NULL,
                 Type_of_Event text,
                 Type_of_Service text,
                 Main_Topic text NOT NULL,
