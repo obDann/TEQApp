@@ -1,0 +1,26 @@
+Sprint 5 Backlog
+Nov 14 to Nov 18
+--------------------------------------------------------------------------------
+Sprint 5 Completion Report
+
+Tasks accomplished:
+David: 17, 18, 20a, 20b, 21a, 21b
+Dann: 23a
+Susan: 15
+Philip: 33a, 53
+Riaz: 35, 36, 3, 38
+
+--------------------------------------------------------------------------------
+Changes and updates before going into the next sprint:
+
+-Heavy considerations of changing the personas/user stories due to the change
+ in client needs
+
+-Deliverable 5 is out; asking for code review activity, how to run our 
+ application, tests, and a video
+
+--------------------------------------------------------------------------------
+What happened in this sprint?
+
+-Many excessive tasks did popped up during this sprint, hence why our burndown
+ is lower than the provisional
