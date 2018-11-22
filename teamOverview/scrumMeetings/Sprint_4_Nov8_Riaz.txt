@@ -1,0 +1,14 @@
+What was I working on?
+Refactored gui code to observer pattern
+Added tests for missing val checker
+
+What am I working on now?
+integrating templatehandler into missing val checker
+reporting tasks
+
+Am I blocked by anything?
+Not really
+
+What are the main takeaways for me after this meeting?
+Will be meeting to demo project
+Reporting tasks/user story will be redone

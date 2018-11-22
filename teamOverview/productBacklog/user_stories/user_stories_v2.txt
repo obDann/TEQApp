@@ -1,0 +1,66 @@
+# User Stories
+--------------------------------------------------------------------------------
+Changes and updates:
+
+-7a is changed; reason being is that the client has changed their mind, but a
+ more suitable user story is made
+ 
+-The UTSC project staff persona was removed and will not be a user for this 
+ project; user stories 9, 11, 12, 13, 14, 15, and 16 are removed
+ 
+-Personas are going to be changing as well, this is not the final version
+ of the user stories due to the change of personas. Personas will be discussed
+ with the group
+
+--------------------------------------------------------------------------------
+1.   As a TEQ employee, Mike James, I want to make only authorized agency  
+     accounts able to access all of the uploaded data so that we can maintain 
+     the privacy of the organizations
+
+1a.  As a TEQ employee Mike James, I want to email agencies their certified
+     account so that agencies are informed that they have an account to
+     contribute to the TEQ program
+
+
+2.   As a volunteer for agency XYZ, Sam Spongy, I want to be able to upload any
+     of the 8 different types of iCare excel files so that the agency that I 
+     represent can contribute to the CCS program
+
+
+3.   As a volunteer for agency XYZ, Sam Spongy, I expect that when I upload my 
+     data, all entries are automatically formatted to comply with the system’s 
+     format so that I do not have to manually change any entries
+   
+
+4.   As a volunteer for agency XYZ, Sam Spongy, I want to be able to view any 
+     data conflicts (i.e. due to duplicate fields like Child 1, Child 2, etc.)
+     or missing data when uploading, so that I can ensure that the data I 
+     uploaded is accurate
+
+
+5.   As a junior TEQ member, James Wowman,  I want to click a simply click a 
+     button regarding a particular subject to auto generate excel files of
+     that topic so that I do not have to learn the complexity of the program
+
+    
+6.   As a long term TEQ employee, Louis Chan, I want to be able to create custom 
+     queries by selecting from a list of variables from a drop down bar so that 
+     I can customize the data I want to see
+
+    
+7.   As a long term TEQ employee, Louis Chan, I want to be able to make
+     appropriate graphs (histograms, scatter plots etc.) out of my queried data
+     so that I can visualize my data
+
+
+7a.  As a long-term TEQ employee, Louis Chan, I want to be able to see any
+     predictive models that are appropriate for a specific subject
+
+
+8.   As a TEQ employee, Mike James, I want to have the ability to run my own SQL
+     queries so that I am able to manipulate the data for statistical 
+     calculations
+
+    
+10.  As a TEQ employee, Mike James, I want to be able to remove agencies in the
+     event that they close down so we don’t have any irrelevant data
