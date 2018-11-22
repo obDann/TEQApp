@@ -11,7 +11,7 @@ import insert_client_exit
 import pandas as pd
 
 class BeautifulUploader(BeautifulUploaderAbstract):
-    def upload_client_profile(self, df, agency):
+    def upload_client_profile(self, df):
         '''
         (BeautifulUploaderAbstract, Dataframe, str) -> None
         Uploads template Client Profile into the database. Agency refers to
@@ -25,10 +25,10 @@ class BeautifulUploader(BeautifulUploaderAbstract):
         while (i < total_rows):
             row = df.iloc[i]
             address_id = insert_client_profile.insert_address(column, row)
-            insert_client_profile.insert_client(column, row, address_id, agency)
+            insert_client_profile.insert_client(column, row, address_id)
             i += 1
     
-    def upload_needs_referrals(self, df, agency):
+    def upload_needs_referrals(self, df):
         '''
         (BeautifulUploaderAbstract, Dataframe, str) -> None
         Uploads template Needs Assessment & Referrals into the database.
@@ -43,8 +43,7 @@ class BeautifulUploader(BeautifulUploaderAbstract):
             client_id = df.iloc[i][3]
             row = df.iloc[i]
             inserted = insert_needs_assessment.insert_referral(column, row, 
-                                                               client_id, 
-                                                               agency)
+                                                               client_id)
             insert_needs_assessment.insert_child(row, client_id)
             insert_needs_assessment.insert_trans_int(row, client_id)
             insert_needs_assessment.insert_find_employment(row, client_id)

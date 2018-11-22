@@ -28,7 +28,6 @@ def create_tables():
                 Official_Language_Preference text NOT NULL,
                 Consent_Future INT,
                 Address_ID INT,
-                Agency text,
                 FOREIGN KEY (Address_ID) 
                 REFERENCES Address(ID)
                 );""")

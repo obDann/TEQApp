@@ -6,14 +6,14 @@ class BeautifulUploaderAbstract(ABC):
     '''
 
     @abstractmethod
-    def upload_client_profile(self, df, agency):
+    def upload_client_profile(self, df):
         '''
         (BeautifulUploaderAbstract, Dataframe, str) -> None
         Uploads template Client Profile into the database.
         '''
     
     @abstractmethod
-    def upload_needs_referrals(self, df, agency):
+    def upload_needs_referrals(self, df):
         '''
         (BeautifulUploaderAbstract, Dataframe, str) -> None
         Uploads template Needs Assessment & Referrals into the database.
