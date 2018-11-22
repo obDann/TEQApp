@@ -14,10 +14,8 @@ class NaiveModel(PredictiveModel):
 
         Initializes a naive model predictive model.
         '''
-        self._df = dataframe
-        self._x_axis = x_axis
-        self._y_axis = y_axis
-
+        # run predictive model's init
+        PredictiveModel.__init__(self, dataframe, x_axis, y_axis)
 
 
     def get_model(self):
@@ -27,12 +25,11 @@ class NaiveModel(PredictiveModel):
         Returns the originally injected DataFrame with an extra column. The
         column name is the string in the tuple returned.
         '''
-
-
-    def get_MAPE(self):
-        '''
-        (PredictiveModel) -> float
-
-        Returns the Mean Absolute Percent Error. The lower it is, the more
-        accurate the model is in a long term basis.
-        '''
+        # the Naive approach is to just simply get the first entry in the
+        # y-axis and call it a day
+        first_entry = self._df[self._y_axis][0]
+        # set the dataframe
+        new_col = "Naive Approach"
+        self._df.loc[:, new_col] = first_entry
+        # then return the Naive model
+        return self._df, new_col
