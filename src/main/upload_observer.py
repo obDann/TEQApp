@@ -5,6 +5,7 @@ import sys
 sys.path.append("../commands")
 import file_system_fetcher as fsf
 from screener import *
+from duplicate_row_checker import *
 sys.path.append("../temhelp")
 from true_tem_handler import *
 
@@ -13,6 +14,7 @@ class UploadObserver(Observer):
     '''
     Observer object for button that allows users to upload excel files
     '''
+    THE_COMMANDS = ["FileSystemFetcher", "DuplicateRowChecker", "Screener"]
 
     def __init__(self, parent, controller):
         ''' (UploadObserver, Tk, Frame) -> None
@@ -29,6 +31,7 @@ class UploadObserver(Observer):
         Uploads a file to the database according to a specified template name
         '''
 
+
         template_name = obs.button.template
 
 
@@ -39,7 +42,7 @@ class UploadObserver(Observer):
 
         # check if the fsf executed properly
         if (my_fsf.executed_properly()):
-            self._after_fsf(df, template_name)
+            self._run_screener(df, template_name)
         else:
             # if the user clicked 'x' in any of the frames in fsf
             # get the message
@@ -60,21 +63,19 @@ class UploadObserver(Observer):
 
             mini_pop.mainloop()
 
-
-    def _after_fsf(self, df, template_name):
+    def _run_screener(self, df, template_name):
         my_tth = TrueTemplateHandler(template_name)
         my_screener = Screener(df, my_tth)
-        my_screener.execute()
+        the_df = my_screener.execute()
+
         if (my_screener.executed_properly()):
-            self._after_screener(df)
-        else:
-            self._checker()
-        print("hello world")
+            self._run_duplicate_row_checker(the_df, template_name)
+            print("I am here!!!")
 
-
-    def _after_screener(self, df):
-        print(df)
-
-
-    def _checker(self):
-        print("a linked list of functions")
+    def _run_duplicate_row_checker(self, df, template_name):
+        my_drc = DuplicateRowChecker(df)
+        the_df = my_drc.execute()
+        f = open("my_file.txt", "a")
+        f.write("========================================")
+        f.write(str(the_df))
+        f.close()
