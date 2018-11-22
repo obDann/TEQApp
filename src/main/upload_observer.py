@@ -6,6 +6,7 @@ sys.path.append("../commands")
 import file_system_fetcher as fsf
 from screener import *
 from duplicate_row_checker import *
+from data_aggregator import *
 sys.path.append("../temhelp")
 from true_tem_handler import *
 
@@ -70,12 +71,26 @@ class UploadObserver(Observer):
 
         if (my_screener.executed_properly()):
             self._run_duplicate_row_checker(the_df, template_name)
-            print("I am here!!!")
+
 
     def _run_duplicate_row_checker(self, df, template_name):
         my_drc = DuplicateRowChecker(df)
         the_df = my_drc.execute()
+        self._run_data_aggregator(df, template_name)
+
+
+    def _run_data_aggregator(self, df, template_name):
+
+        my_data_agg = DataAggregator(template_name)
+
+        # get a template handler
+        my_tth = TrueTemplateHandler(template_name)
+
+        new_df = my_data_agg.execute(df, my_tth)
+        print("I am here!!!")
+
         f = open("my_file.txt", "a")
         f.write("========================================")
-        f.write(str(the_df))
+        f.write(str(new_df))
         f.close()
+
