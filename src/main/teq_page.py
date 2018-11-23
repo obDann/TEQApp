@@ -19,7 +19,8 @@ class TEQPage(tk.Frame):
         label.pack(side=TOP,fill=X)
         
         b1 = Button(self, text="Custom Query",
-                    command=lambda: self.cont.display(cq.CustomQueryPage))
+                    command=lambda: self.cont.set_page(cq.CustomQueryPage, 
+                                                       name))
         b1.pack(side=TOP,fill=X)
         
         back = Button(self, text="Back",
