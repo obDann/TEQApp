@@ -50,13 +50,14 @@ class TeqApp(tk.Tk):
         frame.grid(row=0, column=0, sticky="nsew")
         frame.tkraise()
 
-    def insert_page_details(self, page, df, template_name):
+    def insert_page_details(self, page, df, template_name, month, year, name):
         '''
-        (TeqApp, Frame, DataFrame, str) -> None
+        (TeqApp, Frame, DataFrame, str, str, str) -> None
 
-        Goes to another page while providing a dataframe and a template name
+        Goes to another page while providing a dataframe, template name,
+        month, year, and username
         '''
-        my_frame = page(self.cont, self, df, template_name)
+        my_frame = page(self.cont, self, df, template_name, month, year, name)
         # set the grid
         my_frame.grid(row=0, column=0, sticky="nsew")
         # go to page
