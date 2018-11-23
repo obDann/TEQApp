@@ -5,7 +5,6 @@ import main_page as mp
 from create_account_page import *
 from agency_page import *
 from teq_page import *
-from admin_page import *
 from file_upload_page import *
 from button_observable import *
 from login_observer import *

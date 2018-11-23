@@ -1,4 +1,6 @@
 from Observer import Observer
+from tkinter import *
+import tkinter.messagebox
 import client_db_functions
 import main_page as mp
 import re
@@ -32,7 +34,38 @@ class CreateUserObserver(Observer):
 
         if (username != "" and re.match(r"[^@]+@[^@]+\.[^@]+", email) and
                 name != "" and pw != ""):
-            client_db_functions.insert_user(username, email, name, pw, acc)
+            error = False
+            success = client_db_functions.insert_user(username, email, name,
+                                                     pw, acc)
             emailer = AccountCreationEmailer()
             emailer.send(email)
             obs.page.cont.display(mp.MainPage)
+            send.message(error, success)
+        else:
+            error, success = True, False
+            self.message(error, success, username, email, name, pw)
+
+    def message(self, error, success, username="", email="", name="", pw=""):
+        ''' (CreateUserObserver, bool, bool, str, str, str, str) -> None
+        username, email, name and pw are optional parameters
+
+        Creates a message box telling the user if the account was successfully
+        created or not and additional error messages. error = False means it
+        was successful
+        '''
+        if (error):
+            title = "Error"
+            msg = "Make sure the following fields are filled in properly: \n"
+            entered_fields = [username, email, name, pw]
+            fields = ["Username", "Email", "First Name", "Password"]
+            for i in range(len(fields)):
+                if (i == 1 and not re.match(r"[^@]+@[^@]+\.[^@]+", email)):
+                    # if i is checking email field
+                    msg += fields[i] + " (follow example@domain.ca format)\n"
+                elif entered_fields[i] == "":
+                    msg += fields[i] + "\n"
+        else:
+            title = "Confirm"
+            msg = "Your account has been successfully created!"
+
+        tkinter.messagebox.showinfo(title, msg)

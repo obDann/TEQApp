@@ -5,7 +5,6 @@ import main_page as mp
 from login_page import *
 from agency_page import *
 from teq_page import *
-from admin_page import *
 from file_upload_page import *
 from button_observable import *
 from create_user_observer import *
@@ -43,7 +42,7 @@ class CreateAccountPage(tk.Frame):
 
         # Options menu for selecting which account
         b2.acc = StringVar(self)
-        choice = {"Agency", "TEQ", "Admin"}
+        choice = {"Agency", "TEQ"}
         b2.acc.set("Agency")
         menu = OptionMenu(self, b2.acc, *choice)
         menu.grid(row=5, column=1)

@@ -6,7 +6,8 @@ import password_hash
 
 def insert_user(username, email, name, password, account_type):
     '''
-    Inserts a new user into the database (table User).
+    Inserts a new user into the database (table User) and returns whether it
+    was successfully input or not
     '''
     # time is stored as UNIX timestap in INT
     new_password = password_hash.hash_password(password)
@@ -15,6 +16,8 @@ def insert_user(username, email, name, password, account_type):
     
     if (not(database_methods.execute_query(query, fields, 'users.db'))):
         insert_account(username, account_type)
+        return True
+    return False
 
 def insert_account(username, account_type):
     if (account_type == "Agency"):
@@ -38,8 +41,8 @@ def login(username, password):
         print(format(e))
         error = 1
 
-    if (not(error)):
-        name = cur.fetchall()
+    name = cur.fetchall()
+    if (not(error) and name):
         correct_password = password_hash.verify_password(password, name[0][2])
         if (len(name) != 0 and correct_password):
             return (name[0][0], name[0][1])
@@ -158,20 +161,24 @@ def check_temp_pass(username, temp_pass):
         print(format(e))
         error = 1
 
-    if (not(error)):
-        received = cur.fetchall()
+    received = cur.fetchall()
+    if (not(error) and received):
+        correct_password = password_hash.verify_password(temp_pass,
+                                                         received[0][0])
         if (len(received) != 0):
-            return (True, temp_pass == received[0][0])
+            return (True, correct_password)
 
     return (False, False)
 
 def insert_temp_pass(username, temp_pass):
     '''
-    Inserts a temporary passcode into the database
+    Inserts a temporary passcode into the database, or updates it if it
+    already exists
     '''
+    hash_temp = password_hash.hash_password(temp_pass)
     query = ("INSERT OR REPLACE INTO Temp_Passcode (Username, Temp_Pass)" +
              " values (?, ?)")
-    fields = (username, temp_pass)
+    fields = (username, hash_temp)
     database_methods.execute_query(query, fields, 'users.db')
 
 def remove_temp(username):
@@ -186,7 +193,7 @@ def update_pass(username, password):
     '''
     Updates the user's password with the new one that was entered
     '''
-    new_password = password_hash.hash_password(password)
+    hash_temp = password_hash.hash_password(password)
     query = ("UPDATE User SET Password = ? WHERE Username = ?")
-    fields = (new_password, username)
+    fields = (hash_temp, username)
     database_methods.execute_query(query, fields, 'users.db')
