@@ -14,15 +14,16 @@ total_clients = ("SELECT COUNT(*) FROM (SELECT DISTINCT " +
 # Q2
 def num_clients(year, service):
     '''
-    Displays a line graph of how many times the given service us accessed in 
+    Displays a line graph of how many times a client accessed a service in 
     each month of a given year.
     '''
     months = ["January", "February", "March", "April", "May", "June", "July",
               "August", "September", "October", "November", "December"]
     lst = []
     
-    # set up dataframe
+    
     for month in months:
+        # grab number of clients that attended that service for each month
         num_clients = ("SELECT COUNT(*) FROM Client, Client_Attends_Service, " 
                        + service + " WHERE Client.Unique_ID_Value = " + 
                        "Client_Attends_Service.Client_Unique_ID_Value AND " +
@@ -30,7 +31,8 @@ def num_clients(year, service):
                        "Service.Service_ID AND Client_Attends_Service.Month = '" 
                        + month + "' AND Client_Attends_Service.Year = '" 
                        + year + "'")
-    
+        
+        # set up dataframe
         cur.execute(num_clients)
         rows = cur.fetchall()
         total = rows[0][0]
@@ -49,6 +51,7 @@ def age_histogram(service):
     '''
     Displays a histogram of the ages of clients accessing a given service.
     '''
+    # grab all the ages of clients enrolled in the service
     age = ("SELECT (strftime('%Y', 'now') - strftime('%Y', Date_Of_Birth)) " +
              "- (strftime('%m-%d', 'now') < strftime('%m-%d', Date_Of_Birth)) " 
              + "FROM Client, Client_Attends_Service, " + service + " WHERE " 
@@ -65,6 +68,7 @@ def age_histogram(service):
     
     df = pd.DataFrame(lst)
     df.rename(columns={0: 'Age'}, inplace=True);
+    # bins for grouping the age
     bins = [0,10,20,30,40,50,60,70,80,90,100]
 
     # create the histogram
@@ -73,13 +77,18 @@ def age_histogram(service):
     
     
 def child_pie():
+    '''
+    Displays a pie graph that shows what percentage of clients enrolled in
+    Language Traning Services have children.
+    '''
+    # grab number of clients who have children in language traning courses
     lang_clients = ("SELECT COUNT(*) FROM (SELECT DISTINCT " + 
                     "Client.Unique_ID_Value FROM Client, Client_Enrolment"
                     + ", LT_Course WHERE LT_Course.Course_Code = " + 
                     "Client_Enrolment.Course_Code AND Client.Unique_ID_Value " 
                     + "= Client_Enrolment.Client_Unique_ID_Value)")    
-    lst = []
     # set up dataframe
+    lst = []
     cur.execute(lang_clients)
     rows = cur.fetchall()
     has_child = rows[0][0]
@@ -97,19 +106,25 @@ def child_pie():
     p.display()
 
 def tran_pie():
+    '''
+    Displays a pie graph showing the percentage of clients who have access
+    to transportation.
+    '''
+    # grab number of clients that have no transportation
     no_trans = ("SELECT COUNT(*) FROM (SELECT DISTINCT Client.Unique_ID_Value" 
                 + " FROM Client, Client_Needs WHERE Client.Unique_ID_Value = " 
                 + "Client_Needs.Client_Unique_ID_Value AND Client_Needs.Type = " 
                 + " 'Transportation' AND Client_Needs.Value = 'No')")
     
+    # grab number of clients that have transportation
     yes_trans = ("SELECT COUNT(*) FROM (SELECT DISTINCT Client.Unique_ID_Value" 
                  + " FROM Client, Client_Needs WHERE Client.Unique_ID_Value = " 
                  + "Client_Needs.Client_Unique_ID_Value AND " + 
                  "Client_Needs.Type = 'Transportation' AND " + 
                  "Client_Needs.Value = 'Yes')")    
     
-    lst = []
     # set up dataframe
+    lst = []
     cur.execute(no_trans)
     rows = cur.fetchall()
     no = rows[0][0]
