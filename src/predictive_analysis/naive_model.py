@@ -18,18 +18,22 @@ class NaiveModel(PredictiveModel):
         PredictiveModel.__init__(self, dataframe, x_axis, y_axis)
 
 
-    def get_model(self):
+    def get_model(self, until=None):
         '''
         (PredictiveModel) -> (Dataframe, str)
 
         Returns the originally injected DataFrame with an extra column. The
         column name is the string in the tuple returned.
+
+        The 'until' variable indicates how many entries there are in the
+        data to predict
         '''
+
         # the Naive approach is to just simply get the first entry in the
         # y-axis and call it a day
         first_entry = self._df[self._y_axis][0]
         # set the dataframe
-        new_col = "Naive Approach"
+        new_col = "Naive Model"
         self._df.loc[:, new_col] = first_entry
         # then return the Naive model
         return self._df, new_col

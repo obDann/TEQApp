@@ -24,6 +24,7 @@ class PredictiveModel(ABC):
         # self._df[self._x_axis] is a quantitative variable
         # self._df[self._y_axis] is a quantitative variable
         # there is at least one row in the dataframe
+        # self._num_entries is the original number of entries in the dataframe
 
         # check if the dataframe is valid
         self._check_dataframe(dataframe, x_axis, y_axis)
@@ -31,15 +32,19 @@ class PredictiveModel(ABC):
         self._df = dataframe[:].dropna()
         self._x_axis = x_axis
         self._y_axis = y_axis
+        self._num_entries = self._df.shape[0]
 
 
     @abstractmethod
-    def get_model(self):
+    def get_model(self, until=None):
         '''
-        (PredictiveModel) -> (Dataframe, str)
+        (PredictiveModel, int) -> (Dataframe, str)
 
         Returns the originally injected DataFrame with an extra column. The
         column name is the string in the tuple returned.
+
+        The 'until' variable indicates how many entries there are in the
+        data to predict
         '''
 
     def get_mape_estimate(self, mod=None, model_col=None):
@@ -61,26 +66,27 @@ class PredictiveModel(ABC):
         already made
         '''
         # check if the model is not created
-        if (mod is not None):
+        if (mod is None):
             # if not, get the model and the name
             mod, model_col = self.get_model()
         # we want to have a copy of the model so that the original one is not
         # mutated
-        mod = mod[:]
+        mod = mod.head(self._num_entries)[:]
         # what is wanted is to have an intermediate calculation for a new
         # column taking this off of MGOC20...
         inter_step = "An intermediate step to avoid bad things"
         # actual - forecast
         mod.loc[:, inter_step] = mod[self._y_axis] - mod[model_col]
-        # (actual - forecast) / (actual + 1)
+        # (actual - forecast) / (|actual| + 1)
         # + 1 is used IN THE EVENT THAT ACTUAL IS 0
-        mod[inter_step] = mod[inter_step] / (mod[self._y_axis] + 1)
+        mod[inter_step] = mod[inter_step] / (mod[self._y_axis].abs() + 1)
         # |(actual - forecast) / (actual + 1)|
         mod[inter_step] = mod[inter_step].abs()
         # sum |(actual - forecast) / (actual + 1)|
         another_intermediate = mod[inter_step].sum()
         # sum |(actual - forecast) / (actual + 1)|  / n
-        return another_intermediate / mod.shape[0]
+        return another_intermediate / self._num_entries
+
     def _check_dataframe(self, dataframe, x_axis, y_axis):
         '''
         (PredictiveModel, DataFrame, str, str) -> None
