@@ -31,16 +31,11 @@ class UploadObserver(Observer):
 
         Uploads a file to the database according to a specified template name
         '''
-
-
         template_name = obs.button.template
-
-
         # create a file system fetcher
         my_fsf = fsf.FileSystemFetcher(self._controller)
         # get the dataframe
         df = my_fsf.execute()
-
         # check if the fsf executed properly
         if (my_fsf.executed_properly()):
             self._run_screener(df, template_name)
@@ -85,8 +80,10 @@ class UploadObserver(Observer):
 
         # get a template handler
         my_tth = TrueTemplateHandler(template_name)
-
         new_df = my_data_agg.execute(df, my_tth)
+
+        self._controller.insert_page_details(new_df, template_name)
+
         print("I am here!!!")
 
         f = open("my_file.txt", "a")
