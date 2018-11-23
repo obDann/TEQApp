@@ -3,7 +3,7 @@ from tkinter import *
 import client_db_functions
 from console import *
 import main_page as mp
-import custom_query as cq
+import custom_query_page as cq
 from login_page import *
 from create_account_page import *
 from agency_page import *
