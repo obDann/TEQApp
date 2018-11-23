@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import *
-import client_db_functions
 from console import *
 import main_page as mp
 from login_page import *
@@ -10,11 +9,10 @@ from admin_page import *
 from file_upload_page import *
 
 class AgencyPage(tk.Frame):
-    def __init__(self, parent, controller, name):
+    def __init__(self, parent, controller):
         self.cont = controller
         tk.Frame.__init__(self,parent)
-        label = tk.Label(self, text="Hello " + name +
-                         ". What would you like to do?")
+        label = tk.Label(self, text="Hello, What would you like to do?")
         label.pack(side=TOP,fill=X)
 
         b1 = tk.Button(self, text="Submit iCare File",

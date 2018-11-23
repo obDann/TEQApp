@@ -1,29 +1,31 @@
 import tkinter as tk
 from tkinter import ttk
 import pandas as pd
-from agency_page import * 
+import agency_page as ap 
 from data_viewer_page import *
-from table_observer import *
-from button_observable import *
 import sys
 sys.path.append("../commands")
 import missing_val_checker as mv
 import data_aggregator as da
-
+sys.path.append("../database")
+import beautiful_uploader as bu
 
 class TableViewer(tk.Frame): 
     
-    def __init__(self, parent, controller, data_frame, temp_name):
+    def __init__(self, parent, controller, data_frame, temp_name, month, year):
         tk.Frame.__init__(self, parent)
         self.controller = controller
         self.df = data_frame
-        self.template_name = temp_name        
+        self.temp_name = temp_name
+        # month and year for some templates
+        self.m = month
+        self.y = year
         
         # Run the checkers
         self._execute_checkers()
         
         # The title
-        label1 = tk.Label(self, text=temp_name)
+        label1 = tk.Label(self, text=self.temp_name)
         label1.pack(side="top", fill="x", pady=10)
         
         # The column selection drop down box
@@ -43,9 +45,11 @@ class TableViewer(tk.Frame):
         
         b2 = tk.Button(self, text='Save', command=lambda: self.save_data())
         b2.pack()
-
+        
+        # Uploads the data to db and 
         back = tk.Button(self, text="Back",
-                         command=lambda: controller.display(AgencyPage))
+                         command=lambda: [self.upload_data(),
+                                      self.controller.set_page(ap.AgencyPage)])
         back.pack()        
    
     def show_option(self):
@@ -88,4 +92,25 @@ class TableViewer(tk.Frame):
         # Remove the last element since that is the dtype
         new_col = pd.DataFrame(new_col[:len(new_col)-1], columns=[ind])
         # Add it back to the original dataFrame
-        self.df = self.df.update(new_col)    
+        self.df = self.df.update(new_col)
+    
+    def upload_data(self):
+        '''
+        Uploads the saved data onto our database.
+        '''
+        
+        beaut_up = bu.BeautifulUploader()
+        if (self.temp_name == "Client Profile"):
+            beaut_up.upload_client_profile(self.df)
+        elif (self.temp_name == "Needs Assessment & Referrals"):
+            beaut_up.upload_needs_referrals(self.df)
+        elif (self.temp_name == "Community Connections"):
+            beaut_up.upload_community_connections(self.df, self.m , self.y)
+        elif (self.temp_name == "Employment Related Services"):
+            bu.upload_info_ori(self.df, self.m , self.y)
+        elif (self.temp_name == "Language Training - Client Enrol"):
+            beaut_up.upload_employment_service(self.df, self.m , self.y)
+        elif (self.temp_name == "Language Training - Course Setup"):
+            beaut_up.upload_LT_client_enrol(self.df)
+        elif (self.temp_name == "Language Training - Client Exit"):
+            beaut_up.upload_LT_course_setup(self.df)
