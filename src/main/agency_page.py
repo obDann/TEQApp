@@ -9,10 +9,11 @@ from admin_page import *
 from file_upload_page import *
 
 class AgencyPage(tk.Frame):
-    def __init__(self, parent, controller):
+    def __init__(self, parent, controller, name):
         self.cont = controller
         tk.Frame.__init__(self,parent)
-        label = tk.Label(self, text="Hello, What would you like to do?")
+        label = tk.Label(self, text="Hello " + name +
+                         "! What would you like to do?")
         label.pack(side=TOP,fill=X)
 
         b1 = tk.Button(self, text="Submit iCare File",

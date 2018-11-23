@@ -42,8 +42,9 @@ class FileUpload(tk.Frame):
         # add the observer
         obs1.add_observer(upload_obs)
         b1.template = tt1
+        # add the name
+        b1.name = name
         b1.pack(side=TOP,fill=X)
-
 
 
         tt2 = "Needs Assessment & Referrals"
@@ -53,6 +54,7 @@ class FileUpload(tk.Frame):
         obs2.set_button(b2)
         obs2.add_observer(upload_obs)
         b2.template = tt2
+        b2.name = name
         b2.pack(side=TOP, fill=X)
 
 
@@ -63,6 +65,7 @@ class FileUpload(tk.Frame):
         obs3.set_button(b3)
         obs3.add_observer(upload_obs)
         b3.template = tt3
+        b3.name = name
         b3.pack(side=TOP, fill=X)
 
 
@@ -73,6 +76,7 @@ class FileUpload(tk.Frame):
         obs4.set_button(b4)
         obs4.add_observer(upload_obs)
         b4.template = tt4
+        b4.name = name
         b4.pack(side=TOP, fill=X)
 
         tt5 = "Employment Related Services"
@@ -82,6 +86,7 @@ class FileUpload(tk.Frame):
         obs5.set_button(b5)
         obs5.add_observer(upload_obs)
         b5.template = tt5
+        b5.name = name
         b5.pack(side=TOP, fill=X)
 
         tt6 = "Language Training - Client Enrol"
@@ -91,6 +96,7 @@ class FileUpload(tk.Frame):
         obs6.set_button(b6)
         obs6.add_observer(upload_obs)
         b6.template = tt6
+        b6.name = name
         b6.pack(side=TOP, fill=X)
 
         tt7 = "Language Training - Course Setup"
@@ -100,6 +106,7 @@ class FileUpload(tk.Frame):
         obs7.set_button(b7)
         obs7.add_observer(upload_obs)
         b7.template = tt7
+        b7.name = name
         b7.pack(side=TOP, fill=X)
 
         tt8 = "Language Training - Client Exit"
@@ -109,6 +116,7 @@ class FileUpload(tk.Frame):
         obs8.set_button(b8)
         obs8.add_observer(upload_obs)
         b8.template = tt8
+        b8.name = name
         b8.pack(side=TOP, fill=X)
 
 
