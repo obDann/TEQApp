@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from label_not_in_data_frame_error import *
+from label_not_in_data_frame_error import LabelNotInDataFrameError
 from abc import ABC, abstractmethod
 
 class Graph(ABC):
@@ -23,8 +23,8 @@ class Graph(ABC):
         # self._title is the title of the graph
         fig, ax = plt.subplots()
         self._df = df
-        self._x_label = x_label
-        self._y_label = y_label
+        self._x_label = x_axis
+        self._y_label = y_axis
         self._title = title
 
 
@@ -50,10 +50,4 @@ class Graph(ABC):
         if (self._x_label not in self._df.columns):
             # if it isn't columns, then we raise an error
             msg = "The axis " + str(self._x_label) + " is not in the dataframe"
-            raise LabelNotInDataFrameError(msg)
-
-        # then check if the y axis is in the dataframe
-        if (self._y_label and self._y_label not in self._df.columns):
-            # if it isn't, then we raise an error
-            msg = "The axis " + str(self._y_label) + " is not in the dataframe"
             raise LabelNotInDataFrameError(msg)

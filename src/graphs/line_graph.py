@@ -29,3 +29,9 @@ class LineGraph(Graph):
 
         Displays a graph that a user can interact with
         '''
+        self._check_axis_labels()
+        plt.plot(self._df[self._x_label], self._df[self._y_label])
+        plt.title(self._title)    
+        plt.xlabel(self._x_label)
+        plt.ylabel(self._y_label)
+        plt.show()
