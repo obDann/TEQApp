@@ -6,12 +6,12 @@ class BeautifulUploaderTest():
     def test_upload_client_profile(self):
         df = pd.read_excel('client_profile.xlsx')
         b = BeautifulUploader()
-        b.upload_client_profile(df, "XYZ")
+        b.upload_client_profile(df)
     
     def test_upload_needs_referrals(self):
         df = pd.read_excel('needs_referrals.xlsx')
         b = BeautifulUploader()
-        b.upload_needs_referrals(df, "XYZ")
+        b.upload_needs_referrals(df)
 
     def test_upload_community_connections(self):
         df = pd.read_excel('community_connections.xlsx')
