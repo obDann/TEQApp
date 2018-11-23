@@ -15,8 +15,8 @@ class PieGraph(Graph):
         '''
         # REPRESENTATION INVARIANT
         # PieGraph is a Graph
-        # self._x_axis is a categorial variable in the dataframe
-        # self._y_axis is a quantitative variable in the dataframe
+        # self._x_label is a categorial variable in the dataframe
+        # self._y_label is a quantitative variable in the dataframe
 
         # just call an init
         Graph.__init__(self, df, label, frequency, title)

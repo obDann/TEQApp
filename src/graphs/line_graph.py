@@ -15,8 +15,9 @@ class LineGraph(Graph):
         '''
         # REPRESENTATION INVARIANT
         # LineGraph is a Graph
-        # self._x_axis is a (sequential) quantitative variable in the dataframe
-        # self._y_axis is a quantitative variable in the dataframe
+        # self._x_label is a (sequential) quantitative variable in the
+        # dataframe
+        # self._y_label is a quantitative variable in the dataframe
 
         # just call an init
         Graph.__init__(self, df, x_axis, y_axis, title)

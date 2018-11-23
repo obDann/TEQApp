@@ -35,3 +35,25 @@ class Graph(ABC):
 
         Displays a graph that a user can interact with
         '''
+
+    def _check_axis_labels(self):
+        '''
+        (self) -> None
+
+        Determines of the axis labels are in the dataframe
+
+        RAISES LabelNotInDataFrameError if the x axis or the y axis is not
+        in the dataframe
+        '''
+        # check if the x axis is in the data frame
+
+        if (self._x_label not in self._df.columns):
+            # if it isn't columns, then we raise an error
+            msg = "The axis " + str(self._x_label) + " is not in the dataframe"
+            raise LabelNotInDataFrameError(msg)
+
+        # then check if the y axis is in the dataframe
+        if (self._y_label and self._y_label not in self._df.columns):
+            # if it isn't, then we raise an error
+            msg = "The axis " + str(self._y_label) + " is not in the dataframe"
+            raise LabelNotInDataFrameError(msg)
