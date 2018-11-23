@@ -3,6 +3,7 @@ from tkinter import *
 import client_db_functions
 from console import *
 import main_page as mp
+import custom_query as cq
 from login_page import *
 from create_account_page import *
 from agency_page import *
@@ -16,7 +17,11 @@ class TEQPage(tk.Frame):
         label = tk.Label(self, text="Hello " + name +
                          ". What would you like to do?")
         label.pack(side=TOP,fill=X)
-
+        
+        b1 = Button(self, text="Custom Query",
+                    command=lambda: self.cont.display(cq.CustomQueryPage))
+        b1.pack(side=TOP,fill=X)
+        
         back = Button(self, text="Back",
                             command=lambda: self.cont.display(mp.MainPage))
         back.pack(side=TOP,fill=X)

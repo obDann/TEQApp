@@ -54,13 +54,13 @@ class TestTrueTemplateHandler(unittest.TestCase):
                     'Language of Service', 'Official Language of Preference',
                     'Referred By',
                     'Activity Under Which Client Received Services',
-                    'Type of Institution/Organization '
-                    + 'Where Client Received Services',
-                    'Type of Event Attended', 'Type of Service',
+                    'Type of Institution/Organization Where Client '
+                    + 'Received Services', 'Type of Event Attended',
+                    'Type of Service',
                     'Main Topic/Focus of the Service Received',
                     'Service Received', 'Number of Unique Participants',
-                    'Did Volunteers from the Host Community '
-                    + 'Participate in the Activity',
+                    'Did Volunteers from the Host Community Participate '
+                    + 'in the Activity',
                     'Directed at a Specific Target Group',
                     'Target Group: Children (0-14 yrs)',
                     'Target Group: Youth (15-24 yrs)', 'Target Group: Senior',
@@ -68,21 +68,20 @@ class TestTrueTemplateHandler(unittest.TestCase):
                     'Target Group: Ethnic/cultural/linguistic group',
                     'Target Group: Deaf or Hard of Hearing',
                     'Target Group: Blind or Partially Sighted',
-                    'Target Group: Lesbian, Gay, Bisexual, '
-                    + 'Transgender, Queer (LGBTQ)',
-                    'Target Group: Families/Parents',
+                    'Target Group: Lesbian, Gay, Bisexual, Transgender, '
+                    + 'Queer (LGBTQ)', 'Target Group: Families/Parents',
                     'Target Group: Other impairments (physical, mental)',
-                    'Target Group: Clients with international '
-                    + 'training in a regulated profession',
-                    'Target Group: Clients with international '
-                    + 'training in a regulated trade',
+                    'Target Group: Clients with international training in a '
+                    + 'regulated profession',
+                    'Target Group: Clients with international training '
+                    + 'in a regulated trade',
                     'Target Group: Official language minorities',
                     'Status of Service', 'Reason for Leaving Service',
                     'Start Date (YYYY-MM-DD)', 'End Date (YYYY-MM-DD)',
                     'Projected End Date (YYYY-MM-DD)',
-                    'Was Essential Skills and Aptitudes '
-                    + 'Training Received as Part of the Service?',
-                    'Computer Skills', 'Document Use',
+                    'Was Essential Skills and Aptitudes Training Received '
+                    + 'as Part of the Service?', 'Computer Skills',
+                    'Document Use',
                     'Interpersonal Skills and Workplace Culture',
                     'Leadership Training', 'Life Skills', 'Numeracy',
                     'Support Services Received', 'Care for Newcomer Children',
@@ -91,10 +90,11 @@ class TestTrueTemplateHandler(unittest.TestCase):
                     'Child 3: Type of Care', 'Child 4: Age',
                     'Child 4: Type of Care', 'Child 5: Age',
                     'Child 5: Type of Care', 'Transportation',
-                    'Provisions for Disabilities', 'Translation', 'Between',
-                    'And', 'Interpretation', 'Crisis Counselling',
-                    'Total Length of Service: Hours',
+                    'Provisions for Disabilities', 'Translation',
+                    'Between', 'And', 'Interpretation', 'Between', 'And',
+                    'Crisis Counselling', 'Total Length of Service: Hours',
                     'Total Length of Service: Minutes', 'Reason for update']
+
         actual = self.my_th.get_headers()
         # then compare the two
         self.assertEqual(actual, expected)

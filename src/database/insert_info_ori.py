@@ -32,7 +32,7 @@ def insert_info_and_ori(row_values, service_id, target_id):
     '''
     Inserts a row in the Info_and_Orientation table.
     '''
-    index = [(6, 7), (11, 16), (69, 70), (93, 94)]
+    index = [(5, 8), (9, 16), (69, 70), (93, 94)]
     val = [service_id, target_id]
     val = database_methods.fetch_values_list(row_values, index, val)
     
@@ -51,3 +51,9 @@ def insert_service_needs(column_values, row_values, service_id):
                                       "Service_Needs", service_id, 31, 63)
         insert_general.insert_3_value(column_values, row_values, 
                                       "Service_Needs", service_id, 71, 72)
+
+def update_client_profile(row_values, client_id):
+    index_list = [(0, 1), (4, 5), (8, 9)]
+    if (database_methods.check_id(client_id, 'client_data.db', "Client",
+                                      "Unique_ID_Value")):    
+        insert_general.update_client_profile(row_values, client_id, index_list)
