@@ -50,18 +50,20 @@ query11 = ("SELECT COUNT(*) FROM Referral WHERE "+
           "Referral.Suport_Services_Required  = 'N'")
 
 # Getting the # of people who has their settlement plan completed
-query12 = ("SELECT COUNT(*) FORM Referral WHERE "+
+query12 = ("SELECT COUNT(*) FROM Referral WHERE "+
           "Referral.Settlement_Plan_Completed = 'Y'")
 # Getting the # of people who does not have their settlement plan completed
-query13 = ("SELECT COUNT(*) FORM Referral WHERE "+
+query13 = ("SELECT COUNT(*) FROM Referral WHERE "+
           "Referral.Settlement_Plan_Completed = 'N'")
 
 # Getting the # of people who needs Non IRCC Services
-query14 = ("SELECT COUNT(*) FORM Referral WHERE "+
+query14 = ("SELECT COUNT(*) FROM Referral WHERE "+
           "Referral.Non_IRCC_Services = 'Y'")
 # Getting the # of people who doesnt need Non IRCC Services
-query15 = ("SELECT COUNT(*) FORM Referral WHERE "+
+query15 = ("SELECT COUNT(*) FROM Referral WHERE "+
           "Referral.Non_IRCC_Services = 'N'")
+
+# Q1a
 
 cur.execute(query1)
 rows = cur.fetchall()
