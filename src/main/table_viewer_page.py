@@ -9,6 +9,8 @@ import missing_val_checker as mv
 import data_aggregator as da
 sys.path.append("../database")
 import beautiful_uploader as bu
+sys.path.append("../temhelp")
+from true_tem_handler import TrueTemplateHandler as tth
 
 class TableViewer(tk.Frame): 
     
@@ -64,10 +66,12 @@ class TableViewer(tk.Frame):
         '''
         Executes the checkers for mis matched data.
         '''
+        template_handler = tth.TrueTemplateHandler(self.template_name)
+        
         temp_mv = mv.MissingValChecker(self.template_name)
         temp_da = da.DataAggregator(self.template_name)
-        self.df = mv.execute(self.df, self.template_name)
-        self.df = da.execute(self.df,self.template_name) 
+        self.df = mv.execute(self.df, template_handler)
+        self.df = da.execute(self.df, template_handler) 
         
     def save_data(self):
         '''
