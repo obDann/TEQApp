@@ -118,9 +118,9 @@ class PredictiveModel(ABC):
 
     def _handle_until(self, until, increment_by):
         '''
-        (PredictiveModel, float, float) -> DataFrame
+        (PredictiveModel, float, float) -> Series
 
-        Returns a base x axis dataframe
+        Returns a base x axis series
         '''
         # if until is None, then set we return the original x axis df
         if until is None:
