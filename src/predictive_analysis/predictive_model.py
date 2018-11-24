@@ -36,7 +36,7 @@ class PredictiveModel(ABC):
 
 
     @abstractmethod
-    def get_model(self, until=None):
+    def get_model(self, until=None, increment_by=1.0):
         '''
         (PredictiveModel, int) -> (Dataframe, str)
 
@@ -55,7 +55,7 @@ class PredictiveModel(ABC):
         accurate the model is in a long term basis. The formula used to
         create this mape estimate is
 
-                     sum( |(Actual - Expected) / (Actual + 1)|)
+                     sum( |(Actual - Expected) / (|Actual| + 1)|)
                  ==================================================
                                          n
 
