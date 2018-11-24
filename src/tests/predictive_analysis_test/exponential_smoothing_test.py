@@ -19,7 +19,6 @@ class TestExponentialSmoothingModel(unittest.TestCase):
         self.my_esm = ExponentialSmoothingModel(the_df, x, y)
         self.model, self.col = self.my_esm.get_model()
 
-
     def test_optimal_alpha(self):
         actual_alpha = self.my_esm.get_optimal_alpha()
         expected_alpha = 0.6524414062500005
@@ -46,6 +45,10 @@ class TestExponentialSmoothingModel(unittest.TestCase):
         actual, col = self.my_esm.get_model(500, 1)
         self.assertTrue(actual[col].equals(self.model[self.col]))
 
+    def test_mape_estimate(self):
+        expected = 0.021901559589262393
+        actual = my_esm.get_mape_estimate(self.model, self.col)
+        self.assertEqual(actual, expected)
 
 if __name__ == '__main__':
     unittest.main(exit=False)
