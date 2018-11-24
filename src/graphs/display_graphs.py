@@ -11,6 +11,60 @@ from database_methods import *
 (conn, cur) = connection("client_data.db")
 total_clients = ("SELECT COUNT(*) FROM (SELECT DISTINCT " + 
                  "Client.Unique_ID_Value FROM Client)")
+
+# Q1
+def referral_age():
+    report_name = "Number of Clients in Different Age Groups"
+    # X axis
+    label = "Age Groups"
+    age_df = ["0-12","13-18","19-29","30-39","40-49","50-59","60-69",
+              "70-79","80-89","90+"]
+    age_df = pd.DataFrame(age_df, columns=[label])
+    
+    # Y axis
+    frequency = "People Count"
+    count_df = _get_age_groups()
+    count_df = pd.DataFrame(count_df, columns=[frequency])
+    
+    # Merge the two columns
+    df = pd.concat([age_df,count_df],axis=1)
+    
+    # Graph
+    #pie = PieGraph(df, label, frequency, title= report_name)
+    #pie.display()
+    
+def _get_age_groups():
+    '''
+    Gets the # of clients in each age group and store it into a list.
+    '''
+    age_query = ("SELECT (strftime('%Y', 'now') - " +
+    "strftime('%Y', Client.Date_Of_Birth)) - (strftime('%m-%d', 'now') < "
+    + "strftime('%m-%d', Client.Date_Of_Birth)) AS age from Client, Referral "
+    +"WHERE Client.Unique_ID_Value = Referral.Client_Unique_ID_Value AND ")
+    
+    
+    # Different age groups
+    age_groups = list()
+    age_groups.append("age > 0 AND age < 9")
+    age_groups.append("age >10 AND age < 19")
+    age_groups.append("age > 20 AND age < 29")
+    age_groups.append("age > 30 AND age < 39")
+    age_groups.append("age > 40 AND age < 49")
+    age_groups.append("age > 50 AND age < 59")
+    age_groups.append("age > 60 AND age < 69")
+    age_groups.append("age > 70 AND age < 79")
+    age_groups.append("age > 80 AND age < 89")
+    age_groups.append("age > 90")
+    
+    client_count = list()
+
+    for grp in age_groups:
+        cur.execute(age_query+grp)
+        result = cur.fetchall()
+        client_count.append(len(result))
+    
+    return client_count
+
 # Q2
 def num_clients(year, service):
     '''
