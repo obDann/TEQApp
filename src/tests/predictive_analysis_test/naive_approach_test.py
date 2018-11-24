@@ -49,6 +49,26 @@ class TestNaiveModel(unittest.TestCase):
         expected = 0.6666666666666666
         self.assertEqual(actual, expected)
 
+    def test_optional_params_big_n(self):
+        big_n = 50
+        my_model, col = self.naive_first.get_model(big_n)
+
+        # we expect that there are are 50 rows
+        actual_num_rows = my_model.shape[0]
+        self.assertEqual(actual_num_rows, big_n)
+
+        # we expect that there is a column full of 3s indicated by the column
+        naive_predict = {x: [3 for i in range(50)]}
+        expected_df = pd.DataFrame(naive_predict)
+        actual_predict = my_model[col]
+
+        self.assertTrue(actual_predict.equals(expected_df[x]))
+
+    def test_optional_params_mape(self):
+        my_model, col = self.naive_first.get_model(20, 1)
+        actual = self.naive_first.get_mape_estimate(my_model, col)
+        expected = 0.4023280423280423
+        self.assertEqual(actual, expected)
 
 if __name__ == '__main__':
     unittest.main(exit=False)
