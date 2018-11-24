@@ -69,6 +69,10 @@ class PredictiveModel(ABC):
         if (mod is None):
             # if not, get the model and the name
             mod, model_col = self.get_model()
+        # in the event that they inject a model with more x-axis variables,
+        # get the top n
+        mod = mod.head(self._num_entries)[:]
+
         # we want to have a copy of the model so that the original one is not
         # mutated
         mod = mod.head(self._num_entries)[:]
@@ -111,3 +115,23 @@ class PredictiveModel(ABC):
         if y_axis not in dataframe:
             msg = "'" + y_axis + "' is not in the dataframe passed"
             raise BadDataFrameError(msg)
+
+    def _handle_until(self, until, increment_by):
+        '''
+        (PredictiveModel, float, float) -> DataFrame
+
+        Returns a base x axis dataframe
+        '''
+        # if until is None, then set we return the original x axis df
+        if until is None:
+            return self._df[self._x_axis]
+        # otherwise
+        # get the first row's x-axis value
+        curr = float(self._df.head(1)[self._x_axis])
+        # we can make a list as our x values
+        my_x_list = []
+        while curr < (until):
+            my_x_list.append(curr)
+            curr += increment_by
+        x_axis_col = {self._x_axis: my_x_list}
+        return x_axis_col
