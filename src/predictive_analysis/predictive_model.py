@@ -40,11 +40,14 @@ class PredictiveModel(ABC):
         '''
         (PredictiveModel, int) -> (Dataframe, str)
 
-        Returns the originally injected DataFrame with an extra column. The
-        column name is the string in the tuple returned.
+        Returns the a DataFrame of the passed x, y, and an extra column.
+        The column name is the string in the tuple returned that indicates
+        where the predictive model lies.
 
-        The 'until' variable indicates how many entries there are in the
-        data to predict
+        'until' is the x-axis limit
+
+        The 'increment_by' variable indicates how the x axis will be
+        incrementing.
         '''
 
     def get_mape_estimate(self, mod=None, model_col=None):

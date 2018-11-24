@@ -24,8 +24,9 @@ class ExponentialSmoothingModel(PredictiveModel):
         '''
         (PredictiveModel, float, float) -> (Dataframe, str)
 
-        Returns the originally injected DataFrame of only the x and y values.
-        The column name is the string in the tuple returned.
+        Returns the a DataFrame of the passed x, y, and an extra column.
+        The column name is the string in the tuple returned that indicates
+        where the predictive model lies.
 
         The model will only have 1 extra entry, thus "until" will not be used
         '''

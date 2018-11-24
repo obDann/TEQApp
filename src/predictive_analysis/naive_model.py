@@ -22,8 +22,9 @@ class NaiveModel(PredictiveModel):
         '''
         (PredictiveModel, float, float) -> (Dataframe, str)
 
-        Returns the originally injected DataFrame with an extra column. The
-        column name is the string in the tuple returned.
+        Returns the a DataFrame of the passed x, y, and an extra column.
+        The column name is the string in the tuple returned that indicates
+        where the predictive model lies.
 
         'until' is the x-axis limit
 

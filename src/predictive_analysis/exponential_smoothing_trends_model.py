@@ -27,8 +27,9 @@ class ExponentialSmoothingTrendsModel(PredictiveModel):
         '''
         (PredictiveModel, float, float) -> (Dataframe, str)
 
-        Returns the originally injected DataFrame of only the x and y values.
-        The column name is the string in the tuple returned.
+        Returns the a DataFrame of the passed x, y, and an extra column.
+        The column name is the string in the tuple returned that indicates
+        where the predictive model lies.
 
         The model will only have 1 extra entry, thus "until" will not be used
         '''
@@ -150,23 +151,3 @@ class ExponentialSmoothingTrendsModel(PredictiveModel):
         self._trend_factor = previous_trend
         self._smooth = previous_smoothing
         return my_df, label
-
-
-x = "x axis"
-y = "y axis"
-the_data = {x: [i for i in range(1, 13)],
-            y: [6320, 6672, 6432, 6542, 6774, 6685, 6932, 6751, 6892, 7169,
-                7132, 7282]}
-the_df = pd.DataFrame(the_data)
-
-#for index, x, y in the_df.itertuples():
-    #print("this is the index " + str(index))
-    #print("this is a x " + str(x))
-    #print("this is a y " + str(y))
-my_esm = ExponentialSmoothingTrendsModel(the_df, x, y)
-
-al, be = my_esm.get_optimal_alpha_and_beta()
-
-#the_thing = my_esm._make_trends_model(0.218139805, 0.458614205)
-my_df, col = my_esm.get_model()
-#some_df = my_esm._make_trends_model(0.218139805, 0.458614205)
