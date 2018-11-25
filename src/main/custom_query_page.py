@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
-import random
+from random import *
 import csv
 import sqlite3
 import reports_page as rp
