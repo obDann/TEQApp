@@ -40,3 +40,4 @@ class LoginPage(tk.Frame):
         b3 = Button(self, text="Forgot Password?",
                     command=lambda: self.cont.display(ForgotPasswordPage))
         b3.grid(row=5, column=1, sticky=W, pady=6)
+

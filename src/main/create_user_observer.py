@@ -13,7 +13,7 @@ class CreateUserObserver(Observer):
     '''
     Observer object for button that creates a new user
     '''
-
+    
     def __init__(self):
         ''' (CreateUserObserver) -> None
 
@@ -69,3 +69,4 @@ class CreateUserObserver(Observer):
             msg = "Your account has been successfully created!"
 
         tkinter.messagebox.showinfo(title, msg)
+

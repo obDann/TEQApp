@@ -2,7 +2,9 @@ from Observer import Observer
 import client_db_functions
 from agency_page import *
 from teq_page import *
+
 from change_password_page import *
+
 
 class LoginObserver(Observer):
     '''
@@ -20,6 +22,7 @@ class LoginObserver(Observer):
         If all values are filled and correct, logs in
         the appropriate user
         '''
+
         username = obs.button.e1.get().lower()
         pw = obs.button.e2.get()
         check_temp, name, acc = (False, False), None, None

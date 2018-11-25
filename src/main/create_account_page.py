@@ -50,3 +50,4 @@ class CreateAccountPage(tk.Frame):
         b1 = Button(self, text="Back",
                     command=lambda: self.cont.display(mp.MainPage))
         b1.grid(row=6, column=1, sticky=W, pady=6)
+

@@ -1,0 +1,15 @@
+What was I working on?
+- Finished refactoring DataAggregator due to design conflicts
+- Finished unit testing for DataAggregator
+
+What am I working on now?
+- GUI for displaying the table
+- Tying it with the rest of the GUI app
+
+Am I blocked by anything?
+-Just had a term test on Saturday and had essays due for another class
+- Took me a while to find how to implement (similar to) tables into tkinter
+
+What are the main takeaways for me after this meeting?
+-Will be meeting with the client on Tuesday to check up on things to include in reporting
+-Completed recording for the code review
