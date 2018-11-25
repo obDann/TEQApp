@@ -47,7 +47,7 @@ class TestExponentialSmoothingModel(unittest.TestCase):
 
     def test_mape_estimate(self):
         expected = 0.021901559589262393
-        actual = my_esm.get_mape_estimate(self.model, self.col)
+        actual = self.my_esm.get_mape_estimate(self.model, self.col)
         self.assertEqual(actual, expected)
 
 if __name__ == '__main__':

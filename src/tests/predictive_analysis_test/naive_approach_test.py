@@ -51,6 +51,7 @@ class TestNaiveModel(unittest.TestCase):
 
     def test_optional_params_big_n(self):
         big_n = 50
+        x = "x axis"
         my_model, col = self.naive_first.get_model(big_n)
 
         # we expect that there are are 50 rows
