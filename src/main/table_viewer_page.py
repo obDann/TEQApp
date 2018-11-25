@@ -84,10 +84,6 @@ class TableViewer(tk.Frame):
         # Get the column name
         ind = self.options.get()
         
-        # For formatting where index 0 is empty and index 1 is column name
-        new_col.append("")
-        new_col.append(ind)
-        
         # Get the text input
         inputValue = self.text.get("1.0","end-1c")
         # Split them into a list
@@ -108,6 +104,16 @@ class TableViewer(tk.Frame):
         '''
         Uploads the saved data onto our database.
         '''
+        # This is to format the Dataframe so that it is in the right form
+        tth = TrueTemplateHandler(self.temp_name)
+        # Gets the header names
+        headers = tth.get_headers()
+        df.loc[-1] = headers
+        df.index += 1
+        df = df.sort.index()
+        df.loc[-1] = ['' for i in range (len(headers))]
+        df.index += 1
+        df = df.sort_index()
         
         beaut_up = BeautifulUploader()
         if (self.temp_name == "Client Profile"):
