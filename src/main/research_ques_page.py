@@ -34,9 +34,12 @@ class ResearchQuesPage(tk.Frame):
                     command=lambda: self.referral_age())
         b4.pack(side=TOP,fill=X)
         
-        b5 = Button(self, text="Client Reports", command=lambda:
-                    controller.set_page(cs.ClientSummaryReports, self.name))
+        b5 = Button(self, text="Referral", command=lambda: self.referral_cs())
         b5.pack(side=TOP,fill=X)
+        
+        b6 = Button(self, text="Client Reports", command=lambda:
+                    controller.set_page(cs.ClientSummaryReports, self.name))
+        b6.pack(side=TOP,fill=X)
         
         back = Button(self, text="Back",
                             command=lambda: controller.set_page(rp.ReportsPage, 
@@ -51,3 +54,6 @@ class ResearchQuesPage(tk.Frame):
     
     def referral_age(self):
         referral_age()
+    
+    def referral_cs(self):
+        referral_citizenship()

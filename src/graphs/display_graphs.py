@@ -65,6 +65,38 @@ def _get_age_groups():
     
     return client_count
 
+# Q1A
+
+def referral_citizenship():
+    '''
+    Displays the # of clients who requires referral for canadian citizenship
+    vs not needing it.
+    '''
+    report_name = "Referral for Canadian Citizenship"
+    x_axis = "Answer"
+    y_axis = "Referral Count"
+   
+    yes = ("SELECT COUNT(*) FROM Referral WHERE "+
+              "Referral.Canadian_Citizen_Intention = 'Y'")
+    no = ("SELECT COUNT(*) FROM Referral WHERE "+
+              "Referral.Canadian_Citizen_Intention = 'N'")
+    r1 = cur.execute(yes)
+    r1 = cur.fetchall()
+    r2 = cur.execute(no) 
+    r2 = cur.fetchall()
+    
+    if (r1 != [] and r2 != []):
+            count = list()
+            count.append(r1[0][0])
+            count.append(r2[0][0])
+            
+            a_df = pd.DataFrame(["Yes","No"],columns=[x_axis])
+            c_df = pd.DataFrame(count, columns=[y_axis])
+            
+            df = pd.concat([a_df, c_df],axis=1)
+            pie = PieGraph(df, x_axis, y_axis, title= report_name)
+            pie.display() 
+
 # Q2
 def num_clients(year, service, name):
     '''

@@ -14,7 +14,7 @@ class ClientSummaryReports(tk.Frame):
         Label(self, text="Choose Report").grid(row=1)
         
         # options menu to select type of report
-        report_choice = {"Client Agencies","Language Perference", 
+        report_choice = {"Client Types","Language Perference", 
                          "Ways of Communication"}
         self.report = StringVar(self)
         self.report.set("Options")
@@ -30,7 +30,7 @@ class ClientSummaryReports(tk.Frame):
         back.grid(row=5, column=1, sticky=W, pady=6)
     
     def check(self, report):
-        if (report == "Client Agencies"):
+        if (report == "Client Types"):
             self.year = 1
         self.show_options()    
 
@@ -56,7 +56,7 @@ class ClientSummaryReports(tk.Frame):
         report = self.report.get()
         if (report == "Language Perference"):
             client_language_pref()
-        elif (report == "Client Agencies"):
-            client_agency(str(self.year_c), str(self.month_c))
+        elif (report == "Client Types"):
+            client_types(str(self.year_c), str(self.month_c))
         elif (report == "Ways of Communication"):
             phone_vs_email_usage()

@@ -23,18 +23,19 @@ def client_language_pref():
 
     cur.execute(query)
     result = cur.fetchall()
-
-    df = pd.DataFrame(result)
-    df.rename(columns={0: x_axis}, inplace=True);
-    df.rename(columns={1: y_axis}, inplace=True);
     
-    lang = list()
-    for row in result:
-        lang.append(row[0])
+    if (result != []):
+        df = pd.DataFrame(result)
+        df.rename(columns={0: x_axis}, inplace=True);
+        df.rename(columns={1: y_axis}, inplace=True);
     
-    # Graph
-    p = PieGraph(df, x_axis, y_axis, report_name)
-    p.display()
+        lang = list()
+        for row in result:
+            lang.append(row[0])
+    
+        # Graph
+        p = PieGraph(df, x_axis, y_axis, report_name)
+        p.display()
 
 def phone_vs_email_usage():
     '''
@@ -57,37 +58,41 @@ def phone_vs_email_usage():
     cur.execute(phone_q)
     phone = cur.fetchall()
     
-    # Make Dataframes
-    p_df = pd.DataFrame(phone, columns=[ways[0]])
-    e_df = pd.DataFrame(email, columns=[ways[1]])
+    if (email != [] and phone != []):
+        list_count = list()
+        list_count.append(phone[0])
+        list_count.append(email[0])
+        
+        # Construct the dataframe
+        ways = pd.DataFrame(ways,columns=[x_axis])
+        count = pd.DataFrame(list_count,columns=[y_axis])
+        df = pd.concat([ways, count],axis=1)
     
-    # Merge Dataframes
-    df = pd.concat([p_df, e_df],axis=1)
+        hist = Histogram(df, x_axis, y_axis, report_name)
+        hist.display(ways, 'bar')
     
-    hist = Histogram(df, x_axis, y_axis, report_name)
-    hist.display(ways, 'bar')
-    
-def client_agency(year, month):
+def client_types(year, month):
     '''
-    Given the year and the month, display the client count from each agencies.
+    Given the year and the month, display the client count from each type.
     '''
-    report_name = "Client Agencies"
+    report_name = "Client Types"
     x_axis = "Agencies"
     y_axis = "Number of Clients"
-    query = ("SELECT Client.Agency, COUNT(*) FROM Client WHERE "+ 
+    query = ("SELECT Client.Unique_ID_Type, COUNT(*) FROM Client WHERE "+ 
              "(strftime('%Y', Client.Processing_Details) = '"+ year +
              "' AND strftime('%m', Client.Processing_Details)  = '"+ month + "')" 
-             " GROUP BY Client.Agency")
+             " GROUP BY Client.Unique_ID_Type")
     
     cur.execute(query)
     result = cur.fetchall()
-    # Get the list of Agencies
-    agencies = list()
-    for r in result:
-        agencies.append(r[0])
-    df = pd.DataFrame(result, columns=[x_axis, y_axis])
+    if (result is not None or result != []):
+        # Get the list of client types   
+        types = list()
+        for r in result:
+            types.append(r[0])
+        df = pd.DataFrame(result, columns=[x_axis, y_axis])
     
-    # Graph
-    hist = Histogram(df, x_axis, y_axis, report_name)
-    hist.display(agencies, 'bar')
+        # Graph
+        hist = Histogram(df, x_axis, y_axis, report_name)
+        hist.display(types, 'bar')
     
