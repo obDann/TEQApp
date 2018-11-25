@@ -31,7 +31,7 @@ class ExponentialSmoothingModel(PredictiveModel):
         The model will only have 1 extra entry, thus "until" will not be used
         '''
         # we want to get the most optimal alpha
-        alpha = self._get_optimal_alpha()
+        alpha = self.get_optimal_alpha()
 
         # and then, we want to get our original model with an afiliated list
         base_model, col = self._make_smoothing_model_for_optimizing(alpha)
@@ -53,7 +53,7 @@ class ExponentialSmoothingModel(PredictiveModel):
         base_model.reset_index(drop=True)
         return base_model, col
 
-    def _get_optimal_alpha(self):
+    def get_optimal_alpha(self):
         '''
         (PredictiveModel) -> float
 
