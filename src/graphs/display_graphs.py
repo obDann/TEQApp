@@ -30,7 +30,7 @@ def referral_age():
     df = pd.concat([age_df,count_df],axis=1)
     
     # Graph
-    pie = PieGraph(df, label, frequency, title= report_name)
+    pie = PieGraph(df, label, frequency, report_name)
     pie.display()
     
 def _get_age_groups():
