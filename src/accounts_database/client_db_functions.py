@@ -19,6 +19,36 @@ def insert_user(username, email, name, password, account_type):
         return True
     return False
 
+def check_duplicate(username, email):
+    '''
+    Checks if there are duplicate keys which should be unique in the database.
+    Returns list, bool for success, username, email
+    '''
+    (conn, cur) = database_methods.connection('users.db')
+    query1 = "SELECT Username from User where Username = ?"
+    fields1 = (username,)
+    query2 = "SELECT Email from User where Email = ?"
+    fields2 = (email,)
+    
+    try:
+        cur.execute(query1, fields1)
+        usernames = cur.fetchall()
+        cur.execute(query2, fields2)
+        emails = cur.fetchall()
+        error = 0
+    except sqlite3.Error as e:
+        print(format(e))
+        error = 1
+
+    if (usernames and emails):
+        return [False, usernames[0][0], emails[0][0]]
+    elif (usernames):
+        return [False, usernames[0][0], ""]
+    elif (emails):
+        return [False, "", emails[0][0]]
+    else:
+        return [True, "", ""]
+
 def insert_account(username, account_type):
     if (account_type == "Agency"):
         status = "Active"
