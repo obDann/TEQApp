@@ -53,7 +53,7 @@ class CustomQueryPage(tk.Frame):
                 for line in result:
                     writer.writerow(line)                
         except sqlite3.Error as e:
-            print("Invalid SQL input, with the message: " + e)
+            print("Invalid SQL Command.")
         # Finish message
         print("Finished executing query.")
         
