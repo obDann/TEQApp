@@ -98,7 +98,7 @@ class TableViewer(tk.Frame):
         # Remove the last element since that is the dtype
         new_col = pd.DataFrame(new_col[:len(new_col)-1], columns=[ind])
         # Add it back to the original dataFrame
-        self.df = self.df.update(new_col)
+        self.df.update(new_col)
     
     def upload_data(self):
         '''
@@ -108,12 +108,12 @@ class TableViewer(tk.Frame):
         tth = TrueTemplateHandler(self.temp_name)
         # Gets the header names
         headers = tth.get_headers()
-        df.loc[-1] = headers
-        df.index += 1
-        df = df.sort.index()
-        df.loc[-1] = ['' for i in range (len(headers))]
-        df.index += 1
-        df = df.sort_index()
+        self.df.loc[-1] = headers
+        self.df.index += 1
+        self.df = self.df.sort_index()
+        self.df.loc[-1] = ['' for i in range (len(headers))]
+        self.df.index += 1
+        self.df = self.df.sort_index()
         
         beaut_up = BeautifulUploader()
         if (self.temp_name == "Client Profile"):
