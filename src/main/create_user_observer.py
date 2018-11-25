@@ -40,7 +40,7 @@ class CreateUserObserver(Observer):
             emailer = AccountCreationEmailer()
             emailer.send(email)
             obs.page.cont.display(mp.MainPage)
-            send.message(error, success)
+            self.message(error, success)
         else:
             error, success = True, False
             self.message(error, success, username, email, name, pw)
