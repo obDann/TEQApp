@@ -13,9 +13,9 @@ Changes and updates:
  with the group
 
 --------------------------------------------------------------------------------
-1.   As a TEQ employee, Mike James, I want to make only authorized agency  
-     accounts able to access all of the uploaded data so that we can maintain 
-     the privacy of the organizations
+1.   As a TEQ employee, Mike James, I want to be able to have the TEQ and 
+     agencies create their specialized account so that agencies can maintain 
+     their private data, and the TEQ can use their data.
 
 1a.  As a TEQ employee Mike James, I want to email agencies their certified
      account so that agencies are informed that they have an account to
