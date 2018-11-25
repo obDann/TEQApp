@@ -68,8 +68,8 @@ def phone_vs_email_usage():
         count = pd.DataFrame(list_count,columns=[y_axis])
         df = pd.concat([ways, count],axis=1)
     
-        hist = Histogram(df, x_axis, y_axis, report_name)
-        hist.display(ways, 'bar')
+        p = PieGraph(df, x_axis, y_axis , report_name)
+        p.display()
     
 def client_types(year, month):
     '''
