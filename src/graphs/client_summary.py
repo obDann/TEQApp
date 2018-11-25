@@ -75,8 +75,8 @@ def client_agency(year, month):
     x_axis = "Agencies"
     y_axis = "Number of Clients"
     query = ("SELECT Client.Agency, COUNT(*) FROM Client WHERE "+ 
-             "(strftime('%Y', Client.Processing_Details) = "+ year +
-             " AND strftime('%m', Client.Processing_Details)  = "+ month + ")" 
+             "(strftime('%Y', Client.Processing_Details) = '"+ year +
+             "' AND strftime('%m', Client.Processing_Details)  = '"+ month + "')" 
              " GROUP BY Client.Agency")
     
     cur.execute(query)

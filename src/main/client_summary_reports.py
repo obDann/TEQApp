@@ -57,6 +57,6 @@ class ClientSummaryReports(tk.Frame):
         if (report == "Language Perference"):
             client_language_pref()
         elif (report == "Client Agencies"):
-            client_agency(self.year_c, str(self.month_c))
+            client_agency(str(self.year_c), str(self.month_c))
         elif (report == "Ways of Communication"):
             phone_vs_email_usage()

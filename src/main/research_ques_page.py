@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import *
 import reports_page as rp
 import service_reports as sr
-import client_summary as cs
+import client_summary_reports as cs
 import sys
 sys.path.insert(0, "../graphs")
 from display_graphs import *
@@ -35,7 +35,8 @@ class ResearchQuesPage(tk.Frame):
         b4.pack(side=TOP,fill=X)
         
         b5 = Button(self, text="Client Reports", command=lambda:
-                    controller.set_page(cs.ClientSummary, self.name))
+                    controller.set_page(cs.ClientSummaryReports, self.name))
+        b5.pack(side=TOP,fill=X)
         
         back = Button(self, text="Back",
                             command=lambda: controller.set_page(rp.ReportsPage, 
