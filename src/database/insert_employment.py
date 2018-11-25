@@ -39,7 +39,7 @@ def insert_short_term(row_values, service_id):
     '''
     Inserts a row in the Short_Term_Intervention table.
     '''
-    i = 36
+    i = 35
     end = 44
     while (i < end):
         short_term_id = database_methods.get_id("Short_Term_Intervention") + 1
