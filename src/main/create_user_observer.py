@@ -35,12 +35,15 @@ class CreateUserObserver(Observer):
         if (username != "" and re.match(r"[^@]+@[^@]+\.[^@]+", email) and
                 name != "" and pw != ""):
             error = False
-            success = client_db_functions.insert_user(username, email, name,
-                                                     pw, acc)
-            emailer = AccountCreationEmailer()
-            emailer.send(email)
-            obs.page.cont.display(mp.MainPage)
-            self.message(error, success)
+            # check duplicate and return boolean for success and duplicates
+            success = client_db_functions.check_duplicate(username, email)
+            if (success[0]):
+                client_db_functions.insert_user(username, email, name, pw, acc)
+                emailer = AccountCreationEmailer()
+                emailer.send(email)
+                obs.page.cont.display(mp.MainPage)
+            self.message(error, success[0], username = success[1],
+                         email = success[2])
         else:
             error, success = True, False
             self.message(error, success, username, email, name, pw)
@@ -65,8 +68,16 @@ class CreateUserObserver(Observer):
                 elif entered_fields[i] == "":
                     msg += fields[i] + "\n"
         else:
-            title = "Confirm"
-            msg = "Your account has been successfully created!"
+            if (success):
+                title = "Confirm"
+                msg = "Your account has been successfully created!"
+            else:
+                title = "Error"
+                msg = "The following fields are already in use:\n"
+                if (username != ""):
+                    msg += "Username\n"
+                if (email != ""):
+                    msg += "Email\n"
 
         tkinter.messagebox.showinfo(title, msg)
 
