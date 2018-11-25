@@ -62,7 +62,9 @@ Note that the stinks above is not limited to the above as members are able to ma
 * For Custom Query, the user should have a back button if the user doesn't want to handle any commands, or mistakenly clicked into this page
 
 ### Philip to Riaz
-
+* Missing Value Checker contains too many comments, could reduce some of the unnecessary ones, but the code is easy to understand. In both the execute and  parse_columns method.
+* There are variables that are not clear, for example empty_fields should be code and all the variable (var1, var2.. etc) should be code variable instead.
+    * Not clean code, properly need to reformat the layout of your code.
 ### Riaz to Susan
 
 ### Susan to David
@@ -74,7 +76,8 @@ Note that the stinks above is not limited to the above as members are able to ma
 ### Dann to Philip
 
 ### Philip to Riaz
-
+* The graphs that he made, Histogram, Scatter plot and Line graph should be refactored to be line graph,histogram and pie graph because we couldn't find usage of scatter plot and pie graph is better for comparison.
+    * Some of the variables in the parameters were not needed, so they are removed during the refactoring
 ### Riaz to Susan
 
 ### Susan to David
