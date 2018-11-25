@@ -33,23 +33,8 @@ def client_language_pref():
         lang.append(row[0])
     
     # Graph
-    #hist = Histogram(df, x_axis, y_axis, report_name)
-    #hist.display(lang, 'bar')
-    
-def client_has_child():
-    '''
-    Displays how many child/children does clients have.
-    '''
-    report_name = "Number of Clients with Children"
-    x_axis = "Number of Children"
-    y_axis = "Client Count"  
-    
-    query = ("SELECT Official_Language_Preference ,COUNT(*) FROM Client "+
-             "GROUP BY Client.Official_Language_Preference")
-
-    cur.execute(query)
-    result = cur.fetchall()
-    pass
+    p = PieGraph(df, x_axis, y_axis, report_name)
+    p.display()
 
 def phone_vs_email_usage():
     '''
@@ -79,10 +64,30 @@ def phone_vs_email_usage():
     # Merge Dataframes
     df = pd.concat([p_df, e_df],axis=1)
     
-    #hist = Histogram(df, x_axis, y_axis, report_name)
-    #hist.display(ways, 'bar')
+    hist = Histogram(df, x_axis, y_axis, report_name)
+    hist.display(ways, 'bar')
     
-if __name__ == "__main__":
-    #client_language_pref()
-    #client_summary()
-    #phone_vs_email_usage()
+def client_agency(year, month):
+    '''
+    Given the year and the month, display the client count from each agencies.
+    '''
+    report_name = "Client Agencies"
+    x_axis = "Agencies"
+    y_axis = "Number of Clients"
+    query = ("SELECT Client.Agency, COUNT(*) FROM Client WHERE "+ 
+             "(strftime('%Y', Client.Processing_Details) = "+ year +
+             " AND strftime('%m', Client.Processing_Details)  = "+ month + ")" 
+             " GROUP BY Client.Agency")
+    
+    cur.execute(query)
+    result = cur.fetchall()
+    # Get the list of Agencies
+    agencies = list()
+    for r in result:
+        agencies.append(r[0])
+    df = pd.DataFrame(result, columns=[x_axis, y_axis])
+    
+    # Graph
+    hist = Histogram(df, x_axis, y_axis, report_name)
+    hist.display(agencies, 'bar')
+    

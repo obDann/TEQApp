@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import *
 import reports_page as rp
 import service_reports as sr
+import client_summary as cs
 import sys
 sys.path.insert(0, "../graphs")
 from display_graphs import *
@@ -29,6 +30,13 @@ class ResearchQuesPage(tk.Frame):
                     command=lambda: self.transport_report())
         b3.pack(side=TOP,fill=X)
         
+        b4 = Button(self, text="Referral Age Groups",
+                    command=lambda: self.referral_age())
+        b4.pack(side=TOP,fill=X)
+        
+        b5 = Button(self, text="Client Reports", command=lambda:
+                    controller.set_page(cs.ClientSummary, self.name))
+        
         back = Button(self, text="Back",
                             command=lambda: controller.set_page(rp.ReportsPage, 
                                                              self.name))
@@ -39,3 +47,6 @@ class ResearchQuesPage(tk.Frame):
     
     def transport_report(self):
         tran_pie()
+    
+    def referral_age(self):
+        referral_age()
