@@ -21,5 +21,18 @@ def insert_CLB_level(column_values, row_values, client_id, course_code):
             val.append(row_values[i])
             insert_helper.insert_row(val, "Client_CLB_Level")
         i += 1
-            
-            
+
+def update_client_profile(client_id, row_values):
+    index_list = [(0, 1), (4, 5)]
+    if (database_methods.check_id(client_id, 'client_data.db', "Client",
+                                      "Unique_ID_Value")):
+        insert_general.update_client_profile(row_values, client_id, index_list)
+
+def update_child(row_values, client_id):
+    lst = ["Age", "Type_Of_Care"]
+    table = "Child"
+    prim = "(Client_Unique_ID_Value, Child)"
+    if (database_methods.check_id(client_id, 'client_data.db', "Client",
+                                      "Unique_ID_Value")):  
+        insert_general.update_child(row_values, client_id, lst, table, prim, 1,
+                                    18, 27)
