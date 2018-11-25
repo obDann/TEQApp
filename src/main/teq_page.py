@@ -1,9 +1,8 @@
 import tkinter as tk
 from tkinter import *
-import client_db_functions
 from console import *
 import main_page as mp
-import custom_query_page as cq
+import reports_page as rp
 from login_page import *
 from create_account_page import *
 from agency_page import *
@@ -17,9 +16,9 @@ class TEQPage(tk.Frame):
         label = tk.Label(self, text="Hello " + name +
                          ". What would you like to do?")
         label.pack(side=TOP,fill=X)
-        
-        b1 = Button(self, text="Custom Query",
-                    command=lambda: self.cont.set_page(cq.CustomQueryPage, 
+
+        b1 = Button(self, text="Generate Reports", 
+                    command=lambda: self.cont.set_page(rp.ReportsPage, 
                                                        name))
         b1.pack(side=TOP,fill=X)
         

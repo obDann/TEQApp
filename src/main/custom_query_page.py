@@ -4,7 +4,7 @@ from tkinter import ttk
 import random
 import csv
 import sqlite3
-import teq_page as tp
+import reports_page as rp
 
 class CustomQueryPage(tk.Frame):
     def __init__(self, parent, controller, name):
@@ -27,9 +27,8 @@ class CustomQueryPage(tk.Frame):
                                 
         b1.pack(side=TOP,fill=X, padx= 5, pady= 5)
     
-        back = tk.Button(self, text="Back",
-                         command=lambda: controller.set_page(tp.TEQPage, 
-                                                             self.name))
+        back = tk.Button(self, text="Back",command=lambda: 
+                         controller.set_page(rp.ReportsPage, self.name))
         back.pack(side=TOP,fill=X, padx = 5, pady=5) 
     
     def export_to_csv(self):
