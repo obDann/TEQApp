@@ -193,7 +193,10 @@ class BeautifulUploader(BeautifulUploaderAbstract):
             row = df.iloc[i]
             if (database_methods.check_id(key, 'client_data.db', "Client_Enrolment",
                                           ("(Course_Code, " + 
-                                          "Client_Unique_ID_Value)"))):
+                                          "Client_Unique_ID_Value)")) and 
+                not(database_methods.check_id(key, 'client_data.db', "Client_Exit",
+                                          ("(Course_Code, " + 
+                                          "Client_Unique_ID_Value)")))):
                 insert_client_exit.insert_client_exit(row, client_id, 
                                                       course_code)
                 insert_client_exit.insert_CLB_level(column, row, client_id,
