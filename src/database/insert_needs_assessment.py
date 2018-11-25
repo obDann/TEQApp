@@ -6,7 +6,7 @@ import pandas as pd
 
 db = 'client_data.db'
 
-def insert_client(column_values, row_values, id_value, agency):
+def insert_client(column_values, row_values, id_value):
     '''
     Check if client has a row in Client table (aka client has filled out the
     Client Profile file). If not, insert missing data into Client table.
@@ -17,11 +17,10 @@ def insert_client(column_values, row_values, id_value, agency):
         # extract the data and insert a row into Client table
         index = [(0, 1), (2, 5), (8, 9)]
         val = database_methods.fetch_values_list(row_values, index, [])
-        val.append(agency)
         # insert into Client table
         query = ("INSERT INTO Client (Processing_Details, Unique_ID_Type, " + 
                  "Unique_ID_Value, Date_Of_Birth, Official_Language_Preference"
-                 + ", Agency) VALUES (?, ?, ?, ?, ?, ?);")
+                 + " VALUES (?, ?, ?, ?, ?, ?);")
 
         database_methods.execute_query(query, val, 'client_data.db')
     else:
@@ -37,14 +36,14 @@ def insert_client(column_values, row_values, id_value, agency):
         database_methods.update_query(query, db)        
         
     
-def insert_referral(column_values, row_values, id_value, agency):
+def insert_referral(column_values, row_values, id_value):
     '''
     Inserts data into the Referral table. Gets client unique identifier value
     and a dataframe read_excel object with iloc[row]. Returns 1 if information
     has been inserted and 0 otherwise.
     '''
     # check client has been inserted already
-    insert_client(column_values, row_values, id_value, agency)
+    insert_client(column_values, row_values, id_value)
     index = [(1, 2), (5, 8), (9, 11), (39, 41), (47, 48), (68, 69), 
              (89, 92)]    
     if (not(database_methods.check_id(id_value, db, "Referral",

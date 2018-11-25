@@ -7,6 +7,8 @@ install:
     - pip3 install sendgrid
     - pip3 install xlrd
     - pip3 install scipy
+    - pip3 install passlib
+    - pip3 install matplotlib
 script:
     - cd src/tests
     - python3 -m unittest missing_val_checker_test

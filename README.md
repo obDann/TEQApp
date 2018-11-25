@@ -26,7 +26,8 @@ Within the next few sprints, it will be expected of us to be tying the GUI with 
 - `pip3 install xlrd`
 - `pip3 install passlib`
 - `pip3 install scipy`
- 
+- `pip3 install matplotlib`
+
 **Dependencies used**:
 - [sqlite3](https://www.sqlite.org/download.html)
 - tkinter (Should be pre-installed with Python3)

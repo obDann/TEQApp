@@ -9,7 +9,7 @@ def run():
     
     # Run console
     app = console.TeqApp()
-    app.geometry('400x300')
+    app.geometry('500x300')
     app.title("TEQLIP Application")
     app.mainloop()
 

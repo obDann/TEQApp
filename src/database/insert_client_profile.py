@@ -30,7 +30,7 @@ def insert_address(column_values, row_values):
         database_methods.update_query(query, "client_data.db")
         
 
-def insert_client(column_values, row_values, address_id, agency):
+def insert_client(column_values, row_values, address_id):
     '''
     Inserts data into the Client table. Takes in a dataframe read_excel 
     object with iloc[row], address id, and agency name.
@@ -44,9 +44,8 @@ def insert_client(column_values, row_values, address_id, agency):
         v1 = database_methods.fetch_values(0, 7, row_values, [])
         # get the values of columns 16-17
         val = database_methods.fetch_values(15, 17, row_values, v1)
-        # add address_id and agency
+        # add address_id
         val.append(address_id)
-        val.append(agency)
     
         insert_helper.insert_row(val, "Client")
     else:
