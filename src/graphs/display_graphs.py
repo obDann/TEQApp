@@ -66,7 +66,7 @@ def _get_age_groups():
     return client_count
 
 # Q2
-def num_clients(year, service):
+def num_clients(year, service, name):
     '''
     Displays a line graph of how many times a client accessed a service in 
     each month of a given year.
@@ -89,19 +89,21 @@ def num_clients(year, service):
         # set up dataframe
         cur.execute(num_clients)
         rows = cur.fetchall()
-        total = rows[0][0]
-        lst.append([month, total])
+        if (len(rows) > 0):
+            total = rows[0][0]
+            lst.append([month, total])
     
     df = pd.DataFrame(lst)
     df.rename(columns={0: 'Month', 1: 'Frequency'}, inplace=True);
 
     # display a line graph
-    l = LineGraph(df, 'Month', 'Frequency', 'Number of Clients')
+    l = LineGraph(df, 'Month', 'Frequency', 'Number of Clients who attended ' 
+                  + name + ' in ' + year)
     l.display()
     
 
 # Q3
-def age_histogram(service):
+def age_histogram(service, name):
     '''
     Displays a histogram of the ages of clients accessing a given service.
     '''
@@ -117,17 +119,18 @@ def age_histogram(service):
     cur.execute(age)
     rows = cur.fetchall()
     lst = []
-    for row in rows:
-        lst.append(row[0])
+    if (len(rows) > 0):
+        for row in rows:
+            lst.append(row[0])
     
-    df = pd.DataFrame(lst)
-    df.rename(columns={0: 'Age'}, inplace=True);
-    # bins for grouping the age
-    bins = [0,10,20,30,40,50,60,70,80,90,100]
+        df = pd.DataFrame(lst)
+        df.rename(columns={0: 'Age'}, inplace=True);
+        # bins for grouping the age
+        bins = [0,10,20,30,40,50,60,70,80,90,100]
 
-    # create the histogram
-    hist = Histogram(df, 'Age', 'Frequency', 'Age of Clients in ' + service)
-    hist.display(bins, 'bar')
+        # create the histogram
+        hist = Histogram(df, 'Age', 'Frequency', 'Age of Clients in ' + name)
+        hist.display(bins, 'bar')
     
     
 def child_pie():
@@ -145,11 +148,17 @@ def child_pie():
     lst = []
     cur.execute(lang_clients)
     rows = cur.fetchall()
-    has_child = rows[0][0]
+    if (len(rows) > 0):
+        has_child = rows[0][0]
+    else:
+        has_child = 0
     lst.append(["Has Children", has_child])
     cur.execute(total_clients)
     rows = cur.fetchall()
-    no_child = rows[0][0] - has_child
+    if (len(rows) > 0):
+        no_child = rows[0][0] - has_child
+    else:
+        no_child = 0
     lst.append(["No Children", no_child])
     df = pd.DataFrame(lst)
     df.rename(columns={0: 'Index', 1: 'Frequency'}, inplace=True);
@@ -181,21 +190,21 @@ def tran_pie():
     lst = []
     cur.execute(no_trans)
     rows = cur.fetchall()
-    no = rows[0][0]
+    if (len(rows) > 0):
+        no = rows[0][0]
+    else:
+        no = 0
     lst.append(["No Transportation", no])
     cur.execute(yes_trans)
     rows = cur.fetchall()
-    yes = rows[0][0]
+    if (len(rows) > 0):
+        yes = rows[0][0]
+    else:
+        yes = 0
     lst.append(["Transportation", yes])
     df = pd.DataFrame(lst)
     df.rename(columns={0: 'Index', 1: 'Frequency'}, inplace=True);
     
     # create a pie graph
     p = PieGraph(df, 'Index', 'Frequency', "Clients Who Have Transportation")
-    p.display()    
-
-if __name__ == "__main__":
-    #child_pie()
-    #tran_pie()
-    #age_histogram("Community_Connections")
-    #num_clients("2018", "Community_Connections")
+    p.display()
