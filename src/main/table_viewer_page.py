@@ -5,20 +5,22 @@ import agency_page as ap
 from data_viewer_page import *
 import sys
 sys.path.append("../commands")
-import missing_val_checker as mv
-import data_aggregator as da
+from missing_val_checker import MissingValChecker
+from data_aggregator import DataAggregator
 sys.path.append("../database")
 import beautiful_uploader as bu
 sys.path.append("../temhelp")
-from true_tem_handler import TrueTemplateHandler as tth
+from true_tem_handler import TrueTemplateHandler
 
 class TableViewer(tk.Frame): 
     
-    def __init__(self, parent, controller, data_frame, temp_name, month, year):
-        tk.Frame.__init__(self, parent)
+    # from https://stackoverflow.com/questions/44798950/how-to-display-a-dataframe-in-tkinter
+    def __init__(self, parent, controller, data_frame, temp_name, month, year, name):
         self.controller = controller
+        tk.Frame.__init__(self, parent)
         self.df = data_frame
         self.temp_name = temp_name
+        self.name = name
         # month and year for some templates
         self.m = month
         self.y = year
@@ -51,7 +53,7 @@ class TableViewer(tk.Frame):
         # Uploads the data to db and 
         back = tk.Button(self, text="Back",
                          command=lambda: [self.upload_data(),
-                                      self.controller.set_page(ap.AgencyPage)])
+                                      self.controller.set_page(ap.AgencyPage, self.name)])
         back.pack()        
    
     def show_option(self):
@@ -66,12 +68,12 @@ class TableViewer(tk.Frame):
         '''
         Executes the checkers for mis matched data.
         '''
-        template_handler = tth.TrueTemplateHandler(self.template_name)
+        template_handler = TrueTemplateHandler(self.temp_name)
         
-        temp_mv = mv.MissingValChecker(self.template_name)
-        temp_da = da.DataAggregator(self.template_name)
+        mv = MissingValChecker(self.temp_name)
+        da = DataAggregator(self.temp_name)
         self.df = mv.execute(self.df, template_handler)
-        self.df = da.execute(self.df, template_handler) 
+        new_df = da.execute(self.df, template_handler) 
         
     def save_data(self):
         '''

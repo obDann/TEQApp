@@ -109,26 +109,14 @@ def parse_all_columns(df, template):
     # Gets the column names to a list
     header_name = template.get_headers()
     
-    for col_i in range(len(header_name)):
+    for col_i in range(len(header_name)-1):
         column = df.get(header_name[col_i])
         if (column is not None):
             # Gets the Regex (has regex, regex value, example)
-            regex = template.handle_template()
+            regex = template.handle_template(header_name[col_i])
             if (regex[1] != ""):
                 # Loop through all the fields
                 for row in range(len(df.index)):
-                    # getting the regex from the list
-                    p = re.compile(regex[1])
-                    # Checks each field to the matching regex
-                    if (p.match(str(df.iat[row, col_i])) is None):
-                        # Get a list of drop down values
-                        dropdown = template.get_dropdown_values(column)
-                        if (len(dropdown) != 0):
-                        # If its not in the drop down list
-                            if (column[row] not in dropdown):
-                                misformated.append((header_name[col_i], row))
-                        else:
-                            # Append to the misformated list
-                            misformated.append((header_name[col_i], row))
+                        misformated.append((header_name[col_i], row))
             
     return misformated
