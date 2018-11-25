@@ -85,7 +85,7 @@ def client_types(year, month):
     
     cur.execute(query)
     result = cur.fetchall()
-    if (result is not None or result != []):
+    if (result != []):
         # Get the list of client types   
         types = list()
         for r in result:
