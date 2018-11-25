@@ -8,7 +8,7 @@ sys.path.append("../commands")
 from missing_val_checker import MissingValChecker
 from data_aggregator import DataAggregator
 sys.path.append("../database")
-import beautiful_uploader as bu
+from beautiful_uploader import BeautifulUploader
 sys.path.append("../temhelp")
 from true_tem_handler import TrueTemplateHandler
 
@@ -109,18 +109,20 @@ class TableViewer(tk.Frame):
         Uploads the saved data onto our database.
         '''
         
-        beaut_up = bu.BeautifulUploader()
+        beaut_up = BeautifulUploader()
         if (self.temp_name == "Client Profile"):
             beaut_up.upload_client_profile(self.df)
-        elif (self.temp_name == "Needs Assessment & Referrals"):
+        if (self.temp_name == "Needs Assessment & Referrals"):
             beaut_up.upload_needs_referrals(self.df)
-        elif (self.temp_name == "Community Connections"):
+        if (self.temp_name == "Community Connections"):
             beaut_up.upload_community_connections(self.df, self.m , self.y)
-        elif (self.temp_name == "Employment Related Services"):
+        if (self.temp_name == "Information and Orientation"):
+            beaut_up.upload_info_ori(self.df, self.m , self.y)
+        if (self.temp_name == "Employment Related Services"):
             bu.upload_info_ori(self.df, self.m , self.y)
-        elif (self.temp_name == "Language Training - Client Enrol"):
+        if (self.temp_name == "Language Training - Client Enrol"):
             beaut_up.upload_employment_service(self.df, self.m , self.y)
-        elif (self.temp_name == "Language Training - Course Setup"):
+        if (self.temp_name == "Language Training - Course Setup"):
             beaut_up.upload_LT_client_enrol(self.df)
-        elif (self.temp_name == "Language Training - Client Exit"):
+        if (self.temp_name == "Language Training - Client Exit"):
             beaut_up.upload_LT_course_setup(self.df)
