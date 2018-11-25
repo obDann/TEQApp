@@ -51,7 +51,7 @@ class TableViewer(tk.Frame):
         b2.pack()
         
         # Uploads the data to db and 
-        back = tk.Button(self, text="Back",
+        back = tk.Button(self, text="Upload",
                          command=lambda: [self.upload_data(),
                                       self.controller.set_page(ap.AgencyPage, self.name)])
         back.pack()        
@@ -125,10 +125,10 @@ class TableViewer(tk.Frame):
         if (self.temp_name == "Information and Orientation"):
             beaut_up.upload_info_ori(self.df, self.m , self.y)
         if (self.temp_name == "Employment Related Services"):
-            bu.upload_employment_service(self.df, self.m , self.y)
+            beaut_up.upload_employment_service(self.df, self.m , self.y)
         if (self.temp_name == "Language Training - Client Enrol"):
             beaut_up.upload_LT_client_enrol(self.df)
         if (self.temp_name == "Language Training - Course Setup"):
-            beaut_up.upload_LT_client_setup(self.df)
+            beaut_up.upload_LT_course_setup(self.df)
         if (self.temp_name == "Language Training - Client Exit"):
-            beaut_up.upload_LT_course_exit(self.df)
+            beaut_up.upload_LT_client_exit(self.df)
