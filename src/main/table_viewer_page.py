@@ -79,9 +79,13 @@ class TableViewer(tk.Frame):
         DataFrame.
         '''
         new_col = list()
-                    
         # Get the column name
         ind = self.options.get()
+        
+        # For formatting where index 0 is empty and index 1 is column name
+        new_col.append("")
+        new_col.append(ind)
+        
         # Get the text input
         inputValue = self.text.get("1.0","end-1c")
         # Split them into a list
