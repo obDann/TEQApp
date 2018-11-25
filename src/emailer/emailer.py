@@ -1,14 +1,15 @@
 from abc import ABC, abstractmethod
 
+
 class Emailer(ABC):
     '''
     Sends emails accordingly
     '''
 
-    def __init__ (self):
+    def __init__(self):
         '''
         (Emailer) -> None
-        
+
         Intializes with an email address to use to send out other emails
         '''
 
@@ -16,6 +17,6 @@ class Emailer(ABC):
     def send(self):
         '''
         (Emailer) -> None
-        
+
         Sends an email
 	'''

@@ -4,17 +4,20 @@ sys.path.insert(0, "../database")
 import database_methods
 import password_hash
 
-def insert_user(username, name, password, account_type):
+def insert_user(username, email, name, password, account_type):
     '''
-    Inserts a new user into the database (table User).
+    Inserts a new user into the database (table User) and returns whether it
+    was successfully input or not
     '''
     # time is stored as UNIX timestap in INT
     new_password = password_hash.hash_password(password)
-    query = "INSERT INTO User values (?, ?, ?, ?, strftime('%s','now'));"
-    fields = (username, name, new_password, account_type)
+    query = "INSERT INTO User values (?, ?, ?, ?, ?, strftime('%s','now'));"
+    fields = (username, email, name, new_password, account_type)
     
     if (not(database_methods.execute_query(query, fields, 'users.db'))):
         insert_account(username, account_type)
+        return True
+    return False
 
 def insert_account(username, account_type):
     if (account_type == "Agency"):
@@ -37,9 +40,9 @@ def login(username, password):
     except sqlite3.Error as e:
         print(format(e))
         error = 1
-        
-    if (not(error)):
-        name = cur.fetchall()
+
+    name = cur.fetchall()
+    if (not(error) and name):
         correct_password = password_hash.verify_password(password, name[0][2])
         if (len(name) != 0 and correct_password):
             return (name[0][0], name[0][1])
@@ -92,3 +95,105 @@ def get_tables_names():
     curr.execute("SELECT name FROM sqlite_master WHERE type='table';")
     result = [row[0] for row in curr.fetchall()]
     return result
+
+def check_email(email):
+    '''
+    Checks if an email exists in the database and returns True if it exists,
+    False otherwise.
+    '''
+    (conn, cur) = database_methods.connection('users.db')
+    query = ("SELECT email from User where Email = ?")
+    fields = (email,)
+
+    try:
+        cur.execute(query, fields)
+        error = 0
+    except sqlite3.Error as e:
+        print(format(e))
+        error = 1
+
+    if (not(error)):
+        email = cur.fetchall()
+        if (len(email) != 0):
+            return True
+
+    return False
+
+def get_username(email):
+    '''
+    (str) -> (str, str)
+    
+    Getting username when given email
+    '''
+    (conn, cur) = database_methods.connection('users.db')
+    query = ("SELECT Username, Name from User where Email = ?")
+    fields = (email,)
+
+    try:
+        cur.execute(query, fields)
+        error = 0
+    except sqlite3.Error as e:
+        print(format(e))
+        error = 1
+
+    if (not(error)):
+        recieved = cur.fetchall()
+        if (len(recieved) != 0):
+            return (recieved[0][0], recieved[0][1])
+
+    return (None, None)
+
+def check_temp_pass(username, temp_pass):
+    '''
+    (str, str) -> (bool, bool)
+
+    Checks if the user input a correct temporary password and returns whether
+    the account has a temp_pass and if it matches to the input as a tuple
+    '''
+    (conn, cur) = database_methods.connection('users.db')
+    query = ("SELECT Temp_Pass from Temp_Passcode where Username = ?")
+    fields = (username,)
+
+    try:
+        cur.execute(query, fields)
+        error = 0
+    except sqlite3.Error as e:
+        print(format(e))
+        error = 1
+
+    received = cur.fetchall()
+    if (not(error) and received):
+        correct_password = password_hash.verify_password(temp_pass,
+                                                         received[0][0])
+        if (len(received) != 0):
+            return (True, correct_password)
+
+    return (False, False)
+
+def insert_temp_pass(username, temp_pass):
+    '''
+    Inserts a temporary passcode into the database, or updates it if it
+    already exists
+    '''
+    hash_temp = password_hash.hash_password(temp_pass)
+    query = ("INSERT OR REPLACE INTO Temp_Passcode (Username, Temp_Pass)" +
+             " values (?, ?)")
+    fields = (username, hash_temp)
+    database_methods.execute_query(query, fields, 'users.db')
+
+def remove_temp(username):
+    '''
+    Removes the temporary password after a new one is created
+    '''
+    query = ("DELETE FROM Temp_Passcode WHERE Username = ?")
+    fields = (username,)
+    database_methods.execute_query(query, fields, 'users.db')
+
+def update_pass(username, password):
+    '''
+    Updates the user's password with the new one that was entered
+    '''
+    hash_temp = password_hash.hash_password(password)
+    query = ("UPDATE User SET Password = ? WHERE Username = ?")
+    fields = (hash_temp, username)
+    database_methods.execute_query(query, fields, 'users.db')

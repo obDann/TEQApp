@@ -5,7 +5,6 @@ from login_page import *
 from create_account_page import *
 from agency_page import *
 from teq_page import *
-from admin_page import *
 from file_upload_page import *
 
 class MainPage(tk.Frame):
