@@ -22,18 +22,12 @@ class MissingValChecker(UploadingCommand):
         user to enter values into the empty mandatory fields, then returns
         the fixed DataFrame
         '''
-        # template = tc.get_template(self._template_name)
         self._exec_status = False
         
-        # get a list of empty_fields
         empty_fields = parse_columns(df, template)
-        
-        # user can fix fields method goes here
 
-        # if method reaches here, it executed properly
         self._exec_status = True
         
-        # temporary return method
         return df
 
     def executed_properly(self):
@@ -57,20 +51,15 @@ def parse_columns(df, template):
     mandatory_headers = template.get_mandatory_headers()
     missing_fields = []
 
-    # loop through all mandatory_headers
+    # append to missing_fields any missing mandatory fields
     for header in mandatory_headers:
         column = df.get(header)
-        # if the mandatory column is in the DataFrame
         if not df.empty and column is not None:
-            # loop through all fields
             for row in range(len(df.index)):
                 field = df.iloc[row:row+1][header]
                 if (empty_field(field)):
-                    # add any empty fields to missing_fields
                     missing_fields.append((header, row))
-        # if the mandatory column is not in the DataFrame
         else:
-            # add the entire column to missing_fields
             missing_fields.append((header, -1))
 
     return missing_fields
@@ -82,4 +71,6 @@ def empty_field(df):
     is empty or the only value is an empty string, otherwise returns
     False
     '''
-    return df.isna().any() or (isinstance(df.iat[0], str) and df.iat[0] == "")
+    is_empty = df.isna().any()
+    empty_string = (isinstance(df.iat[0], str) and df.iat[0] == "")
+    return is_empty or empty_string
