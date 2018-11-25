@@ -11,7 +11,7 @@ After typing the line `python3 base_code.py`, follow the instructions presented 
 After completing this step, you should check your email (check spam/junk folders as well) to see if you have received an email.
 The email should look like this:
 
-![alt text](https://github.com/CSCC01/Team10/blob/emailer/src/tests/emailer_test/pics/email_verification.png)
+![alt text](https://github.com/CSCC01/Team10/blob/master/src/tests/emailer_test/pics/email_verification.png)
 
 The result should have your own email instead of your@emailaddress.com.
 
@@ -22,6 +22,6 @@ After typing the line `python3 base_code.py`, follow the instructions presented 
 After completing this step, you should check your email (check spam/junk folders as well) to see if you have received an email.
 The email should look like this:
 
-![alt text](https://github.com/CSCC01/Team10/blob/emailer/src/tests/emailer_test/pics/forgotten_password.png)
+![alt text](https://github.com/CSCC01/Team10/blob/master/src/tests/emailer_test/pics/forgotten_password.png)
 
 The result should have your own email instead of your@emailaddress.com.
