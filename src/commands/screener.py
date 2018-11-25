@@ -35,6 +35,9 @@ class Screener(Command):
         # check if there are at least 2 rows
         num_rows = len(self._df.index)
         if (num_rows < 2):
+            msg = "This file does not have enough rows to be an "
+            msg += " iCare template. Please try again."
+            self._opq.enqueue(msg)
             self._exec_status = False
             return pd.DataFame()
         # otherwise, we can assume that there are at least 3 rows
@@ -55,6 +58,8 @@ class Screener(Command):
             # set the execution status to false
             self._exec_status = False
             # if they are not the same, return an empty dataframe
+            msg = "Wrong template used for uploading. Please try again"
+            self._opq.enqueue(msg)
             return pd.DataFrame()
 
         # otherwise, we can assume that they are the same
