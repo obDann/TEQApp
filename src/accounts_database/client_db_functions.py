@@ -13,11 +13,37 @@ def insert_user(username, email, name, password, account_type):
     new_password = password_hash.hash_password(password)
     query = "INSERT INTO User values (?, ?, ?, ?, ?, strftime('%s','now'));"
     fields = (username, email, name, new_password, account_type)
+    cur = database_methods.execute_query(query, fields, 'users.db')
     
-    if (not(database_methods.execute_query(query, fields, 'users.db'))):
+    user = cur.fetchall()
+    if (user):
         insert_account(username, account_type)
         return True
-    return False
+    else:
+        return False
+
+def delete_user(username):
+    '''
+    Deletes an agency user from the database and returns a tuple of booleans.
+    The first boolean determines if the account exists and the second boolean
+    determines if it is an agency account.
+    '''
+    query = "SELECT Username, Type from User where Username = ?"
+    fields = (username,)
+    cur = database_methods.execute_query(query, fields, 'users.db')
+
+    account = cur.fetchall()
+    if (account):
+        if (account[0][1] == "Agency"):
+            query = "DELETE FROM User WHERE Username = ?"
+            fields = (username,)
+            cur = database_methods.execute_query(query, fields, 'users.db')
+            return (True, True)
+        else:
+            return (True, False)
+    else:
+        return (False, False)
+    
 
 def check_duplicate(username, email):
     '''
@@ -30,15 +56,10 @@ def check_duplicate(username, email):
     query2 = "SELECT Email from User where Email = ?"
     fields2 = (email,)
     
-    try:
-        cur.execute(query1, fields1)
-        usernames = cur.fetchall()
-        cur.execute(query2, fields2)
-        emails = cur.fetchall()
-        error = 0
-    except sqlite3.Error as e:
-        print(format(e))
-        error = 1
+    cur1 = database_methods.execute_query(query1, fields1, 'users.db')
+    cur2 = database_methods.execute_query(query2, fields2, 'users.db')
+    usernames = cur1.fetchall()
+    emails = cur2.fetchall()
 
     if (usernames and emails):
         return [False, usernames[0][0], emails[0][0]]
@@ -60,19 +81,12 @@ def login(username, password):
     '''
     Returns the name of the user and the type if login information is correct.
     '''
-    (conn, cur) = database_methods.connection('users.db')
     query = ("SELECT Name, Type, Password from User where Username = ?")
     fields = (username,)
-
-    try:
-        cur.execute(query, fields)
-        error = 0
-    except sqlite3.Error as e:
-        print(format(e))
-        error = 1
+    cur = database_methods.execute_query(query, fields, 'users.db')
 
     name = cur.fetchall()
-    if (not(error) and name):
+    if (name):
         correct_password = password_hash.verify_password(password, name[0][2])
         if (len(name) != 0 and correct_password):
             return (name[0][0], name[0][1])
@@ -131,23 +145,15 @@ def check_email(email):
     Checks if an email exists in the database and returns True if it exists,
     False otherwise.
     '''
-    (conn, cur) = database_methods.connection('users.db')
-    query = ("SELECT email from User where Email = ?")
+    query = ("SELECT email from User WHERE Email = ?")
     fields = (email,)
+    cur = database_methods.execute_query(query, fields, 'users.db')
 
-    try:
-        cur.execute(query, fields)
-        error = 0
-    except sqlite3.Error as e:
-        print(format(e))
-        error = 1
-
-    if (not(error)):
-        email = cur.fetchall()
-        if (len(email) != 0):
-            return True
-
-    return False
+    email = cur.fetchall()
+    if (len(email) != 0):
+        return True
+    else:
+        return False
 
 def get_username(email):
     '''
@@ -155,23 +161,15 @@ def get_username(email):
     
     Getting username when given email
     '''
-    (conn, cur) = database_methods.connection('users.db')
-    query = ("SELECT Username, Name from User where Email = ?")
+    query = ("SELECT Username, Name from User WHERE Email = ?")
     fields = (email,)
+    cur = database_methods.execute_query(query, fields, 'users.db')
 
-    try:
-        cur.execute(query, fields)
-        error = 0
-    except sqlite3.Error as e:
-        print(format(e))
-        error = 1
-
-    if (not(error)):
-        recieved = cur.fetchall()
-        if (len(recieved) != 0):
-            return (recieved[0][0], recieved[0][1])
-
-    return (None, None)
+    recieved = cur.fetchall()
+    if (len(recieved) != 0):
+        return (recieved[0][0], recieved[0][1])
+    else:
+        return (None, None)
 
 def check_temp_pass(username, temp_pass):
     '''
@@ -181,7 +179,7 @@ def check_temp_pass(username, temp_pass):
     the account has a temp_pass and if it matches to the input as a tuple
     '''
     (conn, cur) = database_methods.connection('users.db')
-    query = ("SELECT Temp_Pass from Temp_Passcode where Username = ?")
+    query = ("SELECT Temp_Pass from Temp_Passcode WHERE Username = ?")
     fields = (username,)
 
     try:

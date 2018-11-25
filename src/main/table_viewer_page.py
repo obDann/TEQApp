@@ -51,7 +51,7 @@ class TableViewer(tk.Frame):
         b2.pack()
         
         # Uploads the data to db and 
-        back = tk.Button(self, text="Submit",
+        back = tk.Button(self, text="Back",
                          command=lambda: [self.upload_data(),
                                       self.controller.set_page(ap.AgencyPage, self.name)])
         back.pack()        

@@ -28,7 +28,7 @@ def execute_query(query, fields, database):
         print(e)
         conn.rollback()
     
-    return error 
+    return cur
     
 def get_id(table):
     '''
