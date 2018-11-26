@@ -1,5 +1,5 @@
 # User Manual
-1. After finishing setting up, you are ready to run this application. Within the [src/main](./src/main) folder, run `python3 main.py` in your terminal or on your favorite IDE. The main page of the application will pop up: 
+1. After finishing setting up, you are ready to run this application. Within the [src/main](../src/main) folder, run `python3 main.py` in your terminal or on your favorite IDE. The main page of the application will pop up: 
 ![alt text](https://github.com/CSCC01/Team10/blob/master/userGuide/pics/0.png)
 If this is your first time using this application, create a new account by clicking "Create a New Account". It will take you to this:
 ![alt text](https://github.com/CSCC01/Team10/blob/master/userGuide/pics/1.png)
@@ -29,6 +29,6 @@ In "Answer Research Questions", you can view and download some reports that corr
 
 If you want to generate your own reports, click "Generate Custom Queries" and it will take you to this page:
 ![alt text](https://github.com/CSCC01/Team10/blob/master/userGuide/pics/13.png)
-An ER Diagram has been provided in [this](./userGuide) directory called "diagram.pdf". It shows the tables in the database and the relations between each entity. Using this diagram, you can create your own SQL query and enter it into the text box, then choose a name for the file. Press "Save" to generate the query. If the query was successful, you should be able to see a .csv file in the main directory which contains the output of your query.
+An ER Diagram has been provided in [this](./) directory called "diagram.pdf". It shows the tables in the database and the relations between each entity. Using this diagram, you can create your own SQL query and enter it into the text box, then choose a name for the file. Press "Save" to generate the query. If the query was successful, you should be able to see a .csv file in the main directory which contains the output of your query.
 
 In "Predictive Analysis",
