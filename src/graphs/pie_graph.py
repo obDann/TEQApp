@@ -2,9 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from graph import Graph
 
-group1 = 0
-group2 = 0.15
-
 class PieGraph(Graph):
     '''
     A simple pie graph to be outputted to the user
@@ -33,6 +30,6 @@ class PieGraph(Graph):
         '''
         self._check_axis_labels()
         plt.pie(self._df[self._y_label], labels=self._df[self._x_label], 
-                explode=(group1, group2), autopct='%1.1f%%')
+                autopct='%1.1f%%')
         plt.title(self._title)
         plt.show()        

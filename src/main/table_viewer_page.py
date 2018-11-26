@@ -61,8 +61,9 @@ class TableViewer(tk.Frame):
         Shows the list of options for this table
         '''
         identifier = self.options.get() # get option
-        self.text.delete(1.0, tk.END)   # empty widget to print new text
-        self.text.insert(tk.END, str(self.df[identifier])) 
+        if (identifier is not None and identifier != ""):
+            self.text.delete(1.0, tk.END)   # empty widget to print new text
+            self.text.insert(tk.END, str(self.df[identifier])) 
     
     def _execute_checkers(self):
         '''
@@ -83,22 +84,26 @@ class TableViewer(tk.Frame):
         new_col = list()
         # Get the column name
         ind = self.options.get()
-        
-        # Get the text input
-        inputValue = self.text.get("1.0","end-1c")
-        # Split them into a list
-        temp_text = inputValue.split('\n')
-        
-        # Edit the split list to only contain the values
-        for element in temp_text:
-            element = element.strip()
-            element = element.split(' ')
-            new_col.append(element[len(element)-1])
+        if (ind is not None and ind != ""):
+            # For formatting where index 0 is empty and index 1 is column name
+            new_col.append("")
+            new_col.append(ind)
+    
+            # Get the text input
+            inputValue = self.text.get("1.0","end-1c")
+            # Split them into a list
+            temp_text = inputValue.split('\n')
             
-        # Remove the last element since that is the dtype
-        new_col = pd.DataFrame(new_col[:len(new_col)-1], columns=[ind])
-        # Add it back to the original dataFrame
-        self.df.update(new_col)
+            # Edit the split list to only contain the values
+            for element in temp_text:
+                element = element.strip()
+                element = element.split(' ')
+                new_col.append(element[len(element)-1])
+                
+            # Remove the last element since that is the dtype
+            new_col = pd.DataFrame(new_col[:len(new_col)-1], columns=[ind])
+            # Add it back to the original dataFrame
+            self.df.update(new_col)
     
     def upload_data(self):
         '''
