@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import *
 import sys
 import research_ques_page as rqp
+import client_type_page as ct
 sys.path.insert(0, "../graphs")
 from client_summary import *
 
@@ -30,33 +31,9 @@ class ClientSummaryReports(tk.Frame):
         back.grid(row=5, column=1, sticky=W, pady=6)
     
     def check(self, report):
-        if (report == "Client Types"):
-            self.year = 1
-        self.show_options()    
-
-    def show_options(self):
-        if (self.year == 1):
-            Label(self, text="Year: ").grid(row=3)
-            month = {"01","02","03","04","05","06","07","08","09","10","11","12"}
-            self.month_c =StringVar(self)
-            self.month_c.set("Month")
-            menu = OptionMenu(self, self.month_c, *month)
-            menu.grid(row=3, column=3)
-        
-            e1 = Entry(self)
-            e1.grid(row=3,column=1)
-            # Get the text input
-            self.year_c = e1.get()
-            
-            b2 = Button(self, text="Generate Report", 
-                    command=lambda: self.display())
-            b2.grid(row=5, column=2, sticky=W, pady=6)
-            
-    def display(self):
-        report = self.report.get()
-        if (report == "Language Perference"):
+        if (report == "Language Perference"):  
             client_language_pref()
-        elif (report == "Client Types"):
-            client_types(str(self.year_c), str(self.month_c))
         elif (report == "Ways of Communication"):
             phone_vs_email_usage()
+        elif (report == "Client Types"):
+            self.cont.set_page(ct.ClientTypePage,self.name)

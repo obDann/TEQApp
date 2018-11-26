@@ -34,7 +34,8 @@ class ResearchQuesPage(tk.Frame):
                     command=lambda: self.referral_age())
         b4.pack(side=TOP,fill=X)
         
-        b5 = Button(self, text="Referral", command=lambda: self.referral_cs())
+        b5 = Button(self, text="Referral Citizenship", 
+                    command=lambda: self.referral_cs())
         b5.pack(side=TOP,fill=X)
         
         b6 = Button(self, text="Client Reports", command=lambda:
