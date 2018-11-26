@@ -19,10 +19,8 @@ class ClientTypePage(tk.Frame):
         menu = OptionMenu(self, self.month_c, *month)
         menu.grid(row=1, column=2)
     
-        e1 = Entry(self)
-        e1.grid(row=1,column=1)
-        # Get the text input
-        self.year_c = e1.get()
+        self.text = Text(self,width=5, height=1)
+        self.text.grid(row=1,column=1)
         
         b2 = Button(self, text="Generate Report", 
                 command=lambda: self.display())
@@ -33,5 +31,12 @@ class ClientTypePage(tk.Frame):
         back.grid(row=3, column=1, sticky=W, pady=6)        
             
     def display(self):
-        client_types(str(self.year_c), str(self.month_c))
+        client_types(self.retrieve_input(), self.month_c.get())
+        
+    def retrieve_input(self):
+        '''
+        Gets the year in text.
+        '''
+        input_value = self.text.get("1.0","end-1c")
+        return input_value        
         

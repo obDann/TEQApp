@@ -38,8 +38,8 @@ class TableViewer(tk.Frame):
         self.options = ttk.Combobox(self, values=list(self.df.columns))
         self.options.pack(pady=10)
         
-        l2= tk.Label(self,text="Columns that contains missing values: ["+
-                     col +"]")
+        l2= tk.Label(self,text="Columns that contain missing or incorrect" +
+                     "values: ["+ col +"]")
         l2.pack(pady=5)
         
         b1 = tk.Button(self, text='Show Data', command=self.show_option)
