@@ -1,3 +1,4 @@
+import tkinter as tk
 from tkinter import *
 sys.path.append("../main")
 import reports_page as rp
@@ -12,7 +13,7 @@ import datetime
 import matplotlib.pyplot as plt
 
 
-class PredictPage():
+class PredictPage(tk.Frame):
     MODELS = ["ExponentialSmoothingModel", "ExponentialSmoothingTrendsModel",
               "LinearRegressionModel", "NaiveModel"]
 
@@ -25,32 +26,31 @@ class PredictPage():
                    "September": 9, "October": 10, "November": 11,
                    "December": 12}
 
-    def __init__(self, controller, name):
+    def __init__(self, parent, controller, name):
         '''
         (PredictPage, TEQApp, Tk, str) -> None
 
         Shows the predictive analysis page
         '''
-
         self.name = name
         self.cont = controller
-        # tk.Frame.__init__(self,parent)
+        tk.Frame.__init__(self,parent)
         self.ticks = {}
 
-        label = Label(self.cont, text = "Which models would you like to see?")
+        label = Label(self, text = "Which models would you like to see?")
         label.grid(column=1)
 
-        row_iter = 1
-        col_iter = 0
+        self._row_iter = 1
+        self._col_iter = 0
         # make int vars for check boxes for a specific model
         for model in self.MODELS:
             self.ticks[model] = IntVar()
-            cb = Checkbutton(self.cont, text=model, variable=self.ticks[model])
-            cb.grid(row=row_iter, column = col_iter, sticky=W)
-            col_iter += 1
-            if (col_iter == 3):
-                col_iter = 0
-                row_iter += 1
+            cb = Checkbutton(self, text=model, variable=self.ticks[model])
+            cb.grid(row=self._row_iter, column = self._col_iter, sticky=W)
+            self._col_iter += 1
+            if (self._col_iter == 3):
+                self._col_iter = 0
+                self._row_iter += 1
 
         # then we want to make a dropdown of future values, so we get today's
         # date
@@ -69,25 +69,22 @@ class PredictPage():
         self._selected_year.set(todays_year)
 
         # then we want to add a dropdown
-        another_label = Label(self.cont, text="What date to predict?")
-        new_row = row_iter + 1
-        another_label.grid(row=new_row, column=0)
-        month_menu = OptionMenu(self.cont, self._selected_month, *months_list)
-        month_menu.grid(row=new_row, column=1)
-        year_menu = OptionMenu(self.cont, self._selected_year, *year_list)
-        year_menu.grid(row=new_row, column=2)
+        another_label = Label(self, text="What date to predict?")
+        self._row_iter = self._row_iter + 1
+        another_label.grid(row=self._row_iter, column=0)
+        month_menu = OptionMenu(self, self._selected_month, *months_list)
+        month_menu.grid(row=self._row_iter, column=1)
+        year_menu = OptionMenu(self, self._selected_year, *year_list)
+        year_menu.grid(row=self._row_iter, column=2)
 
-        my_butt = Button(self.cont, text="Submit", command=self._on_submit)
+        my_butt = Button(self, text="Submit", command=self._on_submit)
         my_butt.grid(column=1)
 
-
-
-
-
-        #back = Button(self, text="Back",
-                            #command=lambda: controller.set_page(rp.ReportsPage,
-                                                             #self.name))
-        #back.pack(side=TOP,fill=X)
+        back = Button(self, text="Back",
+                            command=lambda: self.cont.set_page(rp.ReportsPage,
+                                                               self.name))
+        back.grid(column=0)
+        self._row_iter += 3
 
     def _on_submit(self):
         '''
@@ -99,6 +96,7 @@ class PredictPage():
         num_rows = df.shape[0]
         my_plot_list = []
         my_label_list = []
+        reg_details = [None, None]
 
         # plot the data
         x = "x axis"
@@ -120,6 +118,7 @@ class PredictPage():
                                                        "Frequency")
                 # get the model
                 the_model, col = the_model_ins.get_model()
+
                 # get the mape of the model
                 mape_vals[model] = the_model_ins.get_mape_estimate(the_model,
                                                                    col)
@@ -127,14 +126,57 @@ class PredictPage():
                 df.loc[:, model] = pd.Series(the_model[col].head(num_rows))
                 # add that to our plot
                 my_label = self._get_label(model)
-                print(my_label)
                 sm_plot, = plt.plot(x, model, data=df, linestyle="-",
                                     marker='o')
                 my_plot_list.append(sm_plot)
                 my_label_list.append(my_label)
 
+                # one odd case is if the model is linear
+                if (model == "LinearRegressionModel"):
+                    reg_details[0], reg_details[1] = the_model_ins.get_details()
+
+        if (bool(mape_vals)):
+            msg = "-------------------------------"
+            Label(self, text = msg).grid(row = self._row_iter, column=0)
+            Label(self, text = msg).grid(row = self._row_iter, column=1)
+            self._row_iter += 1
+
+        # check if the linear regression model is ran
+        if reg_details[0] is not None:
+            # if it is ran, then we want to provide the details
+            lm = "y = " + str(reg_details[0])
+            lm += "x + " + str(reg_details[1])
+            some_label = Label(self, text="Linear Model:")
+            some_label.grid(row = self._row_iter, column = 0, sticky=E)
+            another_la = Label(self, text=lm)
+            another_la.grid(row = self._row_iter, column = 1, sticky=W)
+            self._row_iter += 1
+
+        if (bool(mape_vals)):
+            Label(self, text = "MAPE:").grid(row = self._row_iter, column=0,
+                                             sticky=W)
+            self._row_iter += 1
+
+        # go through the MAPE
+        for key in mape_vals:
+            la = Label(self, text=key)
+            la.grid(row=self._row_iter, column=0, sticky=E)
+            nla = Label(self, text=str(mape_vals[key]))
+            nla.grid(row=self._row_iter, column=1, sticky=W)
+            self._row_iter += 1
+
+        months = [""] + list(df["Month"])
+        years = [""] + list(df["Year"])
+        x_axis = [months[i] + " " + years[i] for i in range(len(months))]
+        x_count = [i for i in range(len(x_axis))]
+        plt.xticks(x_count, x_axis)
+        plt.title("People Attending Services over time")
+        plt.xlabel("Months")
+        plt.ylabel("Years")
+        plt.xticks(rotation=90)
         plt.legend(my_plot_list, my_label_list)
         plt.show()
+
 
 
     def _get_mod_name(self, model):
@@ -243,16 +285,10 @@ class PredictPage():
         '''
         # what we want to do is to get the relative dataframe from the database
         # create a connector
-        connector = sql.connect("../database/client_data.db")
+        connector = sql.connect("../main/client_data.db")
         # create a cursor
         cur = connector.cursor()
         query = "SELECT *"
         query += "FROM Client_Attends_Service"
         df_result = pd.read_sql(query, connector)
         return df_result[["Month", "Year"]]
-
-if __name__ == "__main__":
-    my_root = Tk()
-    my_root.title("yaho")
-    predict_pg = PredictPage(my_root, "name")
-    my_root.mainloop()
