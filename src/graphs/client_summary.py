@@ -93,6 +93,6 @@ def client_types(year, month):
         df = pd.DataFrame(result, columns=[x_axis, y_axis])
     
         # Graph
-        hist = Histogram(df, x_axis, y_axis, report_name)
-        hist.display(types, 'bar')
+        pie = PieGraph(df, x_axis, y_axis, report_name)
+        pie.display()
     
