@@ -27,8 +27,13 @@ Within the next few sprints, it will be expected of us to be tying the GUI with 
 **Pip installations required**:
 - `pip3 install pandas`
 - `pip3 install sendgrid`
+- `pip3 install xlrd`
+- `pip3 install passlib`
+- `pip3 install scipy`
+- `pip3 install matplotlib`
 - `pip3 install passlib`
  
+>>>>>>> master
 **Dependencies used**:
 - [sqlite3](https://www.sqlite.org/download.html)
 - tkinter (Should be pre-installed with Python3)

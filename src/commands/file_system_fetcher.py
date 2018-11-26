@@ -2,15 +2,18 @@ import pandas as pd
 from command import Command
 from tkinter import *
 from tkinter.filedialog import askopenfilename
-from sheet_selection import *
 
 class FileSystemFetcher(Command):
 
     def __init__(self, tk_root):
         '''
-        (FileSystemFetcher, TemplateHandler, Tk) -> None
+        (FileSystemFetcher, Tk) -> None
 
-        Initialize the FileSystemFetcher
+        Initialize the FileSystemFetcher; asks user for an excel file and
+        what sheet they would like to upload.
+
+        If a sheet is not selected, then the file system fetcher will have a
+        message and it cannot be able to execute
         '''
         # REPRESENTATION INVARIANT
         # FileSystemFetcher is a command
@@ -18,71 +21,106 @@ class FileSystemFetcher(Command):
         #     it has an execution status
         # it has a root, a tk object
 
+        # On initialization:
+        # there is a boolean called "self._can_exec_flag" which is a flag
+        # that determines if file system fetcher can execute
+
+        # if a user selects an excel file and the excel file only has 1 sheet,
+        #     self._file is a dictionary that contains a dictonary of
+        #     {str: dataframe}
+        #     self._the_sheet_name is the determined sheet name
+
+        # if a user selects an excel file with more than 1 sheet
+        #     self._file is a dictionary that contains a dictionary of
+        #     {str: dataframe}
+        #     self._toplevel is a top level frame off of the root
+        #     self._selected_sheet is a StringVar to determine what is
+        #     the sheet name
+
+        # in either cases, this function has a boolean called a user
+        # execution flag
+
+
         # Initialize an output queue and status
         Command.__init__(self)
 
         # withdraw the root
-        tk_root.withdraw()
+        #tk_root.withdraw()
 
         # then initialize the root
         self._root = tk_root
 
-        # and initialize the template hanlder
-        # self.th = th
-
-    def execute(self):
-        '''
-        (FileSystemFetcher) -> {str: DataFrame}
-
-        Accesses a file using a User Interface and returns a dictionary of
-        DataFrames that maps to a sheet name
-        '''
         # get the file system object path
         file_path = self._get_filesystem_object_path()
 
-        # and we can destroy our root here
-        self._root.destroy()
+        # make a "can execute" flag
+        self._can_exec_flag = False
 
-        # check if the string is None (the user did not select an excel file)
-        if not file_path:
-            # create a message
-            msg = "An excel file has not been selected."
-            # enqueue a the string as an output
-            self._opq.enqueue(msg)
-            # then return None
-            return None
 
-        # otherwise, we can assume that there is a successful path selected
-        # so we use a dictionary first
-        file = pd.read_excel(file_path, sheet_name=None)
+        # check if the string is not None or empty
+        try:
+            self._user_exec = True
+            # we can assume that there is a successful path selected
+            # so we use a dictionary first
+            self._file = pd.read_excel(file_path, sheet_name=None)
 
-        # and then we get the sheet names
-        sheet_names = list(file)
+            # and then we get the sheet names
+            self._sheet_names = list(self._file)
 
-        # check if there is only one sheet
-        if (len(sheet_names) == 1):
-            # if there is, just return the dataframe selected
-            the_sheet_name = sheet_names[0]
-            # and we know that our command has successfully executed
-            self._exec_status = True
-            return file[the_sheet_name]
-        # otherwise, we check if there are more sheets
-        elif (len(sheet_names) > 1):
-            # we create another root
-            some_root = Tk()
-            # create a selected sheet
-            selected_sheet = StringVar()
-            # we default the dropdown to be the first sheet name of the
-            # dropdown
-            selected_sheet.set(sheet_names[0])
-            # then we use a sheet selection object for the user to select a
-            # sheet
-            SheetSelection(sheet_names, selected_sheet, some_root)
-            some_root.mainloop()
-            # we know that our command has successfully executed
-            self._exec_status = True
-            # then return the selected sheet
-            return file[selected_sheet.get()]
+            # then check if there is only one sheet
+            if (len(self._sheet_names) == 1):
+                self._the_sheet_name = self._sheet_names[0]
+                # the user can execute fsf
+                self._can_exec_flag = True
+            elif (len(self._sheet_names) > 1):
+                # we create a toplevel using our root
+                self._toplevel = Toplevel(self._root)
+                # create a selected sheet
+                self._selected_sheet = StringVar()
+                # we default the dropdown to be the first sheet name of the
+                # dropdown
+                self._selected_sheet.set(self._sheet_names[0])
+                # then we use a sheet selection object for the user to select
+                # a sheet
+                self._run_selection()
+        except FileNotFoundError:
+            # set the user execution status to false
+            self._user_exec = False
+            self._opq.enqueue("No file was selected.")
+
+
+    def execute(self):
+        '''
+        (FileSystemFetcher) -> DataFrame
+
+        Returns a dataframe that is representative of the excel file.
+        Returns None if the user has cancelled halfway through initialization
+        '''
+        # check if the user can execute this
+        if self._user_exec:
+        # check if there is one sheet to select from and check if the flag
+        # is ready
+            if (self._can_exec_flag and len(self._sheet_names) == 1):
+                # if it can, set the execution status to true
+                self._exec_status = True
+                # then return the specified file
+                return self._file[self._the_sheet_name]
+            # otherwise, check if there is more than 1 sheet
+            elif len(self._sheet_names) > 1:
+                # if there is, wait for the top level
+                self._toplevel.wait_window()
+                # then check if the execution status is okay
+                if (self._can_exec_flag):
+                    # the execution is okay
+                    self._exec_status = True
+                    # if it is okay, then we can return the sheet name
+                    return self._file[self._the_sheet_name]
+                # if it is not okay
+                else:
+                    # we want to enqueue a message
+                    the_msg = "No sheet was selected."
+                    self._opq.enqueue(the_msg)
+
 
     def _get_filesystem_object_path(self):
         '''
@@ -107,10 +145,47 @@ class FileSystemFetcher(Command):
         '''
         return self._exec_status
 
+    def _run_selection(self):
+        '''
+        (FileSystemFetcher) -> None
+
+        Let's a user pick out a sheet
+        '''
+        # ask the user what sheet they would like to pick
+        my_text_label = "Which sheet are you going to be uploading?"
+        label = Label(self._toplevel, text=my_text_label)
+        label.grid()
+
+        # then what is wanted is a dropdown option list
+        menu = OptionMenu(self._toplevel, self._selected_sheet,
+                          *self._sheet_names)
+        menu.grid()
+
+        # then have a select button; once the user presses select, the
+        # string is returned
+        select_button = Button(self._toplevel, text="Select",
+                               command=self._submit)
+        select_button.grid()
+
+
+
+    def _submit(self):
+        '''
+        (FileSystemFetcher) -> None
+
+        Determines what happens after a user clicks submit
+        '''
+        # the person can now execute file system fetcher
+        self._can_exec_flag = True
+        # set the name of the sheet that is selected
+        self._the_sheet_name = self._selected_sheet.get()
+        # then destroy the top level
+        self._toplevel.destroy()
+
 
 if __name__ == '__main__':
     tk_root = Tk()
-    tk_root.withdraw()
     my_fsf = FileSystemFetcher(tk_root)
     x = my_fsf.execute()
+    print(x)
     tk_root.mainloop()

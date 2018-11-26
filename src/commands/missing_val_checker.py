@@ -14,9 +14,9 @@ class MissingValChecker(UploadingCommand):
         '''
         UploadingCommand.__init__(self, template_name)
 
-    def execute(self, df):
+    def execute(self, df, template):
         '''
-        (MissingValChecker, DataFrame) -> DataFrame
+        (MissingValChecker, DataFrame, TemplateHandler) -> DataFrame
         
         Given a MissingValChecker object parses the DataFrame and allows the
         user to enter values into the empty mandatory fields, then returns

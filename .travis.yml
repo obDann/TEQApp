@@ -5,12 +5,24 @@ cache: pip
 install:
     - pip3 install pandas
     - pip3 install sendgrid
+    - pip3 install xlrd
+    - pip3 install scipy
+    - pip3 install passlib
+    - pip3 install matplotlib
 script:
     - cd src/tests
     - python3 -m unittest missing_val_checker_test
     - python3 -m unittest output_queue_test
+
     - python3 -m unittest data_aggregator_test
     - cd template_helper_tests
     - python3 -m unittest unittest_dropdown_processor.py
     - python3 -m unittest unittest_template_processor.py
     - python3 -m unittest unittest_true_tem_handler.py
+    - cd ../screener_test
+    - python3 -m unittest screener_test.py
+    - cd ../predictive_analysis_test
+    - python3 -m unittest exponential_smoothing_test.py
+    - python3 -m unittest exponential_smoothing_trend_test.py
+    - python3 -m unittest linear_regression_test.py
+    - python3 -m unittest naive_approach_test.py

@@ -18,7 +18,7 @@ def insert_employment(row_values, service_id):
     '''
     Inserts a row in the Employment_Service table.
     '''
-    index = [(6, 8), (12, 18), (66, 68)]
+    index = [(5, 9), (10, 18), (66, 68)]
     val = [service_id]
     val = database_methods.fetch_values_list(row_values, index, val)
     
@@ -39,7 +39,7 @@ def insert_short_term(row_values, service_id):
     '''
     Inserts a row in the Short_Term_Intervention table.
     '''
-    i = 36
+    i = 35
     end = 44
     while (i < end):
         short_term_id = database_methods.get_id("Short_Term_Intervention") + 1
@@ -53,3 +53,18 @@ def insert_short_term(row_values, service_id):
 
 def client_attends_service(service_id, client_id, month, year):
     insert_general.insert_client_service(service_id, client_id, month, year)
+
+def update_client_profile(client_id, row_values):
+    index_list = [(0, 1), (4, 5), (9, 10)]
+    if (database_methods.check_id(client_id, 'client_data.db', "Client",
+                                      "Unique_ID_Value")):    
+        insert_general.update_client_profile(row_values, client_id, index_list)
+
+def update_child(row_values, client_id):
+    lst = ["Age", "Type_Of_Care"]
+    table = "Child"
+    prim = "(Client_Unique_ID_Value, Child)"
+    if (database_methods.check_id(client_id, 'client_data.db', "Client",
+                                      "Unique_ID_Value")):  
+        insert_general.update_child(row_values, client_id, lst, table, prim, 1,
+                                    47, 56)
