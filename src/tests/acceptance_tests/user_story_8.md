@@ -1,9 +1,9 @@
-# User story 6
+# User story 8
 The user story that is going to be covered is the following:  
 **As a TEQ employee, Mike James, I want to have the ability to run my own SQL queries so that I am able to manipulate the data for statistical calculations**
 
 
-This user story is about the feature to select custom queries according to the data and generating a custom graph based on the selected attributes. This user story has been completed and to test out the feature as a user, follow the steps below:
+This user story is about the feature to run a users custom SQL command on the database and outputs an appropriate csv file containing that data. This user story has been completed and to test out the feature as a user, follow the steps below:
 
 ### Creating an agency account
   1. Run the line `python3 main.py` in commandline while in the directory `/src/main`.
