@@ -1,6 +1,6 @@
 # User story 1a
 The user story that is going to be covered is the following:  
-**As a TEQ employee Mike James, I want to email agencies their certified account so that agencies are informed that they have an account to contribute to the TEQ program.**
+**As a TEQ employee, Mike James, I want to email agencies their certified account so that agencies are informed that they have an account to contribute to the TEQ program.**
 
 
 This user story is about emailing users when they have successfully created an account so that they will be notified that they can log in. This user story has been completed and to test out the feature as a user, follow the steps below:
