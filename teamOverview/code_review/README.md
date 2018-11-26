@@ -66,6 +66,18 @@ Note that the stinks above is not limited to the above as members are able to ma
 * There are variables that are not clear, for example empty_fields should be code and all the variable (var1, var2.. etc) should be code variable instead.
     * Not clean code, properly need to reformat the layout of your code.
 ### Riaz to Susan
+beautiful_uploader:
+Code is well organized and clear
+
+Not sure if the class is getting "too long" but it is justified regardless
+
+Dispensables; Duplicate Code
+	-all methods start with the same few lines of code, this can be separated
+	-this means if this part of the code has to be changed, it only has to be changed once
+
+Symbolic Constant
+	-the magic number 2 used for indexing should be replaced with a symbolic constant
+	-this would also help remove the need for comments relating to it
 
 ### Susan to David
 
@@ -79,6 +91,21 @@ Note that the stinks above is not limited to the above as members are able to ma
 * The graphs that he made, Histogram, Scatter plot and Line graph should be refactored to be line graph,histogram and pie graph because we couldn't find usage of scatter plot and pie graph is better for comparison.
     * Some of the variables in the parameters were not needed, so they are removed during the refactoring
 ### Riaz to Susan
+some docstring requirements dont match parameters
+
+graph
+Dispensables; Comments
+	-A few unnecessary comments, code is clear without them
+
+pie_graph
+Symbolic Constant
+	-Good to seperate symbolic constants from code into variables
+	-Symbolic constants should be all caps
+
+graph subtypes
+Dispensables; Duplicate Code
+	-display has diplicate code between the subtypes
+	-this can be moved up to the abstract class's display method
 
 ### Susan to David
 
