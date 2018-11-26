@@ -82,11 +82,24 @@ Note that the stinks above is not limited to the above as members are able to ma
 * Fix creating another account with the same username saying "success" but nothing actually happens
 
 ### David to Dann
+* Code Review for Dann was conducted on 18 as he did not have much on the 15th
+* DuplicateRowChecker was not needed since one line from pandas was called
+* We also talked about the tradeoffs as to why DuplicateRowChecker is is a command rather than something to be called when tying it together.
+* Excellent idea of "Screener", following the template design pattern
+    * The screener is used to determine if the user is uploading the right thing based off of the selected iCare templates
 
 ## Code Review Summary (November 24, 2018)
 
 ### Dann to Philip
-
+* There were minor bugs in multiple pages (custom query, table viewer, etc) that will crash or raise error if we try to break the program.
+  Should put restrictions on those so that those crashs and error raises can be minimized
+* The format of the dataframe in when uploading to the database using beautiful uploader is not set, need to fix that when user gets to view data
+  or when the data gets passed through from the file upload page to the data/table viewer page. But the data gets displayed well.
+	- Where index 0 of the dataframe are all blank spaces, index 1 contains the column names, and from index 2 to n, it contains the data
+* Custom Query error handling caused the exception, where the error message cannot be displayed when invalid SQL Commands were inputted, suggested
+  to remove the true error message (from system) and just display "Invalid SQL Command"
+* For client summary reports, there are a few minor bugs that needs to be fixed, and handled, and make sure to have an GUI for these reports.
+* When file gets uploaded, there needs to be more parameters passed in for beautiful uploader as well as other pages that links to these viewers.
 ### Philip to Riaz
 * The graphs that he made, Histogram, Scatter plot and Line graph should be refactored to be line graph,histogram and pie graph because we couldn't find usage of scatter plot and pie graph is better for comparison.
     * Some of the variables in the parameters were not needed, so they are removed during the refactoring
@@ -109,3 +122,7 @@ Note that the stinks above is not limited to the above as members are able to ma
 * In client_db_functions, there should be a "check duplicate field" which would return whether or not the field exists in order to prevent rollbacks from happening every time a duplicate value is attempted to be inserted into to the database
 
 ### David to Dann
+* Dann showed me his branch for "Predicitve Analysis"
+* Used the template model
+* Used inheritance appropriately
+* One potential smell is the get_model() method as there are optional parameters. I warned Dann to be cautious about this.

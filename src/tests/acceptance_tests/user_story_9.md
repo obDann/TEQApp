@@ -1,4 +1,4 @@
-# User story 10
+# User story 9
 The user story that is going to be covered is the following:  
 **As a TEQ employee, Mike James, I want to be able to remove agencies in the event that they close down so we don’t have any irrelevant data.**
 

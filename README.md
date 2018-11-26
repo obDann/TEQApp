@@ -20,6 +20,15 @@ Within the next few sprints, it will be expected of us to be tying the GUI with 
 
     Within the  [src/main](./src/main) folder, run 'python3 main.py' in your terminal and a GUI will pop up. This is the main page, where you can choose to login or create an account.
 
+**November 26 2018**: Last sprint completed. Demo video is found [here](https://www.youtube.com/watch?v=1fzJtAM_alk).
+
+Right around 1:30, forecasting models was discussed. The "actual" data points were taken from the database. 
+
+When "submit" is clicked on for the exponential smoothing models, what it does is that finds the optimal alpha (and beta) value to minimize MAPE, hence the long wait.
+
+Final user stories and personas are found [here](./teamOverview/productBacklog). Code reviews are found [here](./teamOverview/code_review). Sprint backlogs are found [here](./teamOverview/sprintBacklog). Acceptance/ Unit tests are found [here](./src/tests). Running the application: after installing all of the pip installations, within the  [src/main](./src/main) folder, run `python3 main.py` in your terminal. Alternatively, if `python3` does not work, try running `python main.py` Refer to the user manual in [userGuide](./userGuide) for help with how to use our application.
+
+
 ## Setup
 
 **Python 3** is the minimum requirement in order to run and install everything properly.
@@ -28,12 +37,10 @@ Within the next few sprints, it will be expected of us to be tying the GUI with 
 - `pip3 install pandas`
 - `pip3 install sendgrid`
 - `pip3 install xlrd`
-- `pip3 install passlib`
 - `pip3 install scipy`
 - `pip3 install matplotlib`
 - `pip3 install passlib`
  
->>>>>>> master
 **Dependencies used**:
 - [sqlite3](https://www.sqlite.org/download.html)
 - tkinter (Should be pre-installed with Python3)

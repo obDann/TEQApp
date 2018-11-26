@@ -20,6 +20,9 @@ Task 17   [3 pts]: Make an 'AccountCreator' class to securely make an account
 Task 18   [3 pts]: Make a 'PasswordChanger' class to securely change the
                    password through the accounts database
 
+Task 18a  [1 pts]: Put appropriate message boxes for the password changer and 
+                   account creator
+                   -Dependent on task 17 and 18
 
 User Story 1a:
 Task 19   [1 pts]: Implement the 'Emailer' interface
@@ -40,6 +43,9 @@ Task 21a  [2 pts]: Integrate this emailer into the program
 Task 21b  [5 pts]: Make sure the user can use a temporary code in order to log 
                    into their account and then have them change their password
                    -Dependent on task 21a
+                   
+Task 21c  [5 pts]: Put appropriate message boxes for account creation interface 
+
 
 User Story 2:
 Task 10  [13 pts]: Implement a class to store the parsed (beautiful) data into
@@ -55,6 +61,8 @@ Task 22c  [5 pts]: Implement methods into GUI
                    -Dependent on task 22
 
 Task 23   [2 pts]: Implement the DuplicateRowChecker as described in the design
+
+Task 23a  [3 pts]: Implement the Screener as described in the design
 
 Task 24   [1 pts]: Implement the TemplateHelper Interface
 
@@ -96,7 +104,72 @@ Task 33a [5 pts]: Implement a GUI for displaying the table with the values
                   that needed to be fix
                   -Dependent on task 33
 
+User Story 4:
+Task 15  [8 pts]: Fix Beautiful Uploader so that it can update the data in
+                  the database when there are duplicate fields
+
+
+User Story 5:
+Task 34  [2 pts]: Make the base code for Reporting Console
+
+Task 35  [2 pts]: Make the abstract class for Graphs
+
+Task 36  [1 pts]: Implement the BarGraph
+                  -Dependent on task 35
+
+Task 38  [1 pts]: Implement the Histogram
+                  -Dependent on task 35
+
+Task 38a [1 pts]: Implement the LineGraph
+                  -Dependent on task 35
+
+Task 38b [1 pts]: Implement the PieGraph
+                  -Dependent on task 35
+                  
+Task 44  [3 pts]: Implement 2 reports (graphs) for research 
+                  question 1 and 1a
+                  -Dependent on task 35
+
+Task 45  [3 pts]: Implement TargetGroupReport, which reports if there are 
+                  any changes to different groups of people over a 
+                  time period
+
+Task 46  [3 pts]: Implement 2 general reports (pie graphs) for 
+                  research question 3
+
+
+User Story 6:
+Task 47  [5 pts]: Make ServiceReports, which gives the user a few attributes
+                  to choose from, and generate a custom graph
+
+Task 49  [5 pts]: Make CommunityConnectionReport, which gives the user a few
+                  attributes to choose from, and generate a custom graph
+
+Task 50  [5 pts]: Make ClientSummaryReport, which gives the user a few 
+                  attributes to choose from, and generates a custom graph
+                  
+User Story 7:
+Task 52a [5 pts]: Implement the frame for predictive analysis
+
+Task 52b [2 pts]: Implement the linear regression model
+
+Task 52c [2 pts]: Implement the exponential smoothing model
+
+Task 52d [2 pts]: Implement the exponential smoothing model with 
+                  trending factor
+                  
+Task 52e [1 pts]: Implement the naive model
+
+
+User Story 8:
+Task 53  [5 pts]: Make the CustomQuery  which reads in a SQL command and outputs
+                  the table like in DBMS and output it as an Excel file which the 
+                  user can save
+
+
 User Story 10:
-Task 34  [1 pts]: Implement a functionality to remove agency users from the
+Task 54  [1 pts]: Implement a functionality to remove agency users from the
                   database
                   -Dependent on task 20
+                  
+Task 54a [1 pts]: Put appropriate message boxes for the interface

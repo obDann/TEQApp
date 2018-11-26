@@ -31,4 +31,15 @@ If you want to generate your own reports, click **Generate Custom Queries** and 
 ![alt text](https://github.com/CSCC01/Team10/blob/master/userGuide/pics/13.png)
 An ER Diagram has been provided in [this](./) directory called "diagram.pdf". It shows the tables in the database and the relations between each entity. Using this diagram, you can create your own SQL query and enter it into the text box, then choose a name for the file. Press **Save** to generate the query. If the query was successful, you should be able to see a .csv file in the main directory which contains the output of your query.
 
-In **Predictive Analysis**,
+In **Predictive Analysis**, you will be greeted with this screen
+
+![alt text](https://github.com/CSCC01/Team10/blob/master/userGuide/pics/predict_1.png)
+
+Select the models you favour. The form of these models and the robustness measurement (MAPE) is found in the models pdf in this directory.
+
+After doing clicking these models, you are expected to get a modeled series which looks something like:
+
+![alt text](https://github.com/CSCC01/Team10/blob/master/userGuide/pics/predict_2.png)
+
+Once you hit "Submit", the MAPE values of each model is shown:
+![alt text](https://github.com/CSCC01/Team10/blob/master/userGuide/pics/predict_3.png)

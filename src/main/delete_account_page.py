@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from console import *
-import main_page as mp
+import teq_page as tq
 from login_page import *
 from agency_page import *
 from teq_page import *
@@ -20,8 +20,10 @@ class DeleteAccountPage(tk.Frame):
 
         # create an observable button
         obs_button = ButtonObservable()
-        obs_button.set_button(Button(self, text="Delete",
-                                     command=lambda: obs_button.raise_event(self)))
+        my_butt = Button(self,
+                         text="Delete",
+                         command=lambda: obs_button.raise_event(self))
+        obs_button.set_button(my_butt)
         create_usr_obs = DeleteAccountObserver()
         obs_button.add_observer(create_usr_obs)
         b2 = obs_button.button
@@ -32,6 +34,5 @@ class DeleteAccountPage(tk.Frame):
         b2.e1.grid(row=2, column=1)
 
         b1 = Button(self, text="Back",
-                    command=lambda: self.cont.display(mp.MainPage))
+                    command=lambda: self.cont.set_page(tq.TEQPage, name))
         b1.grid(row=3, column=1, sticky=W, pady=6)
-
