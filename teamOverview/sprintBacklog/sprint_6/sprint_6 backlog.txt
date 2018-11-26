@@ -89,7 +89,7 @@ Task 52a: 5 story points
 - Implement the frame for predictive analysis
 
 
-User Story 10:
+User Story 9:
 Task 54: 1 story point
 - Implement a function to remove agency users from the database
 
