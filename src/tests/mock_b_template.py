@@ -13,7 +13,7 @@ class MockBTemplate():
         self._regex = ['','[a-zA-Z]', '[0-9]']
         self._drop_down_values = []
         
-    def handle_template(self):
+    def handle_template(self, col_name):
         '''
         (TemplateHandler) -> tuple of (bool, str, str)
 
@@ -21,8 +21,12 @@ class MockBTemplate():
         in the template, a string representing the appropriate regex, and a
         string representing an example of the column
         '''
-        pass
-        
+        if (col_name =="a"):
+            return (False,"","")
+        elif (col_name =="b"):
+            return (True,'[a-zA-Z]',"AZ")
+        elif (col_name== "c"):
+            return (True,'[0-9]',"AZ")
     
     def get_headers(self):
         '''
