@@ -5,7 +5,7 @@ import agency_page as ap
 from data_viewer_page import *
 import sys
 sys.path.append("../commands")
-from missing_val_checker import MissingValChecker
+from missing_val_checker import *
 from data_aggregator import DataAggregator
 sys.path.append("../database")
 from beautiful_uploader import BeautifulUploader
@@ -26,7 +26,8 @@ class TableViewer(tk.Frame):
         self.y = year
         
         # Run the checkers
-        self._execute_checkers()
+        mis = self._execute_checkers()
+        col = self._get_m_columns(mis)
         
         # The title
         label1 = tk.Label(self, text=self.temp_name)
@@ -36,6 +37,10 @@ class TableViewer(tk.Frame):
         tk.Label(self, text='Select Column:').pack()
         self.options = ttk.Combobox(self, values=list(self.df.columns))
         self.options.pack(pady=10)
+        
+        l2= tk.Label(self,text="Columns that contains missing values: ["+
+                     col +"]")
+        l2.pack(pady=5)
         
         b1 = tk.Button(self, text='Show Data', command=self.show_option)
         b1.pack()
@@ -56,6 +61,21 @@ class TableViewer(tk.Frame):
                                       self.controller.set_page(ap.AgencyPage, self.name)])
         back.pack()        
    
+    def _get_m_columns(self, mis):
+        '''
+        Get the list of headers that need to be fixed.
+        '''
+        temp = list()
+        s = " "
+        for i in mis:
+            if (i[0] not in temp):
+                temp.append(i[0])
+        
+        for i in temp:
+            s+=i
+            s+=" , "      
+        return s[:-2]   
+   
     def show_option(self):
         '''
         Shows the list of options for this table
@@ -75,6 +95,8 @@ class TableViewer(tk.Frame):
         da = DataAggregator(self.temp_name)
         self.df = mv.execute(self.df, template_handler)
         new_df = da.execute(self.df, template_handler) 
+        
+        return parse_columns(new_df, template_handler)
         
     def save_data(self):
         '''
