@@ -20,7 +20,7 @@ Within the next few sprints, it will be expected of us to be tying the GUI with 
 
     Within the  [src/main](./src/main) folder, run 'python3 main.py' in your terminal and a GUI will pop up. This is the main page, where you can choose to login or create an account.
 
-**November 26 2018**: Last sprint completed. Final user stories and personas are found [here](./teamOverview/productBacklog). Code reviews are found [here](./teamOverview/code_review). Running the application: after installing all of the pip installations, within the  [src/main](./src/main) folder, run `python3 main.py` in your terminal. Refer to the user manual in [userGuide](./userGuide) for help with how to use our application.
+**November 26 2018**: Last sprint completed. Final user stories and personas are found [here](./teamOverview/productBacklog). Code reviews are found [here](./teamOverview/code_review). Sprint backlogs are found [here](./teamOverview/sprintBacklog). Running the application: after installing all of the pip installations, within the  [src/main](./src/main) folder, run `python3 main.py` in your terminal. Refer to the user manual in [userGuide](./userGuide) for help with how to use our application.
 
 ## Setup
 
