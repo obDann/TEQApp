@@ -91,7 +91,15 @@ Note that the stinks above is not limited to the above as members are able to ma
 ## Code Review Summary (November 24, 2018)
 
 ### Dann to Philip
-
+* There were minor bugs in multiple pages (custom query, table viewer, etc) that will crash or raise error if we try to break the program.
+  Should put restrictions on those so that those crashs and error raises can be minimized
+* The format of the dataframe in when uploading to the database using beautiful uploader is not set, need to fix that when user gets to view data
+  or when the data gets passed through from the file upload page to the data/table viewer page. But the data gets displayed well.
+	- Where index 0 of the dataframe are all blank spaces, index 1 contains the column names, and from index 2 to n, it contains the data
+* Custom Query error handling caused the exception, where the error message cannot be displayed when invalid SQL Commands were inputted, suggested
+  to remove the true error message (from system) and just display "Invalid SQL Command"
+* For client summary reports, there are a few minor bugs that needs to be fixed, and handled, and make sure to have an GUI for these reports.
+* When file gets uploaded, there needs to be more parameters passed in for beautiful uploader as well as other pages that links to these viewers.
 ### Philip to Riaz
 * The graphs that he made, Histogram, Scatter plot and Line graph should be refactored to be line graph,histogram and pie graph because we couldn't find usage of scatter plot and pie graph is better for comparison.
     * Some of the variables in the parameters were not needed, so they are removed during the refactoring
