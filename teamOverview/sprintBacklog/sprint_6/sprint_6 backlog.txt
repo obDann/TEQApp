@@ -1,6 +1,16 @@
 Sprint 6 Backlog
 Nov 21 to Nov 25
 --------------------------------------------------------------------------------
+Sprint 5 Completion Report
+
+Tasks accomplished:
+David: 17, 18, 20a, 20b, 21a, 21b
+Dann: 23a
+Susan: 15
+Philip: 33a, 53
+Riaz: 35, 36, 3, 38
+--------------------------------------------------------------------------------
+
 User Stories from Product Backlog that we will address in this sprint:
 
 1)   As a TEQ employee, Mike James, I want to make only authorized agency
@@ -87,6 +97,7 @@ Task 52: 5 story points
 
 Task 52a: 5 story points
 - Implement the frame for predictive analysis
+- Dependent on task 52
 
 
 User Story 9:
@@ -100,10 +111,21 @@ Dann:   1 on Wednesday, 1 on Thursday, 1 on Friday, 1 on Saturday, 1 on Sunday
 Philip: 2 on Wednesday, 2 on Thursday, 2 on Friday, 0 on Saturday, 2 on Sunday
 Susan:  2 on Wednesday, 2 on Thursday, 2 on Friday, 4 on Saturday, 0 on Sunday
 --------------------------------------------------------------------------------
-
 Tasks are assigned as follows:
 
-David: Tasks 18a, 21c, 54
-Susan: Tasks 38a, 38b, 46, 47
-Philip: Tasks 49, 50
-Dann: Tasks 52, 52a
+David:18a, 21c, 54
+Susan: 38a, 38b, 46, 47
+Philip: 49, 50
+Dann: 52, 52a
+
+--------------------------------------------------------------------------------
+Excess tasks are found as follows:
+
+User Story 7:
+Task 52b  [2 pts]: Implement the linear regression model
+
+Task 52c  [2 pts]: Implement the exponential smoothing model
+
+Task 52d  [2 pts]: Implement the exponential smoothing model with trending factor
+
+Task 52e  [1 pts]: Implement the naive model

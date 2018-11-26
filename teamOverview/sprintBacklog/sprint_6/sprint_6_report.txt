@@ -1,0 +1,18 @@
+Sprint 6 Backlog
+Nov 21 to Nov 25
+--------------------------------------------------------------------------------
+Sprint 6 Completion Report
+
+Tasks accomplished:
+David: 18a, 21c
+Dann: 52a, 52b, 52c, 52d, 52e
+Susan: 38a, 38b, 46, 47, 
+Philip: 50
+Riaz:
+--------------------------------------------------------------------------------
+What happened in this sprint?
+
+-Predictive Analysis was a rather large topic, so it got broken down
+
+-Final Sprint! Wrapping our features into the application was the most time
+ consuming thing during this sprint.
