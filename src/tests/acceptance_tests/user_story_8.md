@@ -27,7 +27,7 @@ This user story is about the feature to run a users custom SQL command on the da
   13. Click `Back` to log out of the agency account.
   14. Click the `Login` button and log into the TEQ account you created and click `Login` again.
   15. Select `Generate Reports` and then select `Generate Custom Queries`.
-  16. Enter a custom SQL query and file name.
+  16. Enter a custom SQL query and file name. An ER Diagram has been provided in the directory userGuide to help users write a query. For a default query, type "Select * from Client" that grabs all the information in the table Client in the database.
   17. Finally, click `Save` and a file will be created with the custom data set you selected.
 
 After performing the 17 steps above, there should be a generated file in `src/main` with the file name you specified.
