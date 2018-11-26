@@ -35,7 +35,9 @@ In **Predictive Analysis**, you will be greeted with this screen
 
 ![alt text](https://github.com/CSCC01/Team10/blob/master/userGuide/pics/predict_1.png)
 
-Select the models you favour. After doing so, you are expected to get a modeled series which looks something like
+Select the models you favour. The form of these models and the robustness measurement (MAPE) is found in the models pdf in this directory.
+
+After doing clicking these models, you are expected to get a modeled series which looks something like:
 
 ![alt text](https://github.com/CSCC01/Team10/blob/master/userGuide/pics/predict_2.png)
 
