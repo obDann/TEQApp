@@ -1,6 +1,6 @@
 # User story 5
 The user story that is going to be covered is the following:  
-**As a junior TEQ member, James Wowman, I want to simply click a button (of a particular subject) to auto-generate reports so that I am informed to answer particular research questions.**
+**As a junior TEQ member, James Wowman, I want to simply click a button regarding a particular subject to auto-generate excel files of that topic so that I do not have to learn the complexity of the program.**
 
 
 This user story is about the feature to generate reports relevant to the current data within the database. This user story has been completed and to test out the feature as a user, follow the steps below:

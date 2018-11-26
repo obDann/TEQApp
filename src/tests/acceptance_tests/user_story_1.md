@@ -1,6 +1,6 @@
 # User story 1
 The user story that is going to be covered is the following:  
-**As a TEQ employee, Mike James, I want to be able to have the TEQ and agencies create their specialized account so that agencies can maintain their private data, and the TEQ can use their data.**
+**As a TEQ employee, Mike James, I want to be able to have the TEQ and agencies create their specialized account so that agencies can maintain their private data, and then TEQ can use their data.**
 
 
 This user story is about the feature agencies and TEQ members create special accounts based on their objective activity. This user story has been completed and to test out the feature as a user, follow the steps below:
