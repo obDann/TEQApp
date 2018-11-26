@@ -10,7 +10,7 @@ class DeleteAccountObserver(Observer):
     '''
     Observer object for button that creates a new user
     '''
-    
+
     def __init__(self):
         ''' (CreateUserObserver) -> None
 
@@ -53,4 +53,3 @@ class DeleteAccountObserver(Observer):
                 msg = "This username does not exist."
 
         tkinter.messagebox.showinfo(title, msg)
-
