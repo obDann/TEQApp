@@ -34,10 +34,10 @@ class PredictPage(tk.Frame):
         '''
         self.name = name
         self.cont = controller
-        tk.Frame.__init__(self,parent)
+        tk.Frame.__init__(self, parent)
         self.ticks = {}
 
-        label = Label(self, text = "Which models would you like to see?")
+        label = Label(self, text="Which models would you like to see?")
         label.grid(column=1)
 
         self._row_iter = 1
@@ -46,7 +46,7 @@ class PredictPage(tk.Frame):
         for model in self.MODELS:
             self.ticks[model] = IntVar()
             cb = Checkbutton(self, text=model, variable=self.ticks[model])
-            cb.grid(row=self._row_iter, column = self._col_iter, sticky=W)
+            cb.grid(row=self._row_iter, column=self._col_iter, sticky=W)
             self._col_iter += 1
             if (self._col_iter == 3):
                 self._col_iter = 0
@@ -60,7 +60,7 @@ class PredictPage(tk.Frame):
         year_list = [str(i) for i in range(todays_year, 2101)]
         # we want to have the months for a default value
         todays_month = int(datetime.datetime.today().strftime('%m'))
-        months_list = [self.MONTHS_NUM[i] for i in range(1,13)]
+        months_list = [self.MONTHS_NUM[i] for i in range(1, 13)]
 
         self._selected_month = StringVar()
         self._selected_month.set(self.MONTHS_NUM[todays_month])
@@ -80,9 +80,10 @@ class PredictPage(tk.Frame):
         my_butt = Button(self, text="Submit", command=self._on_submit)
         my_butt.grid(column=1)
 
-        back = Button(self, text="Back",
-                            command=lambda: self.cont.set_page(rp.ReportsPage,
-                                                               self.name))
+        back = Button(self,
+                      text="Back",
+                      command=lambda: self.cont.set_page(rp.ReportsPage,
+                                                         self.name))
         back.grid(column=0)
         self._row_iter += 3
 
@@ -92,18 +93,18 @@ class PredictPage(tk.Frame):
 
         Shows the predictive analysis data to the user
         '''
-        df = self._get_ideal_df()
+        df, orig_dat_pts = self._get_ideal_df()
         num_rows = df.shape[0]
         my_plot_list = []
         my_label_list = []
         reg_details = [None, None]
+        exp_smooth = {}
 
         # plot the data
         x = "x axis"
         base, = plt.plot(x, "Frequency", data=df, linestyle="-", marker='o')
         my_plot_list.append(base)
         my_label_list.append("Frequency")
-
 
         mape_vals = {}
         # we want to go through all of the models that were selected
@@ -114,16 +115,47 @@ class PredictPage(tk.Frame):
                 # use reflection to instantiate the model
                 modu_name = self._get_mod_name(model)
                 module = importlib.import_module(modu_name)
-                the_model_ins = getattr(module, model)(df, "x axis",
-                                                       "Frequency")
-                # get the model
-                the_model, col = the_model_ins.get_model()
+                # one odd case is if the model is linear
+                if (model == "LinearRegressionModel"):
+                    the_model_i = getattr(module, model)(df.head(orig_dat_pts),
+                                                         "x axis", "Frequency")
+                    temp = the_model_i.get_details()
+                    reg_details[0], reg_details[1] = temp[0], temp[1]
+                    temp_srs = df["x axis"] * reg_details[0] + reg_details[1]
+                    df.loc[:, model] = temp_srs
+                    # get the mape of the model
+                    mape_vals[model] = the_model_i.get_mape_estimate()
+                else:
+                    if num_rows < orig_dat_pts:
+                        df_rep = df.head(num_rows)
+                        the_model_i = getattr(module, model)(df_rep, "x axis",
+                                                             "Frequency")
+                        # get the model
+                        the_model, col = the_model_i.get_model()
+                        # append the projected model's data into the df
+                        temp = pd.Series(the_model[col].head(num_rows))
+                        df.loc[:, model] = temp
+                        if model.startswith("Expo"):
+                            # we want the next projected upload
+                            exp_smooth[model] = the_model[col].iloc[num_rows]
+                    else:
+                        df_rep = df.head(orig_dat_pts)
+                        the_model_i = getattr(module, model)(df_rep, "x axis",
+                                                             "Frequency")
+                        # get the model
+                        the_model, col = the_model_i.get_model()
+                        # append the projected model's data into the df
+                        temp = pd.Series(the_model[col].head(orig_dat_pts))
+                        df.loc[:, model] = temp
+                        # check if the model starts with exponential smoothing
+                        if model.startswith("Expo"):
+                            # we want the next projected upload
+                            o = orig_dat_pts
+                            exp_smooth[model] = the_model[col].iloc[o]
 
-                # get the mape of the model
-                mape_vals[model] = the_model_ins.get_mape_estimate(the_model,
-                                                                   col)
-                # append the projected model's data into the df
-                df.loc[:, model] = pd.Series(the_model[col].head(num_rows))
+                    # get the mape of the model
+                    mape_vals[model] = the_model_i.get_mape_estimate()
+
                 # add that to our plot
                 my_label = self._get_label(model)
                 sm_plot, = plt.plot(x, model, data=df, linestyle="-",
@@ -131,15 +163,21 @@ class PredictPage(tk.Frame):
                 my_plot_list.append(sm_plot)
                 my_label_list.append(my_label)
 
-                # one odd case is if the model is linear
-                if (model == "LinearRegressionModel"):
-                    reg_details[0], reg_details[1] = the_model_ins.get_details()
-
         if (bool(mape_vals)):
             msg = "-------------------------------"
-            Label(self, text = msg).grid(row = self._row_iter, column=0)
-            Label(self, text = msg).grid(row = self._row_iter, column=1)
+            Label(self, text=msg).grid(row=self._row_iter, column=0)
+            Label(self, text=msg).grid(row=self._row_iter, column=1)
             self._row_iter += 1
+
+        if (bool(exp_smooth)):
+            for key in exp_smooth:
+                msg = "Next projected estimate in " + key
+                Label(self, text=msg).grid(row=self._row_iter, column=0,
+                                           sticky=E)
+                Label(self, text=str(exp_smooth[key])).grid(row=self._row_iter,
+                                                            column=1,
+                                                            sticky=W)
+                self._row_iter += 1
 
         # check if the linear regression model is ran
         if reg_details[0] is not None:
@@ -147,14 +185,14 @@ class PredictPage(tk.Frame):
             lm = "y = " + str(reg_details[0])
             lm += "x + " + str(reg_details[1])
             some_label = Label(self, text="Linear Model:")
-            some_label.grid(row = self._row_iter, column = 0, sticky=E)
+            some_label.grid(row=self._row_iter, column=0, sticky=E)
             another_la = Label(self, text=lm)
-            another_la.grid(row = self._row_iter, column = 1, sticky=W)
+            another_la.grid(row=self._row_iter, column=1, sticky=W)
             self._row_iter += 1
 
         if (bool(mape_vals)):
-            Label(self, text = "MAPE:").grid(row = self._row_iter, column=0,
-                                             sticky=W)
+            Label(self, text="MAPE:").grid(row=self._row_iter,
+                                           column=0, sticky=W)
             self._row_iter += 1
 
         # go through the MAPE
@@ -171,13 +209,11 @@ class PredictPage(tk.Frame):
         x_count = [i for i in range(len(x_axis))]
         plt.xticks(x_count, x_axis)
         plt.title("People Attending Services over time")
-        plt.xlabel("Months")
-        plt.ylabel("Years")
+        plt.xlabel("Months-Years")
+        plt.ylabel("Number of people attending services")
         plt.xticks(rotation=90)
         plt.legend(my_plot_list, my_label_list)
         plt.show()
-
-
 
     def _get_mod_name(self, model):
         '''
@@ -219,16 +255,20 @@ class PredictPage(tk.Frame):
                 my_str += letter
         return my_str
 
-
     def _get_ideal_df(self):
         '''
-        (PredictPage) -> DataFrame
+        (PredictPage) -> DataFrame, int
 
-        Returns the ideal dataframe for this page
+        Returns the ideal dataframe for this page and number of least number of
+        data points from the database
         '''
         og_df = self._get_df_from_db()
         # let's put it in our date quantifier
         date_q = DateQuantifier(og_df)
+        # quantify the dates so that we can get the number of original data
+        # points
+        num_data_pts_temp = date_q.quantify_dates()
+        num_data_pts = num_data_pts_temp.shape[0]
 
         # and let's get the "youngest" date and quantify it
         young_month, young_year = date_q.get_youngest_date()
@@ -264,7 +304,7 @@ class PredictPage(tk.Frame):
             index_val = int(hunter.index.values[0])
             # then reset the frequency of it to 0
             new_df.at[index_val, "Frequency"] = 0
-            return new_df
+            return new_df, num_data_pts
         else:
             # so we can get our df
             our_df = date_q.quantify_dates()
@@ -274,7 +314,7 @@ class PredictPage(tk.Frame):
             index_val = int(hunter.index.values[0])
             # then the new dataframe is until that time
             new_df = our_df.head(index_val + 1)
-            return new_df
+            return new_df, new_df.shape[0]
 
     def _get_df_from_db(self):
         '''
