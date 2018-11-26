@@ -42,7 +42,7 @@ def phone_vs_email_usage():
     Displays a comparsion on how many clients uses phone, email, or both.
     '''
     report_name = "Phone Usage VS Email Usage for Clients"
-    x_axis = "Ways to Contact"
+    x_axis = "Methods of Communication"
     y_axis = "Usage"
     
     ways = ["Phone", "Email"]

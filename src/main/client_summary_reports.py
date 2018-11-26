@@ -16,7 +16,7 @@ class ClientSummaryReports(tk.Frame):
         
         # options menu to select type of report
         report_choice = {"Client Types","Language Perference", 
-                         "Ways of Communication"}
+                         "Methods of Communication"}
         self.report = StringVar(self)
         self.report.set("Options")
         menu = OptionMenu(self, self.report, *report_choice)
@@ -33,7 +33,7 @@ class ClientSummaryReports(tk.Frame):
     def check(self, report):
         if (report == "Language Perference"):  
             client_language_pref()
-        elif (report == "Ways of Communication"):
+        elif (report == "Methods of Communication"):
             phone_vs_email_usage()
         elif (report == "Client Types"):
             self.cont.set_page(ct.ClientTypePage,self.name)

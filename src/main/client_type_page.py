@@ -33,5 +33,5 @@ class ClientTypePage(tk.Frame):
         back.grid(row=3, column=1, sticky=W, pady=6)        
             
     def display(self):
-        client_types(self.year_c, str(self.month_c))
+        client_types(str(self.year_c), str(self.month_c))
         
