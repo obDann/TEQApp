@@ -77,9 +77,9 @@ def referral_citizenship():
     y_axis = "Referral Count"
    
     yes = ("SELECT COUNT(*) FROM Referral WHERE "+
-              "Referral.Canadian_Citizen_Intention = 'Y'")
+              "Referral.Canadian_Citizen_Intention = 'Yes'")
     no = ("SELECT COUNT(*) FROM Referral WHERE "+
-              "Referral.Canadian_Citizen_Intention = 'N'")
+              "Referral.Canadian_Citizen_Intention = 'No'")
     r1 = cur.execute(yes)
     r1 = cur.fetchall()
     r2 = cur.execute(no) 
