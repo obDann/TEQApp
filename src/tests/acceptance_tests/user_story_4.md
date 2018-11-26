@@ -1,6 +1,6 @@
 # User story 4
 The user story that is going to be covered is the following:  
-**As a volunteer for agency XYZ, Sam Spongy, I want to be able to view any data conflicts (i.e. due to duplicate fields like Child 1, Child 2, etc.) or missing data when uploading, so that I can ensure that the data I uploaded is accurate.**
+**As a volunteer for agency XYZ, Sam Spongy, I want to be able to view any data conflicts such as missing data when uploading, so that I can ensure that the data I uploaded is accurate.**
 
 
 This user story is about the feature where, when uploading a file, the user will be able to check whether the fields fit within the desired format, i.e. checks whether there are duplicates or missing required values, and fix them within the program. This user story has been completed and to test out the feature as a user, follow the steps below:
@@ -18,6 +18,6 @@ This user story is about the feature where, when uploading a file, the user will
   8. Select a file which does not fully comply by the respective template which was selected, and then a window may pop up asking what sheet you would like to upload if there are multiple sheets.
   9. When the sheet is selected, the program will give you an option to select a date.
   10. After selecting the date for uploading, it will take you to a table viewer page within the GUI where you can generate a table. Click `Generate Table`.
-  11. When the table is generated, you will be able to see which columns have missing values. You can select that column and fix any missing values manually. After these changes, click `Save`, and then you may safely upload.
+  11. When the table is generated, you will be able to see which columns have missing values or incorrect input. You can select that column and fix any missing values manually. After these changes, click `Save`, and then you may safely upload.
 
 After performing the steps above, users will be able to submit their file after fixing up the data.
