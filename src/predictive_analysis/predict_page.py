@@ -99,6 +99,8 @@ class PredictPage(tk.Frame):
         my_label_list = []
         reg_details = [None, None]
         exp_smooth = {}
+        opt_alpha = None
+        opt_ab = [None, None]
 
         # plot the data
         x = "x axis"
@@ -153,8 +155,14 @@ class PredictPage(tk.Frame):
                             o = orig_dat_pts
                             exp_smooth[model] = the_model[col].iloc[o]
 
-                    # get the mape of the model
-                    mape_vals[model] = the_model_i.get_mape_estimate()
+                # get the mape of the model
+                mape_vals[model] = the_model_i.get_mape_estimate()
+
+                if (model == "ExponentialSmoothingModel"):
+                    opt_alpha = the_model_i.get_optimal_alpha()
+                elif (model == "ExponentialSmoothingTrendsModel"):
+                    clone = the_model_i
+                    opt_ab[0], opt_ab[1] = clone.get_optimal_alpha_and_beta()
 
                 # add that to our plot
                 my_label = self._get_label(model)
@@ -165,20 +173,55 @@ class PredictPage(tk.Frame):
 
         if (bool(mape_vals)):
             msg = "-------------------------------"
-            Label(self, text=msg).grid(row=self._row_iter, column=0)
-            Label(self, text=msg).grid(row=self._row_iter, column=1)
+            Label(self, text=msg).grid(row=self._row_iter, column=0, sticky=E)
+            Label(self, text=msg).grid(row=self._row_iter, column=1, sticky=W)
             self._row_iter += 1
 
         if (bool(exp_smooth)):
+            msg = "Next projected estimate for:"
+            Label(self, text=msg).grid(row=self._row_iter,
+                                                         column=0,
+                                                         sticky=W)
+            self._row_iter += 1
             for key in exp_smooth:
-                msg = "Next projected estimate in " + key
-                Label(self, text=msg).grid(row=self._row_iter, column=0,
+                Label(self, text=key).grid(row=self._row_iter, column=0,
                                            sticky=E)
                 Label(self, text=str(exp_smooth[key])).grid(row=self._row_iter,
                                                             column=1,
                                                             sticky=W)
                 self._row_iter += 1
 
+        if opt_alpha is not None:
+            msg = "Optimality:"
+            Label(self, text=msg).grid(row=self._row_iter,
+                                                         column=0,
+                                                         sticky=W)
+            self._row_iter += 1
+            msg = "Optimal alpha for Exponential Non Trends Model:"
+            Label(self, text=msg).grid(row=self._row_iter, column=0,
+                                       sticky=E)
+            Label(self, text=str(opt_alpha)).grid(row=self._row_iter,
+                                                 column=1, sticky=W)
+            self._row_iter += 1
+
+        if opt_ab[0] is not None:
+            msg = "Optimality:"
+            Label(self, text=msg).grid(row=self._row_iter,
+                                                         column=0,
+                                                         sticky=W)
+            self._row_iter += 1
+            msg_1 = "Optimal alpha with Trends Model:"
+            msg_2 = "Optimal beta with Trends Model:"
+            Label(self, text=msg_1).grid(row=self._row_iter, column=0,
+                                         sticky=E)
+            Label(self, text=str(opt_ab[0])).grid(row=self._row_iter, column=1,
+                                                 sticky=W)
+            self._row_iter += 1
+            Label(self, text=msg_2).grid(row=self._row_iter, column=0,
+                                         sticky=E)
+            Label(self, text=str(opt_ab[1])).grid(row=self._row_iter, column=1,
+                                                  sticky=W)
+            self._row_iter += 1
         # check if the linear regression model is ran
         if reg_details[0] is not None:
             # if it is ran, then we want to provide the details
