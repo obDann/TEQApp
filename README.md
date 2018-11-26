@@ -16,6 +16,10 @@
 
 Within the next few sprints, it will be expected of us to be tying the GUI with more features.
 
+**November 12 2018**: Sprint 4 completed. GUI and Terminal have been merged and some additional features have also been added. Unittests have been automated using travis and manual tests have READMEs included in their respective folders in [src/tests](./src/tests). Features included in the GUI are, user creation, logging in with a created user, appropriate page will be displayed based on creation, agency users can upload an excel file, and if it has multiple sheets, can choose which sheet to upload. Setup for this sprint is presented below.
+
+    Within the  [src/main](./src/main) folder, run 'python3 main.py' in your terminal and a GUI will pop up. This is the main page, where you can choose to login or create an account.
+
 ## Setup
 
 **Python 3** is the minimum requirement in order to run and install everything properly.
@@ -27,7 +31,9 @@ Within the next few sprints, it will be expected of us to be tying the GUI with 
 - `pip3 install passlib`
 - `pip3 install scipy`
 - `pip3 install matplotlib`
-
+- `pip3 install passlib`
+ 
+>>>>>>> master
 **Dependencies used**:
 - [sqlite3](https://www.sqlite.org/download.html)
 - tkinter (Should be pre-installed with Python3)

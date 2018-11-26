@@ -50,3 +50,36 @@ Note that the stinks above is not limited to the above as members are able to ma
 * In the same function, is_dropdown_value_mandatory, I mentioned that there is a conversion of a string into an integer and then into a boolean right after. Python allows 0's and 1's to act as booleans so the second conversion can be removed so I suggested to just keep it as an integer for conditional statements.
 * In handle_template, there is a hardcoded True value returned which is taking memory unnecessarily.
 * Otherwise, the rest of the quality of code is sufficient and no further comments could be made.
+
+## Code Review Summary (November 15, 2018)
+
+### Dann to Philip
+* For Custom Query, noticed that the user cannot select the name of the csv to export to, so it would be better if the user has the option to
+* For the Data Viewer Page, it should run the data frame checkers (Data Aggregator and MissingValChecker) after the generate table button is hit
+    * data_viewer_page should not contain both table viewer and data viewer class
+* In the table_viewer, there should be a method to upload the data to the database once the user hits the back button
+    * Make sure the format of the dataframe or modified dataframe is matching  in format
+* For Custom Query, the user should have a back button if the user doesn't want to handle any commands, or mistakenly clicked into this page
+
+### Philip to Riaz
+* Missing Value Checker contains too many comments, could reduce some of the unnecessary ones, but the code is easy to understand. In both the execute and  parse_columns method.
+* There are variables that are not clear, for example empty_fields should be code and all the variable (var1, var2.. etc) should be code variable instead.
+    * Not clean code, properly need to reformat the layout of your code.
+### Riaz to Susan
+
+### Susan to David
+
+### David to Dann
+
+## Code Review Summary (November 24, 2018)
+
+### Dann to Philip
+
+### Philip to Riaz
+* The graphs that he made, Histogram, Scatter plot and Line graph should be refactored to be line graph,histogram and pie graph because we couldn't find usage of scatter plot and pie graph is better for comparison.
+    * Some of the variables in the parameters were not needed, so they are removed during the refactoring
+### Riaz to Susan
+
+### Susan to David
+
+### David to Dann
