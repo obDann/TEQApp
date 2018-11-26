@@ -77,7 +77,7 @@ Note that the stinks above is not limited to the above as members are able to ma
     * this would also help remove the need for comments relating to it
 
 ### Susan to David
-* In client_db_functions, it would be better to call execute_query from database_methods and return cur to get rid of all of the redundant code
+* In client_db_functions, it would be better to call execute_query from database_methods and return cur to get rid of all of the redundant code which creates a new connection each time
 * Add more error messages when the user enters bad input for account creation
 * Fix creating another account with the same username saying "success" but nothing actually happens
 
