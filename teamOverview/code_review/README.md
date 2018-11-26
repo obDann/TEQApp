@@ -82,6 +82,11 @@ Note that the stinks above is not limited to the above as members are able to ma
 * Fix creating another account with the same username saying "success" but nothing actually happens
 
 ### David to Dann
+* Code Review for Dann was conducted on 18 as he did not have much on the 15th
+* DuplicateRowChecker was not needed since one line from pandas was called
+* We also talked about the tradeoffs as to why DuplicateRowChecker is is a command rather than something to be called when tying it together.
+* Excellent idea of "Screener", following the template design pattern
+    * The screener is used to determine if the user is uploading the right thing based off of the selected iCare templates
 
 ## Code Review Summary (November 24, 2018)
 
@@ -109,3 +114,7 @@ Note that the stinks above is not limited to the above as members are able to ma
 * In client_db_functions, there should be a "check duplicate field" which would return whether or not the field exists in order to prevent rollbacks from happening every time a duplicate value is attempted to be inserted into to the database
 
 ### David to Dann
+* Dann showed me his branch for "Predicitve Analysis"
+* Used the template model
+* Used inheritance appropriately
+* One potential smell is the get_model() method as there are optional parameters. I warned Dann to be cautious about this.
