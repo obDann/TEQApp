@@ -26,7 +26,6 @@ class UploadObserver(Observer):
         '''
         self._parent = parent
         self._controller = controller
-        self._can_continue = True
 
     def notify(self, obs):
         '''
@@ -34,6 +33,7 @@ class UploadObserver(Observer):
 
         Uploads a file to the database according to a specified template name
         '''
+        self._can_continue = True
         # general initialization before processing
         template_name = obs.button.template
         user_name = obs.button.name

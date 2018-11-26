@@ -5,10 +5,11 @@ import main_page as mp
 from create_account_page import *
 from agency_page import *
 from teq_page import *
-from admin_page import *
 from file_upload_page import *
 from button_observable import *
 from login_observer import *
+from forgot_password_page import *
+
 
 class LoginPage(tk.Frame):
 
@@ -34,4 +35,9 @@ class LoginPage(tk.Frame):
 
         b1 = Button(self, text="Back",
                     command=lambda: self.cont.display(mp.MainPage))
-        b1.grid(row=5, column=1, sticky=W, pady=6)
+        b1.grid(row=6, column=1, sticky=W, pady=6)
+
+        b3 = Button(self, text="Forgot Password?",
+                    command=lambda: self.cont.display(ForgotPasswordPage))
+        b3.grid(row=5, column=1, sticky=W, pady=6)
+

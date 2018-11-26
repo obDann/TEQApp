@@ -51,7 +51,7 @@ class TableViewer(tk.Frame):
         b2.pack()
         
         # Uploads the data to db and 
-        back = tk.Button(self, text="Back",
+        back = tk.Button(self, text="Upload",
                          command=lambda: [self.upload_data(),
                                       self.controller.set_page(ap.AgencyPage, self.name)])
         back.pack()        
@@ -88,27 +88,37 @@ class TableViewer(tk.Frame):
             # For formatting where index 0 is empty and index 1 is column name
             new_col.append("")
             new_col.append(ind)
-        
+    
             # Get the text input
             inputValue = self.text.get("1.0","end-1c")
             # Split them into a list
             temp_text = inputValue.split('\n')
-        
+            
             # Edit the split list to only contain the values
             for element in temp_text:
                 element = element.strip()
                 element = element.split(' ')
                 new_col.append(element[len(element)-1])
-            
-                # Remove the last element since that is the dtype
-                new_col = pd.DataFrame(new_col[:len(new_col)-1], columns=[ind])
-                # Add it back to the original dataFrame
-                self.df = self.df.update(new_col)
+                
+            # Remove the last element since that is the dtype
+            new_col = pd.DataFrame(new_col[:len(new_col)-1], columns=[ind])
+            # Add it back to the original dataFrame
+            self.df.update(new_col)
     
     def upload_data(self):
         '''
         Uploads the saved data onto our database.
         '''
+        # This is to format the Dataframe so that it is in the right form
+        tth = TrueTemplateHandler(self.temp_name)
+        # Gets the header names
+        headers = tth.get_headers()
+        self.df.loc[-1] = headers
+        self.df.index += 1
+        self.df = self.df.sort_index()
+        self.df.loc[-1] = ['' for i in range (len(headers))]
+        self.df.index += 1
+        self.df = self.df.sort_index()
         
         beaut_up = BeautifulUploader()
         if (self.temp_name == "Client Profile"):
@@ -120,10 +130,10 @@ class TableViewer(tk.Frame):
         if (self.temp_name == "Information and Orientation"):
             beaut_up.upload_info_ori(self.df, self.m , self.y)
         if (self.temp_name == "Employment Related Services"):
-            bu.upload_info_ori(self.df, self.m , self.y)
-        if (self.temp_name == "Language Training - Client Enrol"):
             beaut_up.upload_employment_service(self.df, self.m , self.y)
-        if (self.temp_name == "Language Training - Course Setup"):
+        if (self.temp_name == "Language Training - Client Enrol"):
             beaut_up.upload_LT_client_enrol(self.df)
-        if (self.temp_name == "Language Training - Client Exit"):
+        if (self.temp_name == "Language Training - Course Setup"):
             beaut_up.upload_LT_course_setup(self.df)
+        if (self.temp_name == "Language Training - Client Exit"):
+            beaut_up.upload_LT_client_exit(self.df)

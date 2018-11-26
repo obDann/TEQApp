@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
-import random
+from random import *
 import csv
 import sqlite3
 import reports_page as rp
@@ -53,7 +53,7 @@ class CustomQueryPage(tk.Frame):
                 for line in result:
                     writer.writerow(line)                
         except sqlite3.Error as e:
-            print("Invalid SQL input, with the message: " + e)
+            print("Invalid SQL Command.")
         # Finish message
         print("Finished executing query.")
         

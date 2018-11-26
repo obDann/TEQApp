@@ -7,7 +7,6 @@ from login_page import *
 from create_account_page import *
 import agency_page as ap
 from teq_page import *
-from admin_page import *
 from upload_observer import *
 from button_observable import *
 

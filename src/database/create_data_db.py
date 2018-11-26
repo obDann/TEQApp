@@ -188,7 +188,7 @@ def create_tables():
                 Certificate_Listening_Level text,
                 Certificate_Speaking_Level text,
                 FOREIGN KEY (Course_Code, Client_Unique_ID_Value)
-                REFERENCES Client_Enrolment(Course_Code, Unique_ID_Value)
+                REFERENCES Client_Enrolment(Course_Code, Client_Unique_ID_Value)
                 PRIMARY KEY (Course_Code, Client_Unique_ID_Value));""")
 
     cur.execute("""CREATE TABLE IF NOT EXISTS Client_CLB_Level (
