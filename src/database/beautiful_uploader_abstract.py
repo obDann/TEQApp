@@ -8,35 +8,35 @@ class BeautifulUploaderAbstract(ABC):
     @abstractmethod
     def upload_client_profile(self, df):
         '''
-        (BeautifulUploaderAbstract, Dataframe) -> None
+        (BeautifulUploaderAbstract, Dataframe, str) -> None
         Uploads template Client Profile into the database.
         '''
     
     @abstractmethod
     def upload_needs_referrals(self, df):
         '''
-        (BeautifulUploaderAbstract, Dataframe) -> None
+        (BeautifulUploaderAbstract, Dataframe, str) -> None
         Uploads template Needs Assessment & Referrals into the database.
         '''
     
     @abstractmethod
     def upload_community_connections(self, df, month, year):
         '''
-        (BeautifulUploaderAbstract, Dataframe, str, str) -> None
+        (BeautifulUploaderAbstract, Dataframe) -> None
         Uploads template Community Connections into the database.
         '''
     
     @abstractmethod
     def upload_info_ori(self, df, month, year):
         '''
-        (BeautifulUploaderAbstract, Dataframe, str, str) -> None
+        (BeautifulUploaderAbstract, Dataframe) -> None
         Uploads template Info & Orientation into the database.
         '''
     
     @abstractmethod
     def upload_employment_service(self, df, month, year):
         '''
-        (BeautifulUploaderAbstract, Dataframe, str, str) -> None
+        (BeautifulUploaderAbstract, Dataframe) -> None
         Uploads template Employment Related Service into the database.
         '''
     

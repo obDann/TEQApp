@@ -93,6 +93,7 @@ class PredictPage(tk.Frame):
 
         Shows the predictive analysis data to the user
         '''
+        fig, ax = plt.subplots()
         df, orig_dat_pts = self._get_ideal_df()
         num_rows = df.shape[0]
         my_plot_list = []

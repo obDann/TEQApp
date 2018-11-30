@@ -1,6 +1,7 @@
 from Observer import Observer
 from tkinter import *
 import tkinter.messagebox
+sys.path.insert(0, "../accounts_database")
 import client_db_functions
 import main_page as mp
 import re
@@ -13,13 +14,11 @@ class DeleteAccountObserver(Observer):
 
     def __init__(self):
         ''' (CreateUserObserver) -> None
-
         Initializes a CreateUserObserver object
         '''
 
     def notify(self, obs):
         ''' (CreateUserObserver, Observable) -> None
-
         If all values are filled, adds a new user record to the db
         and displays the main page
         '''
@@ -34,7 +33,6 @@ class DeleteAccountObserver(Observer):
 
     def message(self, exists, agency):
         ''' (CreateUserObserver, bool, bool) -> None
-
         Creates a message box telling the user if the account was deleted or
         not.
         '''

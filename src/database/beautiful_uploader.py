@@ -10,10 +10,6 @@ import insert_client_enrol
 import insert_client_exit
 import pandas as pd
 
-START_IDX = 2
-COLUMN_IDX = 1
-ROW_IDX = 0
-
 class BeautifulUploader(BeautifulUploaderAbstract):
     def upload_client_profile(self, df):
         '''
@@ -22,10 +18,10 @@ class BeautifulUploader(BeautifulUploaderAbstract):
         the clients agency.
         '''
         # get the number of rows in the dataframe
-        total_rows = df.shape[ROW_IDX]
+        total_rows = df.shape[0]
         # data starts at row 2
-        i = START_IDX
-        column = df.iloc[COLUMN_IDX]
+        i = 2
+        column = df.iloc[1]
         while (i < total_rows):
             row = df.iloc[i]
             address_id = insert_client_profile.insert_address(column, row)
@@ -38,10 +34,10 @@ class BeautifulUploader(BeautifulUploaderAbstract):
         Uploads template Needs Assessment & Referrals into the database.
         '''
         # get the number of rows in the dataframe
-        total_rows = df.shape[ROW_IDX]
+        total_rows = df.shape[0]
         # data starts at row 2
-        i = START_IDX
-        column = df.iloc[COLUMN_IDX]
+        i = 2
+        column = df.iloc[1]
         while (i < total_rows):
             # get client id
             client_id = df.iloc[i][3]
@@ -62,10 +58,10 @@ class BeautifulUploader(BeautifulUploaderAbstract):
         Uploads template Community Connections into the database.
         '''
         # get the number of rows in the dataframe
-        total_rows = df.shape[ROW_IDX]
+        total_rows = df.shape[0]
         # data starts at row 2
-        i = START_IDX
-        column = df.iloc[COLUMN_IDX]
+        i = 2
+        column = df.iloc[1]
         while (i < total_rows):
             # get client id
             client_id = df.iloc[i][3]
@@ -88,10 +84,10 @@ class BeautifulUploader(BeautifulUploaderAbstract):
         Uploads template Info & Orientation into the database.
         '''
         # get the number of rows in the dataframe
-        total_rows = df.shape[ROW_IDX]
+        total_rows = df.shape[0]
         # data starts at row 2
-        i = START_IDX
-        column = df.iloc[COLUMN_IDX]
+        i = 2
+        column = df.iloc[1]
         while (i < total_rows):
             # get client id
             client_id = df.iloc[i][3]            
@@ -111,10 +107,10 @@ class BeautifulUploader(BeautifulUploaderAbstract):
         Uploads template Employment Related Service into the database.
         '''
         # get the number of rows in the dataframe
-        total_rows = df.shape[ROW_IDX]
+        total_rows = df.shape[0]
         # data starts at row 2
-        i = START_IDX
-        column = df.iloc[COLUMN_IDX]
+        i = 2
+        column = df.iloc[1]
         while (i < total_rows):
             # get client id
             client_id = df.iloc[i][3]
@@ -135,9 +131,9 @@ class BeautifulUploader(BeautifulUploaderAbstract):
         Uploads template LT Client Enrolment into the database.
         '''
         # get the number of rows in the dataframe
-        total_rows = df.shape[ROW_IDX]
+        total_rows = df.shape[0]
         # data starts at row 2
-        i = START_IDX
+        i = 2
         while (i < total_rows):
             # get client id
             client_id = df.iloc[i][3]
@@ -155,10 +151,10 @@ class BeautifulUploader(BeautifulUploaderAbstract):
         Uploads template LT Course Setup into the database.
         '''
         # get the number of rows in the dataframe
-        total_rows = df.shape[ROW_IDX]
+        total_rows = df.shape[0]
         # data starts at row 2
-        i = START_IDX
-        column = df.iloc[COLUMN_IDX]
+        i = 2
+        column = df.iloc[1]
         while (i < total_rows):
             # get course code
             course_code = df.iloc[i][2]
@@ -183,10 +179,10 @@ class BeautifulUploader(BeautifulUploaderAbstract):
         Uploads template LT Client Exit into the database.
         '''
         # get the number of rows in the dataframe
-        total_rows = df.shape[ROW_IDX]
+        total_rows = df.shape[0]
         # data starts at row 2
-        i = START_IDX
-        column = df.iloc[COLUMN_IDX]
+        i = 2
+        column = df.iloc[1]
         while (i < total_rows):
             # get client id
             client_id = df.iloc[i][3]

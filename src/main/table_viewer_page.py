@@ -5,7 +5,7 @@ import agency_page as ap
 from data_viewer_page import *
 import sys
 sys.path.append("../commands")
-from missing_val_checker import *
+from missing_val_checker import MissingValChecker
 from data_aggregator import DataAggregator
 sys.path.append("../database")
 from beautiful_uploader import BeautifulUploader
@@ -26,8 +26,7 @@ class TableViewer(tk.Frame):
         self.y = year
         
         # Run the checkers
-        mis = self._execute_checkers()
-        col = self._get_m_columns(mis)
+        self._execute_checkers()
         
         # The title
         label1 = tk.Label(self, text=self.temp_name)
@@ -37,10 +36,6 @@ class TableViewer(tk.Frame):
         tk.Label(self, text='Select Column:').pack()
         self.options = ttk.Combobox(self, values=list(self.df.columns))
         self.options.pack(pady=10)
-        
-        l2= tk.Label(self,text="Columns that contain missing or incorrect" +
-                     "values: ["+ col +"]")
-        l2.pack(pady=5)
         
         b1 = tk.Button(self, text='Show Data', command=self.show_option)
         b1.pack()
@@ -61,29 +56,13 @@ class TableViewer(tk.Frame):
                                       self.controller.set_page(ap.AgencyPage, self.name)])
         back.pack()        
    
-    def _get_m_columns(self, mis):
-        '''
-        Get the list of headers that need to be fixed.
-        '''
-        temp = list()
-        s = " "
-        for i in mis:
-            if (i[0] not in temp):
-                temp.append(i[0])
-        
-        for i in temp:
-            s+=i
-            s+=" , "      
-        return s[:-2]   
-   
     def show_option(self):
         '''
         Shows the list of options for this table
         '''
         identifier = self.options.get() # get option
-        if (identifier is not None and identifier != ""):
-            self.text.delete(1.0, tk.END)   # empty widget to print new text
-            self.text.insert(tk.END, str(self.df[identifier])) 
+        self.text.delete(1.0, tk.END)   # empty widget to print new text
+        self.text.insert(tk.END, str(self.df[identifier])) 
     
     def _execute_checkers(self):
         '''
@@ -96,8 +75,6 @@ class TableViewer(tk.Frame):
         self.df = mv.execute(self.df, template_handler)
         new_df = da.execute(self.df, template_handler) 
         
-        return parse_columns(new_df, template_handler)
-        
     def save_data(self):
         '''
         Saves the display column values as a DataFrame and return the whole
@@ -106,26 +83,22 @@ class TableViewer(tk.Frame):
         new_col = list()
         # Get the column name
         ind = self.options.get()
-        if (ind is not None and ind != ""):
-            # For formatting where index 0 is empty and index 1 is column name
-            new_col.append("")
-            new_col.append(ind)
-    
-            # Get the text input
-            inputValue = self.text.get("1.0","end-1c")
-            # Split them into a list
-            temp_text = inputValue.split('\n')
+        
+        # Get the text input
+        inputValue = self.text.get("1.0","end-1c")
+        # Split them into a list
+        temp_text = inputValue.split('\n')
+        
+        # Edit the split list to only contain the values
+        for element in temp_text:
+            element = element.strip()
+            element = element.split(' ')
+            new_col.append(element[len(element)-1])
             
-            # Edit the split list to only contain the values
-            for element in temp_text:
-                element = element.strip()
-                element = element.split(' ')
-                new_col.append(element[len(element)-1])
-                
-            # Remove the last element since that is the dtype
-            new_col = pd.DataFrame(new_col[:len(new_col)-1], columns=[ind])
-            # Add it back to the original dataFrame
-            self.df.update(new_col)
+        # Remove the last element since that is the dtype
+        new_col = pd.DataFrame(new_col[:len(new_col)-1], columns=[ind])
+        # Add it back to the original dataFrame
+        self.df.update(new_col)
     
     def upload_data(self):
         '''
