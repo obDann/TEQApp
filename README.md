@@ -16,7 +16,7 @@
 
 Within the next few sprints, it will be expected of us to be tying the GUI with more features.
 
-**November 12 2018**: Sprint 4 completed. GUI and Terminal have been merged and some additional features have also been added. Unittests have been automated using travis and manual tests have READMEs included in their respective folders in [src/tests](./src/tests). Features included in the GUI are, user creation, logging in with a created user, appropriate page will be displayed based on creation, agency users can upload an excel file, and if it has multiple sheets, can choose which sheet to upload. Setup for this sprint is presented below.
+**November 12, 2018**: Sprint 4 completed. GUI and Terminal have been merged and some additional features have also been added. Unittests have been automated using travis and manual tests have READMEs included in their respective folders in [src/tests](./src/tests). Features included in the GUI are, user creation, logging in with a created user, appropriate page will be displayed based on creation, agency users can upload an excel file, and if it has multiple sheets, can choose which sheet to upload. Setup for this sprint is presented below.
 
     Within the  [src/main](./src/main) folder, run 'python3 main.py' in your terminal and a GUI will pop up. This is the main page, where you can choose to login or create an account.
 
@@ -28,7 +28,7 @@ When "submit" is clicked on for the exponential smoothing models, what it does i
 
 Final user stories and personas are found [here](./teamOverview/productBacklog). Code reviews are found [here](./teamOverview/code_review). Sprint backlogs are found [here](./teamOverview/sprintBacklog). Acceptance/ Unit tests are found [here](./src/tests). Running the application: after installing all of the pip installations, within the  [src/main](./src/main) folder, run `python3 main.py` in your terminal. Alternatively, if `python3` does not work, try running `python main.py` Refer to the user manual in [userGuide](./userGuide) for help with how to use our application.
 
-**January 18, 2018**: After revisiting this project, it was requested of a member to remove a feature (an emailing system) as it is linked to his personal accounts. For this version, users are still able to make accounts, but an e-mail won't be sent and the program does not re-direct the user to the login screen after registering. Likewise, the 'Forget Password?' feature no longer has any functionality. 
+**January 18, 2019**: After revisiting this project, it was requested of a member to remove a feature (an emailing system) as it is linked to his personal accounts. For this version, users are still able to make accounts, but an e-mail won't be sent and the program does not re-direct the user to the login screen after registering. Likewise, the 'Forget Password?' feature no longer has any functionality. 
 
 Running the application: after installing all of the pip installations, within the  [src/main](./src/main) folder, run `python3 main.py` in your terminal. Alternatively, if `python3` does not work, try running `python main.py` Refer to the user manual in [userGuide](./userGuide) for help with how to use our application.
 
